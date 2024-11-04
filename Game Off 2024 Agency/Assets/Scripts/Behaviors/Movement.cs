@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(changeDirection());
+        Physics2D.IgnoreLayerCollision(3,3);
     }
 
     // Update is called once per frame
