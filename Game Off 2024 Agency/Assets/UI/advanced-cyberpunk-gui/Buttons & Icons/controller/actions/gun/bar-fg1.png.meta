@@ -256,6 +256,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1372,7 +1385,57 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bar-fg1_0: 4481620073758939421
+      bar-fg1_1: -7148335994499401595
+      bar-fg1_10: 6009776744807734609
+      bar-fg1_11: -2270218181941055318
+      bar-fg1_12: 8202503720360383881
+      bar-fg1_13: 5197563190704746138
+      bar-fg1_14: 3507336694753023116
+      bar-fg1_15: -1927161284524581788
+      bar-fg1_16: 7247114993057042257
+      bar-fg1_17: -6547415632132121845
+      bar-fg1_18: -3335299106578345159
+      bar-fg1_19: -614958887395699122
+      bar-fg1_2: -2442810269075246739
+      bar-fg1_20: -1586796874007192434
+      bar-fg1_21: -6268154740829403911
+      bar-fg1_22: -4251508251383358483
+      bar-fg1_23: 8253730680017803241
+      bar-fg1_24: 7168530443113730631
+      bar-fg1_25: -3407223521990673671
+      bar-fg1_26: 629065348485038615
+      bar-fg1_27: 8833182085000053524
+      bar-fg1_28: 8898057248466355061
+      bar-fg1_29: 3749897027008225689
+      bar-fg1_3: -1219786420018755600
+      bar-fg1_30: -2471412939504459670
+      bar-fg1_31: 511072538246898604
+      bar-fg1_32: 8476841609248417021
+      bar-fg1_33: -4929597978803206447
+      bar-fg1_34: -1721805325732417287
+      bar-fg1_35: 6626306743473915763
+      bar-fg1_36: -1607642833380839277
+      bar-fg1_37: -5240466063713801130
+      bar-fg1_38: 6736241562439880709
+      bar-fg1_39: -1812297962641263854
+      bar-fg1_4: 8069971959640423752
+      bar-fg1_40: -643233978726719312
+      bar-fg1_41: 8955146976579161915
+      bar-fg1_42: -1672360713455965438
+      bar-fg1_43: 7848304993318861069
+      bar-fg1_44: 4910987308401923469
+      bar-fg1_45: -8000998429314406803
+      bar-fg1_46: 7668124501134846202
+      bar-fg1_47: -3042220959767937797
+      bar-fg1_48: -6300538116929836618
+      bar-fg1_49: 4414575168212843933
+      bar-fg1_5: 6165507828164540708
+      bar-fg1_6: 2424313393183989245
+      bar-fg1_7: 6097561901030845492
+      bar-fg1_8: 8859909066559609289
+      bar-fg1_9: 3175294801053474746
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
