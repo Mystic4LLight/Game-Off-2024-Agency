@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7310818951436878403}
   - component: {fileID: 4669434984779284701}
   - component: {fileID: 5605963497342444857}
+  - component: {fileID: 2216215172607822965}
   m_Layer: 3
   m_Name: Agent
   m_TagString: Untagged
@@ -177,3 +178,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   changeDirectionTime: 5
+--- !u!114 &2216215172607822965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3482474801323517251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21dea186e984024790f6993b2aceb3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentSO: {fileID: 11400000, guid: f2f1e2666a5311e4f90fb8dd08b50a69, type: 2}
