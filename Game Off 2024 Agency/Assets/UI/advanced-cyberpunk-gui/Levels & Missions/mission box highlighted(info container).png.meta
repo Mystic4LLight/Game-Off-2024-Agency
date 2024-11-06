@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mission box highlighted(info container)_0: -9029062445837627197
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

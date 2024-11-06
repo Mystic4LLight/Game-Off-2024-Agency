@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      level (score bar)-bg_0: 5702215199777915814
+      level (score bar)-bg_1: 360013164978559571
+      level (score bar)-bg_2: 6501162821258859798
+      level (score bar)-bg_3: -8011139445947145651
+      level (score bar)-bg_4: 7798405181223932549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

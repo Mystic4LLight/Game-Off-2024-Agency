@@ -197,7 +197,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      missions menu (frame-down)_0: -5828190750167873674
+      missions menu (frame-down)_1: 774277308379988589
+      missions menu (frame-down)_2: 5851743935091288160
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

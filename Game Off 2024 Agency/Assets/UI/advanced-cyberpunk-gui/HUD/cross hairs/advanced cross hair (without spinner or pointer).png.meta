@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      advanced cross hair (without spinner or pointer)_0: -6500265743783216863
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

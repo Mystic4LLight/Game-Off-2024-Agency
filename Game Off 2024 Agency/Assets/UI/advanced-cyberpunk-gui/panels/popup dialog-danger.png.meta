@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      popup dialog-danger_0: 5512886309672390434
+      popup dialog-danger_1: -7883146942994301088
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
