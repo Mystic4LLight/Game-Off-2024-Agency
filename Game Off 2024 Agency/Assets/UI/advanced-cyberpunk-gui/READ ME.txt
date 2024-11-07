@@ -1,0 +1,24 @@
+THANK YOU FOR PURCHASING THIS ASSET PACK....
+
+FONTS USED : Audiowide, sans-serif
+
+
+EDITED IN : Inkscape (.SVG file editor)
+
+CLIPPING YOUR IMAGE TO "MISSION BOX, NOTIFICATION DIALOG, etc" (adding your prefered image)
+----------------------------------------------------------------------
+>import/drag & drop your image into inkscape.
+>Ensure the imported "IMAGE" is directly below the "CLIPPING SHAPE" (regular shape/drawn) on the layers tab.
+>Select the "CLIPPING SHAPE", Hold shift, then select the "IMAGE".
+>Right click on "CLIPPING SHAPE / IMAGE".
+>From the dropdown, select "Set clip".
+>The "IMAGE" should now take the shape of the "CLIPPING SHAPE"
+
+
+RELEASING ALREADY CLIPED IMAGE FROM "MISSION BOX, NOTIFICATION DIALOG, etc"
+----------------------------------------------------------------------
+>Right click on already cliped image
+>From the dropdown select "Release clip"
+
+ALTERNATIVE SOFTWARES TO INKSCAPE:
+Sketch, Vectrzy, Vectr, Sketsa SVG editor, Draw SVG, etc.
