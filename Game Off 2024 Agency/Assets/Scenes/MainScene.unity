@@ -1316,7 +1316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e65f75cbacdf3944867f5a0f3f1915c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 1530193387}
 --- !u!1 &202835464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,7 +1945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f545c39715969b14586d36103e852375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentSelectMenu: {fileID: 1530193387}
 --- !u!1 &303465178
 GameObject:
   m_ObjectHideFlags: 0
@@ -8989,7 +8987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e65f75cbacdf3944867f5a0f3f1915c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 701317675}
 --- !u!114 &1647400846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9222,6 +9219,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687268178}
   m_CullTransparentMesh: 1
+--- !u!1 &1708477798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1708477799}
+  - component: {fileID: 1708477800}
+  m_Layer: 0
+  m_Name: MissionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1708477799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708477798}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1193.2258, y: 646.81067, z: -7.4234066}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1708477800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708477798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371b3be4a9f81e243a9ca0a13f4b6d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avaiableMissions: []
 --- !u!1 &1715897975
 GameObject:
   m_ObjectHideFlags: 0
@@ -12526,3 +12568,4 @@ SceneRoots:
   - {fileID: 830754496}
   - {fileID: 606745578}
   - {fileID: 303465179}
+  - {fileID: 1708477799}
