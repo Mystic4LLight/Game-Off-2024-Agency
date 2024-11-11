@@ -1,34 +1,33 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class Mission : MonoBehaviour
+// Draft Template for a mission class (needed for Artifacts script as a draft)
+[System.Serializable]
+public class Mission
 {
-    public string missionName;
-    public string description;
-    public int passCheck;
-    public enum attributesForCheck{
-        Strength,
-        Agility,
-        Intelligence
-    }
-    public attributesForCheck missionAttribute;
-    public List<Agent> deployedAgents = new List<Agent>();
-    public MissionSO missionSO;
-    void Start()
+    [SerializeField] private List<Agent> _agents;
+
+    [SerializeField] private List<Artifact> _artifacts = new List<Artifact>();
+
+    public bool AddArtifact(Artifact artifact)
     {
-        name = missionSO.missionName;
-        description = missionSO.description;
-        passCheck = missionSO.passCheck;
+        if (!_artifacts.Contains(artifact))
+        {
+            _artifacts.Add(artifact);
+            Debug.Log($"Artifact {artifact.name} was added to the mission.");
+            return true;
+        }
+        else
+            return false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool RemoveArtifact(Artifact artifact)
     {
-        
+        if (_artifacts.Contains(artifact))
+        {
+            return _artifacts.Remove(artifact);
+        }
+        else
+            return false;
     }
-    public void deployAgent(Agent agent){
-        deployedAgents.Add(agent);
-    }
-
 }
