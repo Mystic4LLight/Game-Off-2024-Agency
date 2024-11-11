@@ -945,6 +945,7 @@ GameObject:
   - component: {fileID: 96173999740784770}
   - component: {fileID: 1771429896663166964}
   - component: {fileID: 3137050660744148615}
+  - component: {fileID: 4873068800322472153}
   m_Layer: 5
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -1054,6 +1055,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4873068800322472153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907358009495555857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbff95078c0fe94fbc3b17ec8a2703b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
+  targetWindow: {fileID: 0}
+  infoWindow: {fileID: 0}
 --- !u!1 &3979239954495025787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,7 +1585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3859209499015046999
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2940,8 +2956,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbff95078c0fe94fbc3b17ec8a2703b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonType: 4
+  buttonType: 0
   targetWindow: {fileID: 0}
+  infoWindow: {fileID: 0}
 --- !u!1 &7649488632940963966
 GameObject:
   m_ObjectHideFlags: 0
