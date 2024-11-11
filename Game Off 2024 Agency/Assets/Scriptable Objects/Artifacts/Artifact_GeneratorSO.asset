@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda66ea8e0714aa4297cd5305f216a26, type: 3}
+  m_Name: Artifact_GeneratorSO
+  m_EditorClassIdentifier: 
+  displayName: 'Tillinghast Generator '
+  description: 'Dr. Crawford Tillinghast Generator (See and interact with invisible
+    creatures) '
+  profilePhoto: {fileID: 5995458008256242160, guid: 94c2d7f7dca58bf4b998d07a2f4482f8, type: 3}
