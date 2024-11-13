@@ -10,6 +10,9 @@ public class ArtifactManager : MonoBehaviour
     // A list of artifact templates (ScriptableObjects) that will be assigned in the Unity Editor.
     public List<ArtifactSO> artifactSO_Templates;
 
+    // Template for an unidentified artifact.(shows to player if artifact is not identified)
+    public ArtifactSO unidentifiedArtifactSO;
+
     // The artifact prefab to be instantiated when creating new artifacts.
     [SerializeField] Artifact artifactPrefab;
 
@@ -25,7 +28,7 @@ public class ArtifactManager : MonoBehaviour
     // A list of artifacts assigned to active missions.
     [SerializeField] public List<Artifact> missionAssignedArtifacts = new List<Artifact>();
 
-    void Start()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -35,17 +38,31 @@ public class ArtifactManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
 
+    void Start()
+    {
         InitializeArtifactCatalog();
 
-        // TEST
-     //  AddRandomArtifactToAgency();
-        // Log the contents of the artifact catalog.
-        /*     foreach (var artifact in agencyArtifactCatalog)
-            {
-                Debug.Log("<color=blue>Artifact: " + artifact.name + " Address: " + artifact.GetInstanceID() + "</color>");
-            }   
-       */
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "CorrisScene-Sandbox")
+        {
+            //=======================
+            // TEST PART
+
+            Debug.Log("TEST Adding Random artifacts to catalog and identifying one of it");
+            // Add new artifact to Agency
+            var newOwnedArtifact = AddRandomArtifactToAgency();
+            IdentifyArtifact(newOwnedArtifact);
+            // Add another artifact to agency - but without identification
+            AddRandomArtifactToAgency();
+            // Log the contents of the artifact catalog.
+            /*     foreach (var artifact in agencyArtifactCatalog)
+                {
+                    Debug.Log("<color=blue>Artifact: " + artifact.name + " Address: " + artifact.GetInstanceID() + "</color>");
+                }   
+           */
+            //=======================
+        }
     }
 
     private void InitializeArtifactCatalog()
@@ -84,21 +101,25 @@ public class ArtifactManager : MonoBehaviour
     }
 
     // TEST Function to check Artifacts working
-    private void AddRandomArtifactToAgency()
+    private Artifact AddRandomArtifactToAgency()
     {
         if (agencyArtifactCatalog.Count > 0)
         {
-            Debug.LogWarning("TEST Adding Random artifact to catalog");
             int randomIndex = Random.Range(0, agencyArtifactCatalog.Count);
-            Artifact randomArtifact = agencyArtifactCatalog[randomIndex];
+            var randomArtifact = agencyArtifactCatalog[randomIndex];
             AddNewArtifactToAgency(randomArtifact);
+            return randomArtifact;
         }
         else
         {
             Debug.LogWarning("Artifact catalog is empty. Cannot add a random artifact to the agency.");
+            return null;
         }
     }
-
+    public void IdentifyArtifact(Artifact artifact)
+    {
+        artifact.Identify();
+    }
 
     public bool AssignArtifactToMission(Artifact artifact, Mission mission)
     {
@@ -131,7 +152,5 @@ public class ArtifactManager : MonoBehaviour
             return false;
         }
     }
-
-
 
 }
