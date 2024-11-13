@@ -1491,13 +1491,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573365b8a3317ca44895723707ff6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentSO: {fileID: 0}
   agentName: {fileID: 1259052504}
   description: {fileID: 1229195508}
   profilePhoto: {fileID: 202835466}
   strength: {fileID: 459493593}
-  speed: {fileID: 964577349}
+  constitution: {fileID: 0}
+  size: {fileID: 0}
+  dexterity: {fileID: 0}
+  appearance: {fileID: 0}
+  education: {fileID: 0}
   intelligence: {fileID: 520333775}
-  agentSO: {fileID: 0}
+  power: {fileID: 0}
+  accounting: {fileID: 0}
+  anthropology: {fileID: 0}
+  appraise: {fileID: 0}
+  archaeology: {fileID: 0}
+  artCraft1: {fileID: 0}
+  artCraft2: {fileID: 0}
+  artCraft3: {fileID: 0}
+  charm: {fileID: 0}
+  climb: {fileID: 0}
+  computerUse: {fileID: 0}
+  creditRating: {fileID: 0}
+  cthulhuMythos: {fileID: 0}
+  disguise: {fileID: 0}
+  dodge: {fileID: 0}
+  driveAuto: {fileID: 0}
+  elecRepair: {fileID: 0}
+  electronics: {fileID: 0}
+  fastTalk: {fileID: 0}
+  fightingBrawl: {fileID: 0}
+  fighting2: {fileID: 0}
+  fighting3: {fileID: 0}
+  firearmsAiming: {fileID: 0}
+  firearmsHipshot: {fileID: 0}
+  firearms3: {fileID: 0}
+  firstAid: {fileID: 0}
+  history: {fileID: 0}
+  intimidate: {fileID: 0}
+  jump: {fileID: 0}
+  languageOther1: {fileID: 0}
+  languageOther2: {fileID: 0}
+  languageOwn: {fileID: 0}
+  law: {fileID: 0}
+  libraryUse: {fileID: 0}
+  listen: {fileID: 0}
+  locksmith: {fileID: 0}
+  mechRepair: {fileID: 0}
+  medicine: {fileID: 0}
+  naturalWorld: {fileID: 0}
+  navigate: {fileID: 0}
+  occult: {fileID: 0}
+  opHvMachine: {fileID: 0}
+  persuade: {fileID: 0}
+  pilot: {fileID: 0}
+  psychology: {fileID: 0}
+  psychanalysis: {fileID: 0}
+  science1: {fileID: 0}
+  science2: {fileID: 0}
+  science3: {fileID: 0}
+  sleightOfHand: {fileID: 0}
+  spotHidden: {fileID: 0}
+  stealth: {fileID: 0}
+  survival1: {fileID: 0}
+  swim: {fileID: 0}
+  throw1: {fileID: 0}
+  track: {fileID: 0}
+  other1: {fileID: 0}
+  other2: {fileID: 0}
+  other3: {fileID: 0}
+  other4: {fileID: 0}
+  other5: {fileID: 0}
   isClicked: 0
 --- !u!114 &220711052
 MonoBehaviour:
@@ -2242,6 +2307,7 @@ MonoBehaviour:
   artifactSO_Templates:
   - {fileID: 11400000, guid: 81855605b9071b047a408b6c84d5c769, type: 2}
   - {fileID: 11400000, guid: d5f79989bc370df49818662ee64cd57a, type: 2}
+  unidentifiedArtifactSO: {fileID: 11400000, guid: 46538c27af9c9bd449c55976be2e0e86, type: 2}
   artifactPrefab: {fileID: 3906072462314843218, guid: 174d7951c9443104b830d5ced007b165, type: 3}
   agencyArtifactCatalog: []
   agencyOwnedArtifacts: []
@@ -4587,13 +4653,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573365b8a3317ca44895723707ff6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentSO: {fileID: 0}
   agentName: {fileID: 982137106}
   description: {fileID: 433191163}
   profilePhoto: {fileID: 333503198}
   strength: {fileID: 465773698}
-  speed: {fileID: 817077013}
+  constitution: {fileID: 0}
+  size: {fileID: 0}
+  dexterity: {fileID: 0}
+  appearance: {fileID: 0}
+  education: {fileID: 0}
   intelligence: {fileID: 2001286287}
-  agentSO: {fileID: 0}
+  power: {fileID: 0}
+  accounting: {fileID: 0}
+  anthropology: {fileID: 0}
+  appraise: {fileID: 0}
+  archaeology: {fileID: 0}
+  artCraft1: {fileID: 0}
+  artCraft2: {fileID: 0}
+  artCraft3: {fileID: 0}
+  charm: {fileID: 0}
+  climb: {fileID: 0}
+  computerUse: {fileID: 0}
+  creditRating: {fileID: 0}
+  cthulhuMythos: {fileID: 0}
+  disguise: {fileID: 0}
+  dodge: {fileID: 0}
+  driveAuto: {fileID: 0}
+  elecRepair: {fileID: 0}
+  electronics: {fileID: 0}
+  fastTalk: {fileID: 0}
+  fightingBrawl: {fileID: 0}
+  fighting2: {fileID: 0}
+  fighting3: {fileID: 0}
+  firearmsAiming: {fileID: 0}
+  firearmsHipshot: {fileID: 0}
+  firearms3: {fileID: 0}
+  firstAid: {fileID: 0}
+  history: {fileID: 0}
+  intimidate: {fileID: 0}
+  jump: {fileID: 0}
+  languageOther1: {fileID: 0}
+  languageOther2: {fileID: 0}
+  languageOwn: {fileID: 0}
+  law: {fileID: 0}
+  libraryUse: {fileID: 0}
+  listen: {fileID: 0}
+  locksmith: {fileID: 0}
+  mechRepair: {fileID: 0}
+  medicine: {fileID: 0}
+  naturalWorld: {fileID: 0}
+  navigate: {fileID: 0}
+  occult: {fileID: 0}
+  opHvMachine: {fileID: 0}
+  persuade: {fileID: 0}
+  pilot: {fileID: 0}
+  psychology: {fileID: 0}
+  psychanalysis: {fileID: 0}
+  science1: {fileID: 0}
+  science2: {fileID: 0}
+  science3: {fileID: 0}
+  sleightOfHand: {fileID: 0}
+  spotHidden: {fileID: 0}
+  stealth: {fileID: 0}
+  survival1: {fileID: 0}
+  swim: {fileID: 0}
+  throw1: {fileID: 0}
+  track: {fileID: 0}
+  other1: {fileID: 0}
+  other2: {fileID: 0}
+  other3: {fileID: 0}
+  other4: {fileID: 0}
+  other5: {fileID: 0}
   isClicked: 0
 --- !u!114 &758113771
 MonoBehaviour:
@@ -5322,13 +5453,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573365b8a3317ca44895723707ff6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentSO: {fileID: 0}
   agentName: {fileID: 71608094}
   description: {fileID: 1847298406}
   profilePhoto: {fileID: 1831540199}
   strength: {fileID: 796893161}
-  speed: {fileID: 1834848083}
+  constitution: {fileID: 0}
+  size: {fileID: 0}
+  dexterity: {fileID: 0}
+  appearance: {fileID: 0}
+  education: {fileID: 0}
   intelligence: {fileID: 360465173}
-  agentSO: {fileID: 0}
+  power: {fileID: 0}
+  accounting: {fileID: 0}
+  anthropology: {fileID: 0}
+  appraise: {fileID: 0}
+  archaeology: {fileID: 0}
+  artCraft1: {fileID: 0}
+  artCraft2: {fileID: 0}
+  artCraft3: {fileID: 0}
+  charm: {fileID: 0}
+  climb: {fileID: 0}
+  computerUse: {fileID: 0}
+  creditRating: {fileID: 0}
+  cthulhuMythos: {fileID: 0}
+  disguise: {fileID: 0}
+  dodge: {fileID: 0}
+  driveAuto: {fileID: 0}
+  elecRepair: {fileID: 0}
+  electronics: {fileID: 0}
+  fastTalk: {fileID: 0}
+  fightingBrawl: {fileID: 0}
+  fighting2: {fileID: 0}
+  fighting3: {fileID: 0}
+  firearmsAiming: {fileID: 0}
+  firearmsHipshot: {fileID: 0}
+  firearms3: {fileID: 0}
+  firstAid: {fileID: 0}
+  history: {fileID: 0}
+  intimidate: {fileID: 0}
+  jump: {fileID: 0}
+  languageOther1: {fileID: 0}
+  languageOther2: {fileID: 0}
+  languageOwn: {fileID: 0}
+  law: {fileID: 0}
+  libraryUse: {fileID: 0}
+  listen: {fileID: 0}
+  locksmith: {fileID: 0}
+  mechRepair: {fileID: 0}
+  medicine: {fileID: 0}
+  naturalWorld: {fileID: 0}
+  navigate: {fileID: 0}
+  occult: {fileID: 0}
+  opHvMachine: {fileID: 0}
+  persuade: {fileID: 0}
+  pilot: {fileID: 0}
+  psychology: {fileID: 0}
+  psychanalysis: {fileID: 0}
+  science1: {fileID: 0}
+  science2: {fileID: 0}
+  science3: {fileID: 0}
+  sleightOfHand: {fileID: 0}
+  spotHidden: {fileID: 0}
+  stealth: {fileID: 0}
+  survival1: {fileID: 0}
+  swim: {fileID: 0}
+  throw1: {fileID: 0}
+  track: {fileID: 0}
+  other1: {fileID: 0}
+  other2: {fileID: 0}
+  other3: {fileID: 0}
+  other4: {fileID: 0}
+  other5: {fileID: 0}
   isClicked: 0
 --- !u!114 &876566878
 MonoBehaviour:
@@ -8735,13 +8931,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573365b8a3317ca44895723707ff6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentSO: {fileID: 0}
   agentName: {fileID: 936783375}
   description: {fileID: 105500569}
   profilePhoto: {fileID: 1603696410}
   strength: {fileID: 332661955}
-  speed: {fileID: 1539586442}
+  constitution: {fileID: 0}
+  size: {fileID: 0}
+  dexterity: {fileID: 0}
+  appearance: {fileID: 0}
+  education: {fileID: 0}
   intelligence: {fileID: 2118862771}
-  agentSO: {fileID: 0}
+  power: {fileID: 0}
+  accounting: {fileID: 0}
+  anthropology: {fileID: 0}
+  appraise: {fileID: 0}
+  archaeology: {fileID: 0}
+  artCraft1: {fileID: 0}
+  artCraft2: {fileID: 0}
+  artCraft3: {fileID: 0}
+  charm: {fileID: 0}
+  climb: {fileID: 0}
+  computerUse: {fileID: 0}
+  creditRating: {fileID: 0}
+  cthulhuMythos: {fileID: 0}
+  disguise: {fileID: 0}
+  dodge: {fileID: 0}
+  driveAuto: {fileID: 0}
+  elecRepair: {fileID: 0}
+  electronics: {fileID: 0}
+  fastTalk: {fileID: 0}
+  fightingBrawl: {fileID: 0}
+  fighting2: {fileID: 0}
+  fighting3: {fileID: 0}
+  firearmsAiming: {fileID: 0}
+  firearmsHipshot: {fileID: 0}
+  firearms3: {fileID: 0}
+  firstAid: {fileID: 0}
+  history: {fileID: 0}
+  intimidate: {fileID: 0}
+  jump: {fileID: 0}
+  languageOther1: {fileID: 0}
+  languageOther2: {fileID: 0}
+  languageOwn: {fileID: 0}
+  law: {fileID: 0}
+  libraryUse: {fileID: 0}
+  listen: {fileID: 0}
+  locksmith: {fileID: 0}
+  mechRepair: {fileID: 0}
+  medicine: {fileID: 0}
+  naturalWorld: {fileID: 0}
+  navigate: {fileID: 0}
+  occult: {fileID: 0}
+  opHvMachine: {fileID: 0}
+  persuade: {fileID: 0}
+  pilot: {fileID: 0}
+  psychology: {fileID: 0}
+  psychanalysis: {fileID: 0}
+  science1: {fileID: 0}
+  science2: {fileID: 0}
+  science3: {fileID: 0}
+  sleightOfHand: {fileID: 0}
+  spotHidden: {fileID: 0}
+  stealth: {fileID: 0}
+  survival1: {fileID: 0}
+  swim: {fileID: 0}
+  throw1: {fileID: 0}
+  track: {fileID: 0}
+  other1: {fileID: 0}
+  other2: {fileID: 0}
+  other3: {fileID: 0}
+  other4: {fileID: 0}
+  other5: {fileID: 0}
   isClicked: 0
 --- !u!114 &1581184394
 MonoBehaviour:
@@ -10926,13 +11187,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573365b8a3317ca44895723707ff6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentSO: {fileID: 0}
   agentName: {fileID: 248437817}
   description: {fileID: 418841502}
   profilePhoto: {fileID: 1086864586}
   strength: {fileID: 987338679}
-  speed: {fileID: 1723835670}
+  constitution: {fileID: 0}
+  size: {fileID: 0}
+  dexterity: {fileID: 0}
+  appearance: {fileID: 0}
+  education: {fileID: 0}
   intelligence: {fileID: 1865827398}
-  agentSO: {fileID: 0}
+  power: {fileID: 0}
+  accounting: {fileID: 0}
+  anthropology: {fileID: 0}
+  appraise: {fileID: 0}
+  archaeology: {fileID: 0}
+  artCraft1: {fileID: 0}
+  artCraft2: {fileID: 0}
+  artCraft3: {fileID: 0}
+  charm: {fileID: 0}
+  climb: {fileID: 0}
+  computerUse: {fileID: 0}
+  creditRating: {fileID: 0}
+  cthulhuMythos: {fileID: 0}
+  disguise: {fileID: 0}
+  dodge: {fileID: 0}
+  driveAuto: {fileID: 0}
+  elecRepair: {fileID: 0}
+  electronics: {fileID: 0}
+  fastTalk: {fileID: 0}
+  fightingBrawl: {fileID: 0}
+  fighting2: {fileID: 0}
+  fighting3: {fileID: 0}
+  firearmsAiming: {fileID: 0}
+  firearmsHipshot: {fileID: 0}
+  firearms3: {fileID: 0}
+  firstAid: {fileID: 0}
+  history: {fileID: 0}
+  intimidate: {fileID: 0}
+  jump: {fileID: 0}
+  languageOther1: {fileID: 0}
+  languageOther2: {fileID: 0}
+  languageOwn: {fileID: 0}
+  law: {fileID: 0}
+  libraryUse: {fileID: 0}
+  listen: {fileID: 0}
+  locksmith: {fileID: 0}
+  mechRepair: {fileID: 0}
+  medicine: {fileID: 0}
+  naturalWorld: {fileID: 0}
+  navigate: {fileID: 0}
+  occult: {fileID: 0}
+  opHvMachine: {fileID: 0}
+  persuade: {fileID: 0}
+  pilot: {fileID: 0}
+  psychology: {fileID: 0}
+  psychanalysis: {fileID: 0}
+  science1: {fileID: 0}
+  science2: {fileID: 0}
+  science3: {fileID: 0}
+  sleightOfHand: {fileID: 0}
+  spotHidden: {fileID: 0}
+  stealth: {fileID: 0}
+  survival1: {fileID: 0}
+  swim: {fileID: 0}
+  throw1: {fileID: 0}
+  track: {fileID: 0}
+  other1: {fileID: 0}
+  other2: {fileID: 0}
+  other3: {fileID: 0}
+  other4: {fileID: 0}
+  other5: {fileID: 0}
   isClicked: 0
 --- !u!114 &1907276369
 MonoBehaviour:
@@ -11914,13 +12240,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573365b8a3317ca44895723707ff6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentSO: {fileID: 0}
   agentName: {fileID: 2146646985}
   description: {fileID: 1972951191}
   profilePhoto: {fileID: 1793775571}
   strength: {fileID: 845392480}
-  speed: {fileID: 383378803}
+  constitution: {fileID: 0}
+  size: {fileID: 0}
+  dexterity: {fileID: 0}
+  appearance: {fileID: 0}
+  education: {fileID: 0}
   intelligence: {fileID: 21176615}
-  agentSO: {fileID: 0}
+  power: {fileID: 0}
+  accounting: {fileID: 0}
+  anthropology: {fileID: 0}
+  appraise: {fileID: 0}
+  archaeology: {fileID: 0}
+  artCraft1: {fileID: 0}
+  artCraft2: {fileID: 0}
+  artCraft3: {fileID: 0}
+  charm: {fileID: 0}
+  climb: {fileID: 0}
+  computerUse: {fileID: 0}
+  creditRating: {fileID: 0}
+  cthulhuMythos: {fileID: 0}
+  disguise: {fileID: 0}
+  dodge: {fileID: 0}
+  driveAuto: {fileID: 0}
+  elecRepair: {fileID: 0}
+  electronics: {fileID: 0}
+  fastTalk: {fileID: 0}
+  fightingBrawl: {fileID: 0}
+  fighting2: {fileID: 0}
+  fighting3: {fileID: 0}
+  firearmsAiming: {fileID: 0}
+  firearmsHipshot: {fileID: 0}
+  firearms3: {fileID: 0}
+  firstAid: {fileID: 0}
+  history: {fileID: 0}
+  intimidate: {fileID: 0}
+  jump: {fileID: 0}
+  languageOther1: {fileID: 0}
+  languageOther2: {fileID: 0}
+  languageOwn: {fileID: 0}
+  law: {fileID: 0}
+  libraryUse: {fileID: 0}
+  listen: {fileID: 0}
+  locksmith: {fileID: 0}
+  mechRepair: {fileID: 0}
+  medicine: {fileID: 0}
+  naturalWorld: {fileID: 0}
+  navigate: {fileID: 0}
+  occult: {fileID: 0}
+  opHvMachine: {fileID: 0}
+  persuade: {fileID: 0}
+  pilot: {fileID: 0}
+  psychology: {fileID: 0}
+  psychanalysis: {fileID: 0}
+  science1: {fileID: 0}
+  science2: {fileID: 0}
+  science3: {fileID: 0}
+  sleightOfHand: {fileID: 0}
+  spotHidden: {fileID: 0}
+  stealth: {fileID: 0}
+  survival1: {fileID: 0}
+  swim: {fileID: 0}
+  throw1: {fileID: 0}
+  track: {fileID: 0}
+  other1: {fileID: 0}
+  other2: {fileID: 0}
+  other3: {fileID: 0}
+  other4: {fileID: 0}
+  other5: {fileID: 0}
   isClicked: 0
 --- !u!114 &2055805128
 MonoBehaviour:

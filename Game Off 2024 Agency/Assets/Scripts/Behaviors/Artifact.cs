@@ -3,18 +3,20 @@ using UnityEngine;
 
 public class Artifact : MonoBehaviour
 {
-    [SerializeField] private string displayName;
-    [SerializeField] private string description;
-    [SerializeField] private Sprite profilePhoto;
     [SerializeField] public ArtifactSO artifactSO;
+    [SerializeField] public bool identified = false;
 
     private bool isInitialized = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // TEST ONLY.  We don't need this for a game.
         if (!isInitialized)
+        {
             InitializeFromTemplate(artifactSO);
+            Identify();
+        }
     }
 
     // Method to initialize the artifact from ArtifactSO
@@ -22,12 +24,54 @@ public class Artifact : MonoBehaviour
     {
         artifactSO = template;
         name = template.name;
-        displayName = template.displayName;
-        description = template.description;
-        profilePhoto = template.profilePhoto;
- 
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = profilePhoto;
+
+        identified = false;
+
+        ActualizeSprite();
+
         isInitialized = true;
+    }
+
+    private void ActualizeSprite()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = ProfilePhoto;
+    }
+
+    // Method to identify the artifact
+    public void Identify()
+    {
+        identified = true;
+        ActualizeSprite();
+    }
+
+    // Method to get the current ArtifactSO based on identification status
+    private ArtifactSO GetCurrentArtifactSO()
+    {
+        return identified ? artifactSO : ArtifactManager.Instance.unidentifiedArtifactSO;
+    }
+
+    public string DisplayName
+    {
+        get
+        {
+            return GetCurrentArtifactSO().displayName;
+        }
+    }
+
+    public string Description
+    {
+        get
+        {
+            return GetCurrentArtifactSO().description;
+        }
+    }
+
+    public Sprite ProfilePhoto
+    {
+        get
+        {
+            return GetCurrentArtifactSO().profilePhoto;
+        }
     }
 }
