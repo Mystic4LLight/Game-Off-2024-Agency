@@ -5,7 +5,7 @@ public class AgentManager : MonoBehaviour
 {
     public List<Agent> agents = new List<Agent>();
     [SerializeField] Agent agentPrefab;
-    [SerializeField] public List<AgentSO> agentsSO = new List<AgentSO>();
+    [SerializeField] public List<AgentSO> recruitableAgentsSO = new List<AgentSO>();
     [SerializeField] public Transform agentSpawnPoint;
     public List<Agent> activeAgents = new List<Agent>();    
     public static AgentManager Instance;
@@ -27,7 +27,8 @@ public class AgentManager : MonoBehaviour
     public void RecruitAgent(AgentSO agentSO){        
         Agent newAgent = Instantiate(agentPrefab, agentSpawnPoint.transform.position, agentPrefab.transform.rotation);
         newAgent.agentSO = agentSO;
-        activeAgents.Add(newAgent);             
+        activeAgents.Add(newAgent);
+        recruitableAgentsSO.Remove(agentSO);
     }
     
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Mission
 {
-    [SerializeField] private List<Agent> _agents;
+    [SerializeField] public List<Agent> _agents;
 
     [SerializeField] private List<Artifact> _artifacts = new List<Artifact>();
 

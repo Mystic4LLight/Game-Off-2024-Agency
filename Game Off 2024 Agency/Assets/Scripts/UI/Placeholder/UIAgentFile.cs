@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class AgentPanel : MonoBehaviour
+public class UIAgentFile : MonoBehaviour
 {
-    [SerializeField] public AgentSO agentSO;
+    private AgentSO agentSO;
     [SerializeField] private TextMeshProUGUI agentName;
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private Image profilePhoto;
@@ -88,6 +88,10 @@ public class AgentPanel : MonoBehaviour
     {
 
     }
+    void OnEnable()
+    {
+        fillPanel();
+    }
     public void clickButton(){
         isClicked = true;
     }
@@ -166,5 +170,9 @@ public class AgentPanel : MonoBehaviour
         other4.text = agentSO.other4.ToString();
         other5.text = agentSO.other5.ToString();
         
+    }
+    public void setAgentSO(AgentSO newAgentSO)
+    {
+        agentSO = newAgentSO;
     }
 }

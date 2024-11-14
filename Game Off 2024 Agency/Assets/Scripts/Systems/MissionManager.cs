@@ -28,14 +28,14 @@ public class MissionManager : MonoBehaviour
     }
     public void startMission(Mission mission, List<Agent> deployedAgents){
         avaiableMissions.Remove(mission);
-        mission.deployedAgents = deployedAgents;
-        foreach (Agent agent in mission.deployedAgents){
+        mission._agents = deployedAgents;
+        foreach (Agent agent in mission._agents){
             AgentManager.Instance.activeAgents.Remove(agent);
         }
         //in-mission logic here
-        foreach (Agent agent in mission.deployedAgents){
+        foreach (Agent agent in mission._agents){
             AgentManager.Instance.activeAgents.Add(agent);
-            mission.deployedAgents.Remove(agent);
+            mission._agents.Remove(agent);
         }
         
 

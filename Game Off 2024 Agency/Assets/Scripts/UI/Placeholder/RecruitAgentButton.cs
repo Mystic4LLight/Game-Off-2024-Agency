@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RecruitAgentButton : MonoBehaviour
 {
-    [SerializeField] private List<AgentPanel> agentPanels = new List<AgentPanel>();
+    [SerializeField] private List<UIAgentFile> agentPanels = new List<UIAgentFile>();
     
     void Start()
     {
@@ -16,11 +16,11 @@ public class RecruitAgentButton : MonoBehaviour
         
     }
     public void recruitAgentButtonPressed(){
-        foreach (AgentPanel agentPanel in agentPanels)
-        if (agentPanel.isClicked == true && agentPanel.agentSO != null){
-            AgentManager.Instance.RecruitAgent(agentPanel.agentSO);
-            agentPanel.isClicked = false;
-        }
+        //foreach (UIAgentFile agentPanel in agentPanels)
+        //if (agentPanel.isClicked == true && agentPanel.getAgentSO() != null){
+            //AgentManager.Instance.RecruitAgent(agentPanel.getAgentSO());
+            //agentPanel.isClicked = false;
+        //}
         
     }
 }

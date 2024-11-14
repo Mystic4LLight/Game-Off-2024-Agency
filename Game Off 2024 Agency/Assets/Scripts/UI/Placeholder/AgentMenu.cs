@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AgentMenu : MonoBehaviour
 {
-    [SerializeField] private List<AgentPanel> agentPanels = new List<AgentPanel>();
+    [SerializeField] private List<UIAgentFile> agentPanels = new List<UIAgentFile>();
     void OnEnable(){
         FillAgents();
     }
@@ -19,10 +19,10 @@ public class AgentMenu : MonoBehaviour
     }
     public void FillAgents(){
         for (int i = 0; i < agentPanels.Count; i++){
-            agentPanels[i].agentSO = AgentManager.Instance.agentsSO[i];
-            if (agentPanels[i].agentSO != null){
-                agentPanels[i].fillPanel();
-            }
+            //agentPanels[i].getAgentSO() = AgentManager.Instance.agentsSO[i];
+            //if (agentPanels[i].getAgentSO() != null){
+                //agentPanels[i].fillPanel();
+            //}
         }
     }
 }
