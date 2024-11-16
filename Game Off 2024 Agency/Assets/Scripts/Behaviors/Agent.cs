@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 public class Agent : MonoBehaviour
 {
@@ -77,6 +79,15 @@ public class Agent : MonoBehaviour
     [SerializeField] private int other4;
     [SerializeField] private int other5;
 
+    // (Corris) properties for effects checks
+    public bool IsInjured => activeEffects.Any(effect => effect.effectSO is EffectSO_Injured);
+    public bool IsDying => activeEffects.Any(effect => effect.effectSO is EffectSO_Dying);
+    public bool IsPoisoned => activeEffects.Any(effect => effect.effectSO is EffectSO_Poisoned);
+    public bool IsInsane => activeEffects.Any(effect => effect.effectSO is EffectSO_Insane);
+
+
+    // List of active effects
+    private List<Effect> activeEffects = new List<Effect>();
 
     void Start()
     {
@@ -158,6 +169,39 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Corris: Call when needed (not sure do we have turn based system or real time)
+        // UpdateEffects();
+    }
+
+
+    public bool ApplyEffect(Effect effect)
+    {
+        if (effect == null)
+        {
+            Debug.LogWarning("Effect is null, cannot apply effect.");
+            return false;
+        }
+
+        // Implement the logic to apply the effect to the agent
+        // Example: Add a component, modify properties, etc.
+        Debug.Log($"Agent: Applying effect {effect.DisplayName} to {(name != null ? name : "NULL")}");
+
+        // Put effect to active effects list
+        activeEffects.Add(effect);
+
+        return true;
+    }
+
+    // Corris: Call when needed (not sure do we have turn based system or real time)
+    public void UpdateEffects()
+    {
+        /* // Update all active effects
+         foreach (var effect in activeEffects)
+         {
+             effect.UpdateEffect(this);
+         }
+        */
+        // Remove all expired effects
+        activeEffects.RemoveAll(effect => effect.IsExpired);
     }
 }

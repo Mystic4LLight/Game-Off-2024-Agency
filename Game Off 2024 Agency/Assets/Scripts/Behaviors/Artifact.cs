@@ -51,27 +51,7 @@ public class Artifact : MonoBehaviour
         return identified ? artifactSO : ArtifactManager.Instance.unidentifiedArtifactSO;
     }
 
-    public string DisplayName
-    {
-        get
-        {
-            return GetCurrentArtifactSO().displayName;
-        }
-    }
-
-    public string Description
-    {
-        get
-        {
-            return GetCurrentArtifactSO().description;
-        }
-    }
-
-    public Sprite ProfilePhoto
-    {
-        get
-        {
-            return GetCurrentArtifactSO().profilePhoto;
-        }
-    }
+    public string DisplayName => GetCurrentArtifactSO().displayName;
+    public string Description => GetCurrentArtifactSO().description;
+    public Sprite ProfilePhoto => GetCurrentArtifactSO().profilePhoto;
 }
