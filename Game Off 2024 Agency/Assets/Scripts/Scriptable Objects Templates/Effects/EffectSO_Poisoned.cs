@@ -15,4 +15,9 @@ public class EffectSO_Poisoned : EffectSO
         // .. Poisoned logic if needed
     }
 
+    public override void UpdateEffect(Agent agent)
+    {
+        // Just as sample
+        agent.TakeDamage(damageByPoison);
+    }
 }

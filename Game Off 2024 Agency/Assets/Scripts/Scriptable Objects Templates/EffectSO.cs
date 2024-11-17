@@ -27,4 +27,9 @@ public class EffectSO : ScriptableObject
         return agent.ApplyEffect(effect);
 
     }
+
+    public virtual void UpdateEffect(Agent agent)
+    {
+        // overriden in child classes
+    }
 }

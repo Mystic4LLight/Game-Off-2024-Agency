@@ -164,6 +164,18 @@ public class Agent : MonoBehaviour
         other3 = agentSO.other3;
         other4 = agentSO.other4;
         other5 = agentSO.other5;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "CorrisScene-Sandbox")
+        {
+            // (Corris) TEST: Apply some effects to the agent
+            Debug.Log("TEST Apply some effects to the agent");
+            var _effect = new Effect(EffectManager.Instance.GetEffectSOByName("EffectSO_Poisoned"));
+            ApplyEffect(_effect);
+            // And show effect in the panel (like if player looking on Hint on agent profile minieffects icon (I guess we will have this one).
+            GameObject.Find("Effect_Panel").GetComponent<EffectPanel>().Effect = _effect;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -192,16 +204,24 @@ public class Agent : MonoBehaviour
         return true;
     }
 
-    // Corris: Call when needed (not sure do we have turn based system or real time)
+    // Corris: Call when needed (on time turns)
     public void UpdateEffects()
     {
-        /* // Update all active effects
+        // Update all active effects
          foreach (var effect in activeEffects)
          {
              effect.UpdateEffect(this);
          }
-        */
+        
         // Remove all expired effects
         activeEffects.RemoveAll(effect => effect.IsExpired);
     }
+
+    public void TakeDamage(float damage)
+    {
+        // наносим урон агенту
+        Debug.Log($"Agent: {name} takes {damage} damage");
+
+    }
 }
+
