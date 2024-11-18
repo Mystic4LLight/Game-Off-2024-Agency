@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428be0600a0058848ac4ba4f5cde4754, type: 3}
+  m_Name: EffectSO_Poisoned
+  m_EditorClassIdentifier: 
+  displayName: Poisoned
+  description: Agent is poisoned
+  profilePhoto: {fileID: 6127255902558653833, guid: 832e689282d509c4082e97b127f3775b, type: 3}
+  duration: 2
+  damageByPoison: 1
