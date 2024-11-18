@@ -1,10 +1,15 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 [CreateAssetMenu(fileName = "AgentSO", menuName = "Scriptable Objects/AgentSO")]
 public class AgentSO : ScriptableObject
 {
     public new string name;
     public string description;
+
+    public AgentSkill requiredSkillForAnalysis; // The skill required for this artifact's analysis
+
     public Sprite profilePhoto;
     [Header("Stats")]
     public int strength;
@@ -76,5 +81,20 @@ public class AgentSO : ScriptableObject
     public int other3;
     public int other4;
     public int other5;
+
+    [SerializeField] private AgentSkill primarySkill;
+    public Dictionary<AgentSkill, int> skills = new Dictionary<AgentSkill, int>();
+
+    // Initialize or set a skill level
+    public void SetSkillLevel(AgentSkill skill, int level)
+    {
+        skills[skill] = level;
+    }
+
+    // Get the skill level for a given skill type
+    public int GetSkillLevel(AgentSkill skill)
+    {
+        return skills.ContainsKey(skill) ? skills[skill] : 0;
+    }
 
 }
