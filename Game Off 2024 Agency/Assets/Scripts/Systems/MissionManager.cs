@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class MissionManager : MonoBehaviour
 {
-    public List<Mission> avaiableMissions = new List<Mission>();
-    public static MissionManager Instance;     
+    [SerializeField] private List<Mission> avaiableMainMissions = new List<Mission>();
+    [SerializeField] private List<Mission> avaiableSideMissions = new List<Mission>();
+    public static MissionManager Instance;
+
+    public List<Mission> AvaiableMainMissions { get => avaiableMainMissions; set => avaiableMainMissions = value; }
+    public List<Mission> AvaiableSideMissions { get => avaiableSideMissions; set => avaiableSideMissions = value; }
+
     void Start()
     {
         if (Instance != null && Instance != this){
@@ -21,23 +26,65 @@ public class MissionManager : MonoBehaviour
     {
         
     }
-    public void addAvaiableMission(Mission mission){
+    public void addAvaiableMainMission(Mission mission){
         if (mission != null){
-            avaiableMissions.Add(mission);
+            AvaiableMainMissions.Add(mission);
         }
     }
-    public void startMission(Mission mission, List<Agent> deployedAgents){
-        avaiableMissions.Remove(mission);
-        mission._agents = deployedAgents;
-        foreach (Agent agent in mission._agents){
+    public void addAvaiableSideMission(Mission mission)
+    {
+        if (mission != null)
+        {
+            AvaiableMainMissions.Add(mission);
+        }
+    }
+    public Mission getAvaiableMainMission(int id)
+    {
+        return AvaiableMainMissions[id];
+    }
+    public Mission getAvaiableSideMission(int id)
+    {
+        return AvaiableSideMissions[id];
+    }
+    public void removeAvaiableMainMission(int id)
+    {
+        AvaiableMainMissions.RemoveAt(id);
+    }
+    public void removeAvaiableSideMission(int id)
+    {
+        AvaiableSideMissions.RemoveAt(id);
+    }
+    public void startMainMission(Mission mission, List<Agent> deployedAgents){
+        AvaiableMainMissions.Remove(mission);
+        
+        
+        foreach (Agent agent in deployedAgents){
             AgentManager.Instance.activeAgents.Remove(agent);
+            mission.AddAgent(agent);
         }
         //in-mission logic here
-        foreach (Agent agent in mission._agents){
+        foreach (Agent agent in deployedAgents){
             AgentManager.Instance.activeAgents.Add(agent);
-            mission._agents.Remove(agent);
+            mission.removeAgent(agent);
         }
         
+
+    }
+    public void startSideMission(Mission mission, List<Agent> deployedAgents)
+    {
+        AvaiableSideMissions.Remove(mission);
+        foreach (Agent agent in deployedAgents)
+        {
+            AgentManager.Instance.activeAgents.Remove(agent);
+            mission.AddAgent(agent);
+        }
+        //in-mission logic here
+        foreach (Agent agent in deployedAgents)
+        {
+            AgentManager.Instance.activeAgents.Add(agent);
+            mission.removeAgent(agent);
+        }
+
 
     }
 }

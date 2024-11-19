@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1482ac6317d3654593db5439b29bb0d, type: 3}
-  m_Name: MissionA
+  m_Name: MissionSO 1
   m_EditorClassIdentifier: 
-  missionName: a
-  description: a
+  missionName: Creature hunt 2
+  description: Capture Creature 2
   passCheck: 5
+  missionImage: {fileID: 8420485207997377320, guid: fd27a917fd36be44084ae09194f97870, type: 3}

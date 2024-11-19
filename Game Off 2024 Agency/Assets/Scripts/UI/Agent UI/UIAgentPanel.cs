@@ -3,6 +3,7 @@ using System.Linq;
 //using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIAgentPanel : MonoBehaviour
 {

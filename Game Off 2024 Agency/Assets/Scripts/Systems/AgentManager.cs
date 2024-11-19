@@ -30,5 +30,6 @@ public class AgentManager : MonoBehaviour
         activeAgents.Add(newAgent);
         recruitableAgentsSO.Remove(agentSO);
     }
+
     
 }
