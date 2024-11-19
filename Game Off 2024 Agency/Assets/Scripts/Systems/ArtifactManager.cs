@@ -86,7 +86,7 @@ public class ArtifactManager : MonoBehaviour
         // Instantiate a new artifact using the artifactPrefab as a child of the ArtifactManager.
         Artifact newArtifact = Instantiate(artifactPrefab, this.transform);
 
-        // Initialize the new artifact with the template's data.
+        // InitializeAgentStats the new artifact with the template's data.
         newArtifact.InitializeFromTemplate(template);
 
         // Add the new artifact to the agencyArtifactCatalog.
