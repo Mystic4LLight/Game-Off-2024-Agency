@@ -85,6 +85,8 @@ public class Agent : MonoBehaviour
     public bool IsPoisoned => activeEffects.Any(effect => effect.effectSO is EffectSO_Poisoned);
     public bool IsInsane => activeEffects.Any(effect => effect.effectSO is EffectSO_Insane);
 
+    // Corris: List of current stats (standard)
+    public List<AgentStat> currentStats = new List<AgentStat>();
 
     // List of active effects
     private List<Effect> activeEffects = new List<Effect>();
@@ -165,6 +167,9 @@ public class Agent : MonoBehaviour
         other4 = agentSO.other4;
         other5 = agentSO.other5;
 
+        // Initializing standard (Corris) AgentStats
+        InitializeAgentStats();
+
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "CorrisScene-Sandbox")
         {
             // (Corris) TEST: Apply some effects to the agent
@@ -184,7 +189,45 @@ public class Agent : MonoBehaviour
         // Corris: Call when needed (not sure do we have turn based system or real time)
         // UpdateEffects();
     }
+    
+    public void InitializeAgentStats()
+    {
+        if (agentSO == null)
+        {
+            Debug.LogError("AgentSO is not assigned!");
+            return;
+        }
+        if (agentSO.statTemplate == null)
+        {
+            Debug.LogError("StatTemplate is not assigned!");
+            return;
+        }
 
+        // Копируем шаблон и создаём текущие значения
+        currentStats = agentSO.statTemplate.stats
+            .Select(template => new AgentStat(template))
+            .ToList();
+    }
+
+    public void SetStatValue(string name, float newValue)
+    {
+        var stat = currentStats.FirstOrDefault(s => s.template.name == name);
+        if (stat != null)
+        {
+          //  stat.currentValue = Mathf.Clamp(stat.currentValue + delta, 0, stat.template.defaultValue);
+            stat.currentValue = newValue;
+        }
+    }
+
+    public float GetStatValue(string name)
+    {
+        var stat = currentStats.FirstOrDefault(s => s.template.name == name);
+        if (stat != null)
+        {
+            return stat.currentValue;
+        }
+        return 0;
+    }
 
     public bool ApplyEffect(Effect effect)
     {
@@ -219,7 +262,7 @@ public class Agent : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        // наносим урон агенту
+        // hitting agent
         Debug.Log($"Agent: {name} takes {damage} damage");
 
     }
