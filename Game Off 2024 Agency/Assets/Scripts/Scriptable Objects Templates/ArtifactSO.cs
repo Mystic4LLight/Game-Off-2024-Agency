@@ -12,7 +12,9 @@ public class ArtifactSO : ScriptableObject
     public Sprite placeholderPhoto; // Placeholder image for unidentified artifact
 
     [Header("Research & Analysis")]
+    public bool isUnderResearch = false;
     public float researchTimeRequired = 168f; // Total time in in-game hours (e.g., one week)
+    public int remainingResearchTime = 5;
     public bool isIdentified = false;         // Tracks if artifact has been fully analyzed
     public int maxSanityLoss = 5; 
     public AgentSkill requiredSkillForAnalysis;            // Maximum sanity points the artifact can cause
@@ -28,4 +30,11 @@ public class ArtifactSO : ScriptableObject
     [Header("R&D Integration")]
     public bool leadsToNewTool = false;       // Indicates if artifact unlocks a new tool in R&D
     public string toolDescription;            // Description of the new tool or function unlocked
+
+    public void IdentifyArtifact()
+    {
+        isIdentified = true; // Mark artifact as identified
+        displayName = string.IsNullOrEmpty(displayName) ? "Identified Artifact" : displayName;
+        Debug.Log($"Artifact identified: {displayName}");
+    }
 }

@@ -85,6 +85,9 @@ public class AgentSO : ScriptableObject
     [SerializeField] private AgentSkill primarySkill;
     public Dictionary<AgentSkill, int> skills = new Dictionary<AgentSkill, int>();
 
+
+
+
     // Initialize or set a skill level
     public void SetSkillLevel(AgentSkill skill, int level)
     {
