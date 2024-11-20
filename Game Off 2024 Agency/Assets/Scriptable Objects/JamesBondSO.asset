@@ -16,5 +16,96 @@ MonoBehaviour:
   description: Legendary Agent
   profilePhoto: {fileID: 7114782437234694498, guid: 1ef0225bbbc52fc4796d000b9196f69a, type: 3}
   strength: 10
-  speed: 10
+  constitution: 0
+  size: 0
+  dexterity: 0
+  appearance: 0
+  education: 0
   intelligence: 10
+  power: 0
+  accounting: 0
+  anthropology: 0
+  appraise: 0
+  archaeology: 0
+  artCraft1: 0
+  artCraft2: 0
+  artCraft3: 0
+  charm: 0
+  climb: 0
+  computerUse: 0
+  creditRating: 0
+  cthulhuMythos: 0
+  disguise: 0
+  dodge: 0
+  driveAuto: 0
+  elecRepair: 0
+  electronics: 0
+  fastTalk: 0
+  fightingBrawl: 0
+  fighting2: 0
+  fighting3: 0
+  firearmsAiming: 0
+  firearmsHipshot: 0
+  firearms3: 0
+  firstAid: 0
+  history: 0
+  intimidate: 0
+  jump: 0
+  languageOther1: 0
+  languageOther2: 0
+  languageOwn: 0
+  law: 0
+  libraryUse: 0
+  listen: 0
+  locksmith: 0
+  mechRepair: 0
+  medicine: 0
+  naturalWorld: 0
+  navigate: 0
+  occult: 0
+  opHvMachine: 0
+  persuade: 0
+  pilot: 0
+  psychology: 0
+  psychanalysis: 0
+  science1: 0
+  science2: 0
+  science3: 0
+  sleightOfHand: 0
+  spotHidden: 0
+  stealth: 0
+  survival1: 0
+  swim: 0
+  throw1: 0
+  track: 0
+  other1: 0
+  other2: 0
+  other3: 0
+  other4: 0
+  other5: 0
+  statTemplate: {fileID: 11400000, guid: 38a7f90e9265fd844a232724905883d6, type: 2}
+  stats:
+  - template:
+      name: 
+      description: 
+      defaultValue: 0
+      icon: {fileID: 0}
+    currentValue: 0
+  - template:
+      name: 
+      description: 
+      defaultValue: 0
+      icon: {fileID: 0}
+    currentValue: 0
+  - template:
+      name: 
+      description: 
+      defaultValue: 0
+      icon: {fileID: 0}
+    currentValue: 0
+  - template:
+      name: 
+      description: 
+      defaultValue: 0
+      icon: {fileID: 0}
+    currentValue: 0
