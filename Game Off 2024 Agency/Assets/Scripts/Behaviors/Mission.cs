@@ -12,8 +12,10 @@ public class Mission : MonoBehaviour
     [SerializeField] private string missionName;
     [SerializeField] private string description;
     [SerializeField] private int passCheck;
+    [SerializeField] private string statCheck;
     [SerializeField] public Sprite missionImage;
     [SerializeField] private MissionSO missionSO;
+    
 
     public global::System.String MissionName { get => missionName; set => missionName = value; }
     public global::System.String Description { get => description; set => description = value; }
@@ -63,7 +65,7 @@ public class Mission : MonoBehaviour
         else
             return false;
     }
-    public bool removeAgent (Agent agent)
+    public bool RemoveAgent (Agent agent)
     {
         if (_agents.Contains(agent))
         {
@@ -72,5 +74,47 @@ public class Mission : MonoBehaviour
         else
             return false;
     }
+    public bool CheckStat(Agent agent, string stat, float checkValue)
+    {
+        float rollValue = RollD100();         
+        if (rollValue <= agent.GetStatValue(stat))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool CheckHardStat(Agent agent, string stat)
+    {
+        float rollValue = RollD100();
+        if (rollValue <= (agent.GetStatValue(stat)/5))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool CheckExtremeStat(Agent agent, string stat, float checkValue)
+    {
+        float rollValue = RollD100();
+        if (rollValue <= (agent.GetStatValue(stat)/20))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public float RollD100()
+    {
+        return Random.Range(1, 101);
+    }
+
 
 }

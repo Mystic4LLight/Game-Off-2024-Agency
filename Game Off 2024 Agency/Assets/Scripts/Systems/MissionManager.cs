@@ -73,6 +73,17 @@ public class MissionManager : MonoBehaviour
         }      
 
     }
+    public void startMainMission(Mission mission, List<Agent> deployedAgents, List<Artifact> usedArtifacts)
+    {
+        AvaiableMainMissions.Remove(mission);
+
+        foreach (Agent agent in deployedAgents)
+        {
+            AgentManager.Instance.activeAgents.Remove(agent);
+            mission.AddAgent(agent);
+        }
+
+    }
     public void startSideMission(Mission mission, List<Agent> deployedAgents)
     {
         AvaiableSideMissions.Remove(mission);

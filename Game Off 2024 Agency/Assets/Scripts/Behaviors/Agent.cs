@@ -266,5 +266,9 @@ public class Agent : MonoBehaviour
         Debug.Log($"Agent: {name} takes {damage} damage");
 
     }
+    public void increaseStatValue(string stat, float value)
+    {
+        SetStatValue(stat, GetStatValue(stat) + value);
+    }
 }
 
