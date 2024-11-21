@@ -78,13 +78,19 @@ public class MissionManager : MonoBehaviour
             AgentManager.Instance.activeAgents.Remove(agent);
             mission.AddAgent(agent);
         }
-        //in-mission logic here
+
+    }
+
+    public void endMission(Mission mission, UniqueList<Agent> deployedAgents)
+    {
         foreach (Agent agent in deployedAgents)
         {
             AgentManager.Instance.activeAgents.Add(agent);
             mission.removeAgent(agent);
         }
-
-
     }
+    
+
+
+
 }
