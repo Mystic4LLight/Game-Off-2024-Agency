@@ -8,7 +8,6 @@ using System.Collections.Generic;
 public class Mission : MonoBehaviour
 {
     [SerializeField] private List<Agent> _agents;
-
     [SerializeField] private List<Artifact> _artifacts = new List<Artifact>();
     [SerializeField] private string missionName;
     [SerializeField] private string description;
@@ -24,12 +23,15 @@ public class Mission : MonoBehaviour
 
     public void OnEnable()
     {
+        
+    }
+    public void missionFillData()
+    {
         missionName = missionSO.missionName;
         description = missionSO.description;
         passCheck = missionSO.passCheck;
         missionImage = missionSO.missionImage;
     }
-
     public bool AddArtifact(Artifact artifact)
     {
         if (!_artifacts.Contains(artifact))
@@ -70,4 +72,5 @@ public class Mission : MonoBehaviour
         else
             return false;
     }
+
 }

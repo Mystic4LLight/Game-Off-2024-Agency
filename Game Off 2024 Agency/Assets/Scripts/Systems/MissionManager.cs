@@ -26,6 +26,16 @@ public class MissionManager : MonoBehaviour
     {
         
     }
+    public void createMainMission(Mission missionSO)
+    {
+        Mission newMission = new Mission();
+        avaiableMainMissions.Add(newMission);
+    }
+    public void createSideMission(Mission missionSO)
+    {
+        Mission newMission = new Mission();
+        avaiableSideMissions.Add(newMission);
+    }
     public void addAvaiableMainMission(Mission mission){
         if (mission != null){
             AvaiableMainMissions.Add(mission);
@@ -55,19 +65,12 @@ public class MissionManager : MonoBehaviour
         AvaiableSideMissions.RemoveAt(id);
     }
     public void startMainMission(Mission mission, List<Agent> deployedAgents){
-        AvaiableMainMissions.Remove(mission);
-        
+        AvaiableMainMissions.Remove(mission);  
         
         foreach (Agent agent in deployedAgents){
             AgentManager.Instance.activeAgents.Remove(agent);
             mission.AddAgent(agent);
-        }
-        //in-mission logic here
-        foreach (Agent agent in deployedAgents){
-            AgentManager.Instance.activeAgents.Add(agent);
-            mission.removeAgent(agent);
-        }
-        
+        }      
 
     }
     public void startSideMission(Mission mission, List<Agent> deployedAgents)
@@ -81,12 +84,13 @@ public class MissionManager : MonoBehaviour
 
     }
 
-    public void endMission(Mission mission, UniqueList<Agent> deployedAgents)
+    
+    public void endMission(Mission mission, List<Agent> deployedAgents)
     {
         foreach (Agent agent in deployedAgents)
         {
             AgentManager.Instance.activeAgents.Add(agent);
-            mission.removeAgent(agent);
+            Destroy(mission);
         }
     }
     
