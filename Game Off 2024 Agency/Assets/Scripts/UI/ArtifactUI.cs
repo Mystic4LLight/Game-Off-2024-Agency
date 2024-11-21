@@ -35,7 +35,8 @@ public class ArtifactUI : MonoBehaviour
         {
             unidentifiedPanel.SetActive(true);
             identifiedPanel.SetActive(false);
-            unidentifiedNameText.text = artifactSO.unidentifiedName; // Placeholder name
+            unidentifiedNameText.text = artifactSO.unidentifiedName;
+            researchTimerText.text = $"Time Left: {artifact.GetRemainingResearchTime()} hours";
             UpdateResearchTimerUI();
         }
         else
@@ -82,7 +83,7 @@ public class ArtifactUI : MonoBehaviour
     {
         if (currentArtifact != null)
         {
-            artifact.ReduceResearchTime(24f);  // Reduce research time by 24 hours for a "day".
+            artifact.ReduceResearchTime(Mathf.FloorToInt(24f)); // Convert float to int
             UpdateResearchTimerUI();           // Update UI with the new time.
 
             if (artifact.GetRemainingResearchTime() <= 0)

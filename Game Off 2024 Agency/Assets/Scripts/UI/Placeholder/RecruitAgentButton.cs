@@ -1,26 +1,26 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecruitAgentButton : MonoBehaviour
 {
-    [SerializeField] private List<AgentPanel> agentPanels = new List<AgentPanel>();
-    
-    void Start()
+    public Button recruitButton;
+    public AgentPanel agentPanel; // Reference to the associated AgentPanel
+
+    private void Start()
     {
-        
+        recruitButton.onClick.AddListener(OnRecruitButtonClicked);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnRecruitButtonClicked()
     {
-        
-    }
-    public void recruitAgentButtonPressed(){
-        foreach (AgentPanel agentPanel in agentPanels)
-        if (agentPanel.isClicked == true && agentPanel.agentSO != null){
-            AgentManager.Instance.RecruitAgent(agentPanel.agentSO);
-            agentPanel.isClicked = false;
+        if (agentPanel != null)
+        {
+            agentPanel.ToggleClicked();
+            Debug.Log($"AgentPanel isClicked state: {agentPanel.isClicked}");
         }
-        
+        else
+        {
+            Debug.LogWarning("AgentPanel is not assigned to RecruitAgentButton.");
+        }
     }
 }
