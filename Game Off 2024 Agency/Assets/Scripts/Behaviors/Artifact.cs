@@ -2,40 +2,71 @@ using UnityEngine;
 
 public class Artifact : MonoBehaviour
 {
-    public ArtifactSO artifactSO;
-    private int remainingResearchTime;
+    [SerializeField] public ArtifactSO artifactSO;
+    [SerializeField] private float currentResearchTime = 0f; // Tracks current research progress
+    [SerializeField] public bool identified = false;
+
+    private bool isInitialized = false;
+
+    void Start()
+    {
+        if (!isInitialized)
+        {
+            InitializeFromTemplate(artifactSO);
+        }
+    }
 
     public void InitializeFromTemplate(ArtifactSO template)
     {
         artifactSO = template;
-        remainingResearchTime = template.researchTime;
+        name = template.name;
+        identified = false;
+        ActualizeSprite();
+        isInitialized = true;
+        currentResearchTime = artifactSO.researchTimeRequired;
     }
 
-    public int GetRemainingResearchTime()
+    private void ActualizeSprite()
     {
-        return remainingResearchTime;
-    }
-
-    public void ReduceResearchTime(int time)
-    {
-        remainingResearchTime -= time;
-        if (remainingResearchTime <= 0)
-        {
-            Identify();
-        }
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = artifactSO.profilePhoto;
     }
 
     public void Identify()
     {
-        Debug.Log($"Artifact {artifactSO.artifactName} has been identified.");
-        // Update to identified state here
+        identified = true;
+        UpdateSprite();
     }
 
-
-    public void DisplayArtifactInfo()
+    public float GetRemainingResearchTime()
     {
-        Debug.Log($"Artifact Name: {artifactSO.artifactName}");
-        Debug.Log($"Required Skill: {artifactSO.requiredSkillForAnalysis}");
-        Debug.Log($"Research Time: {artifactSO.researchTimeRequired}");
+        return currentResearchTime;
+    }
+
+    public void ReduceResearchTime(float timeReduction)
+    {
+        currentResearchTime -= timeReduction;
+        if (currentResearchTime <= 0)
+        {
+            Identify();
+        }
+        
+        if (artifactSO.hasCurse)
+        {
+            // Apply curse effect to the agent (e.g., reduce sanity)
+            ApplySanityEffect(artifactSO.sanityEffectOnAgent);
+        }
+    }
+
+    void ApplySanityEffect(int effect)
+    {
+        // Assume you have a method to modify the agent's sanity
+        //agent.sanity -= effect;
+        // You can also trigger UI updates if necessary
+}
+    private void UpdateSprite()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = artifactSO.profilePhoto;
     }
 }

@@ -1,38 +1,23 @@
-
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "EffectSO_Poisoned", menuName = "Scriptable Objects/EffectSO_Poisoned")]
 public class EffectSO_Poisoned : EffectSO
 {
-    public int severityMin = 1; // Minimum poison severity
-    public int severityMax = 5; // Maximum poison severity
+
+    public float damageByPoison = 1f;
 
     public override bool ApplyEffect(Effect effect, Agent agent)
     {
-        if (agent == null)
-        {
-            Debug.LogWarning("Agent is null, cannot apply poison effect.");
-            return false;
-        }
+        // Common part of the effect (log for example)
+        return base.ApplyEffect(effect, agent);
 
-        // Each in-game day, roll for poison severity
-        int dailySeverity = Random.Range(severityMin, severityMax);
-        int currentConstitution = agent.GetStat("Constitution");
-
-        agent.ReduceStat("Constitution", dailySeverity);
-        Debug.Log($"Agent {agent.agentName} takes {dailySeverity} poison damage. Constitution: {agent.GetStat("Constitution")}");
-
-        // Check if the agent's constitution reaches 0
-        if (agent.GetStat("Constitution") <= 0)
-        {
-            agent.Die("Poison");
-        }
-
-        return true;
+        // Unique part of the effect
+        // .. Poisoned logic if needed
     }
 
-    public void RemoveEffect(Agent agent, Effect effect)
+    public override void UpdateEffect(Agent agent)
     {
-        agent.RemoveEffect(effect); // Pass the correct Effect instance
-        Debug.Log($"Poison effect removed from Agent {agent.agentName}.");
+        // Just as sample
+        agent.TakeDamage(damageByPoison);
     }
 }

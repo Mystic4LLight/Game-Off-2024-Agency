@@ -1,5 +1,5 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "EffectSO", menuName = "Scriptable Objects/EffectSO")]
 public class EffectSO : ScriptableObject
@@ -8,27 +8,28 @@ public class EffectSO : ScriptableObject
     public string description;
     public Sprite profilePhoto;
     public float duration;
+    // any proprs you want to add
 
     public virtual bool ApplyEffect(Effect effect, Agent agent)
     {
-        if (effect != null && agent != null)
+        if (agent == null)
         {
-            // Example logic for applying an effect
-            Debug.Log($"Effect {displayName} applied to agent {agent.agentSO.agentName}.");
-            return true;
+            Debug.LogWarning("Agent is null, cannot apply effect.");
+            return false;
         }
 
-        Debug.LogWarning("Effect or Agent is null.");
-        return false;
-    }
+        if (effect == null)
+        {
+            Debug.LogWarning("Effect is null, cannot apply effect.");
+            return false;
+        }
 
-    public void RemoveEffect(Dictionary<string, int> stats)
-    {
-        // Implement logic to remove the effect
+        return agent.ApplyEffect(effect);
+
     }
 
     public virtual void UpdateEffect(Agent agent)
     {
-        // Overridden in child classes for time-based effects
+        // overriden in child classes
     }
 }
