@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 public class Agent : MonoBehaviour
 {
@@ -77,6 +79,17 @@ public class Agent : MonoBehaviour
     [SerializeField] private int other4;
     [SerializeField] private int other5;
 
+    // (Corris) properties for effects checks
+    public bool IsInjured => activeEffects.Any(effect => effect.effectSO is EffectSO_Injured);
+    public bool IsDying => activeEffects.Any(effect => effect.effectSO is EffectSO_Dying);
+    public bool IsPoisoned => activeEffects.Any(effect => effect.effectSO is EffectSO_Poisoned);
+    public bool IsInsane => activeEffects.Any(effect => effect.effectSO is EffectSO_Insane);
+
+    // Corris: List of current stats (standard)
+    public List<AgentStat> currentStats = new List<AgentStat>();
+
+    // List of active effects
+    private List<Effect> activeEffects = new List<Effect>();
 
     void Start()
     {
@@ -153,11 +166,109 @@ public class Agent : MonoBehaviour
         other3 = agentSO.other3;
         other4 = agentSO.other4;
         other5 = agentSO.other5;
+
+        // Initializing standard (Corris) AgentStats
+        InitializeAgentStats();
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "CorrisScene-Sandbox")
+        {
+            // (Corris) TEST: Apply some effects to the agent
+            Debug.Log("TEST Apply some effects to the agent");
+            var _effect = new Effect(EffectManager.Instance.GetEffectSOByName("EffectSO_Poisoned"));
+            ApplyEffect(_effect);
+            // And show effect in the panel (like if player looking on Hint on agent profile minieffects icon (I guess we will have this one).
+            GameObject.Find("Effect_Panel").GetComponent<EffectPanel>().Effect = _effect;
+        }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Corris: Call when needed (not sure do we have turn based system or real time)
+        // UpdateEffects();
+    }
+    
+    public void InitializeAgentStats()
+    {
+        if (agentSO == null)
+        {
+            Debug.LogError("AgentSO is not assigned!");
+            return;
+        }
+        if (agentSO.statTemplate == null)
+        {
+            Debug.LogError("StatTemplate is not assigned!");
+            return;
+        }
+
+        // Копируем шаблон и создаём текущие значения
+        currentStats = agentSO.statTemplate.stats
+            .Select(template => new AgentStat(template))
+            .ToList();
+    }
+
+    public void SetStatValue(string name, float newValue)
+    {
+        var stat = currentStats.FirstOrDefault(s => s.template.name == name);
+        if (stat != null)
+        {
+          //  stat.currentValue = Mathf.Clamp(stat.currentValue + delta, 0, stat.template.defaultValue);
+            stat.currentValue = newValue;
+        }
+    }
+
+    public float GetStatValue(string name)
+    {
+        var stat = currentStats.FirstOrDefault(s => s.template.name == name);
+        if (stat != null)
+        {
+            return stat.currentValue;
+        }
+        return 0;
+    }
+
+    public bool ApplyEffect(Effect effect)
+    {
+        if (effect == null)
+        {
+            Debug.LogWarning("Effect is null, cannot apply effect.");
+            return false;
+        }
+
+        // Implement the logic to apply the effect to the agent
+        // Example: Add a component, modify properties, etc.
+        Debug.Log($"Agent: Applying effect {effect.DisplayName} to {(name != null ? name : "NULL")}");
+
+        // Put effect to active effects list
+        activeEffects.Add(effect);
+
+        return true;
+    }
+
+    // Corris: Call when needed (on time turns)
+    public void UpdateEffects()
+    {
+        // Update all active effects
+         foreach (var effect in activeEffects)
+         {
+             effect.UpdateEffect(this);
+         }
         
+        // Remove all expired effects
+        activeEffects.RemoveAll(effect => effect.IsExpired);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        // hitting agent
+        Debug.Log($"Agent: {name} takes {damage} damage");
+
+    }
+    public void increaseStatValue(string stat, float value)
+    {
+        SetStatValue(stat, GetStatValue(stat) + value);
     }
 }
+

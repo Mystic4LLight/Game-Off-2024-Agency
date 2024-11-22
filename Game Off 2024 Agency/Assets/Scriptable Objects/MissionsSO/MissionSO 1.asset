@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1482ac6317d3654593db5439b29bb0d, type: 3}
+  m_Name: MissionSO 1
+  m_EditorClassIdentifier: 
+  missionName: Creature hunt 2
+  description: Capture Creature 2
+  passCheck: 5
+  missionImage: {fileID: 8420485207997377320, guid: fd27a917fd36be44084ae09194f97870, type: 3}
