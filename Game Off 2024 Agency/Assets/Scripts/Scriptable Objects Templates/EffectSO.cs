@@ -7,7 +7,7 @@ public class EffectSO : ScriptableObject
     public string displayName;
     public string description;
     public Sprite icon;
-    public float duration;
+    public float durationDefault;  // Corris: commented because param with Editor - for Each effectConfig
 
     public virtual bool ApplyEffect(Effect effect, Agent agent)
     {

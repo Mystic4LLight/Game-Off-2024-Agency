@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using NUnit.Framework.Internal;
 using System;
 using System.Linq;
+using NUnit.Framework.Internal;
+using System;
 
 public class Agent : MonoBehaviour
 {
@@ -86,6 +88,10 @@ public class Agent : MonoBehaviour
     public bool IsDying => activeEffects.Any(effect => effect.EffectSO is EffectSO_Dying);
     public bool IsPoisoned => activeEffects.Any(effect => effect.EffectSO is EffectSO_Poisoned);
     public bool IsInsane => activeEffects.Any(effect => effect.EffectSO is EffectSO_Insane);
+    public bool IsInjured => activeEffects.Any(effect => effect.EffectSO is EffectSO_Injured);
+    public bool IsDying => activeEffects.Any(effect => effect.EffectSO is EffectSO_Dying);
+    public bool IsPoisoned => activeEffects.Any(effect => effect.EffectSO is EffectSO_Poisoned);
+    public bool IsInsane => activeEffects.Any(effect => effect.EffectSO is EffectSO_Insane);
 
     // Corris: List of current stats (standard)
     public List<AgentStat> currentStats = new();
@@ -94,7 +100,7 @@ public class Agent : MonoBehaviour
     private List<Effect> activeEffects = new();
 
 
-    private List<Effect> activeEffects = new(); // List of active effects on the agent
+    private activeEffects = new(); // List of active effects on the agent
 
     // Start is called before the first frame update
     void Start()
@@ -347,10 +353,6 @@ public class Agent : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Applies an effect to the agent.
-    /// </summary>
-    /// <param name="effect">The effect to apply.</param>
     public bool ApplyEffect(Effect effect)
     {
         if (effect == null)
