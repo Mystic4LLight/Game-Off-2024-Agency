@@ -5,30 +5,188 @@ using TMPro;
 
 public class AgentPanel : MonoBehaviour
 {
-    [Header("UI Components")]
-    public TextMeshProUGUI agentNameText;
-    public TextMeshProUGUI agentDescriptionText;
-    public TextMeshProUGUI statsText;
-    public TextMeshProUGUI effectsText;
-    public Image agentPortraitImage;
+    private Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderNameText = new();
+    private Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderValueText = new();
+    private Dictionary<Specialization.SpecializationType, List<string>> defaultPlaceholderText = new();
 
-    [Header("Abilities Layout Groups")]
-    public Transform[] abilityColumns; // Array of 4 VerticalLayoutGroups for abilities
-    public GameObject abilityPrefab;   // Prefab for a single ability row (name + percentage)
+    public AgentSO agentSO;
 
-    private AgentSO agentSO;
+    [Header("Agent Information")]
+    public TextMeshProUGUI agentNameText, agentOccupationText, agentAgeText, agentSexText, agentBackstoryText;
+
+    [Header("Portrait")]
+    public Image portraitImage;
+
+    [Header("Characteristics")]
+    public TextMeshProUGUI strengthText, constitutionText, sizeText, dexterityText, appearanceText;
+    public TextMeshProUGUI educationText, intelligenceText, powerText;
+
+    [Header("Bar Stats UI")]
+    public Image hpFillBar, mpFillBar, sanFillBar, luckFillBar;
+    public TextMeshProUGUI hpText, mpText, sanText, luckText;
+
+    [Header("Specialization Placeholders")]
+    public TextMeshProUGUI artCraftNameText, artCraftValueText, artCraft2NameText, artCraft2ValueText, artCraft3NameText, artCraft3ValueText;
+    public TextMeshProUGUI fighting2NameText, fighting2ValueText, fighting3NameText, fighting3ValueText;
+    public TextMeshProUGUI firearms3NameText, firearms3ValueText;
+    public TextMeshProUGUI scienceNameText, scienceValueText, science2NameText, science2ValueText, science3NameText, science3ValueText;
+    public TextMeshProUGUI languageOtherNameText, languageOtherValueText, language2NameText, language2ValueText, languageOwnNameText, languageOwnValueText;
+    public TextMeshProUGUI other1NameText, other1ValueText, other2NameText, other2ValueText, other3NameText, other3ValueText;
+    public TextMeshProUGUI other4NameText, other4ValueText, other5NameText, other5ValueText;
+    [Header("Survival Specialization")]
+    public TextMeshProUGUI survivalNameText;
+    public TextMeshProUGUI survivalValueText;
+
     public AgentSO AgentSO => agentSO;
 
-    // Property to track selection state
-    public bool isClicked { get; private set; } = false;
-
-    public void Initialize(AgentSO agent)
+    private bool _isClicked = false;
+    public bool isClicked
     {
-        agentSO = agent;
-        UpdateUI();
+        get => _isClicked;
+        private set => _isClicked = value;
     }
 
-    private void UpdateUI()
+    private void OnEnable()
+    {
+        // Initialize placeholder dictionaries
+        placeholderNameText.Clear();
+        placeholderValueText.Clear();
+        InitializeDefaultPlaceholderText();
+        InitializePlaceholders();
+    }
+
+    private void InitializeDefaultPlaceholderText()
+    {
+        defaultPlaceholderText[Specialization.SpecializationType.Science] = new List<string>
+        {
+            "Science\n----", "----", "----"
+        };
+
+        defaultPlaceholderText[Specialization.SpecializationType.ArtCraft] = new List<string>
+        {
+            "Art/Craft\n----", "----", "----"
+        };
+
+        defaultPlaceholderText[Specialization.SpecializationType.Language] = new List<string>
+        {
+            "Language(Other)\n----", "----", "Language(Own)\nEnglish"
+        };
+
+        defaultPlaceholderText[Specialization.SpecializationType.Fighting] = new List<string>
+        {
+            "Fighting\n----", "Fighting\n----"
+        };
+
+        defaultPlaceholderText[Specialization.SpecializationType.Firearms] = new List<string>
+        {
+            "Firearms\n----"
+        };
+
+        defaultPlaceholderText[Specialization.SpecializationType.Other] = new List<string>
+        {
+            "----", "----", "----", "----", "----"
+        };
+
+        defaultPlaceholderText[Specialization.SpecializationType.Survival] = new List<string>
+        {
+            "Survival\n----"
+        };
+    }
+
+    private void InitializePlaceholders()
+    {
+        // Art/Craft placeholders
+        placeholderNameText[Specialization.SpecializationType.ArtCraft] = new List<TextMeshProUGUI>
+        {
+            artCraftNameText, artCraft2NameText, artCraft3NameText
+        };
+        placeholderValueText[Specialization.SpecializationType.ArtCraft] = new List<TextMeshProUGUI>
+        {
+            artCraftValueText, artCraft2ValueText, artCraft3ValueText
+        };
+
+        // Fighting placeholders
+        placeholderNameText[Specialization.SpecializationType.Fighting] = new List<TextMeshProUGUI>
+        {
+            fighting2NameText, fighting3NameText
+        };
+        placeholderValueText[Specialization.SpecializationType.Fighting] = new List<TextMeshProUGUI>
+        {
+            fighting2ValueText, fighting3ValueText
+        };
+
+        // Firearms placeholders
+        placeholderNameText[Specialization.SpecializationType.Firearms] = new List<TextMeshProUGUI>
+        {
+            firearms3NameText
+        };
+        placeholderValueText[Specialization.SpecializationType.Firearms] = new List<TextMeshProUGUI>
+        {
+            firearms3ValueText
+        };
+
+        // Science placeholders
+        placeholderNameText[Specialization.SpecializationType.Science] = new List<TextMeshProUGUI>
+        {
+            scienceNameText, science2NameText, science3NameText
+        };
+        placeholderValueText[Specialization.SpecializationType.Science] = new List<TextMeshProUGUI>
+        {
+            scienceValueText, science2ValueText, science3ValueText
+        };
+
+        // Language placeholders
+        placeholderNameText[Specialization.SpecializationType.Language] = new List<TextMeshProUGUI>
+        {
+            languageOtherNameText, language2NameText, languageOwnNameText
+        };
+        placeholderValueText[Specialization.SpecializationType.Language] = new List<TextMeshProUGUI>
+        {
+            languageOtherValueText, language2ValueText, languageOwnValueText
+        };
+
+        // Other placeholders
+        placeholderNameText[Specialization.SpecializationType.Other] = new List<TextMeshProUGUI>
+        {
+            other1NameText, other2NameText, other3NameText, other4NameText, other5NameText
+        };
+        placeholderValueText[Specialization.SpecializationType.Other] = new List<TextMeshProUGUI>
+        {
+            other1ValueText, other2ValueText, other3ValueText, other4ValueText, other5ValueText
+        };
+
+        // Survival placeholder
+        placeholderNameText[Specialization.SpecializationType.Survival] = new List<TextMeshProUGUI>
+        {
+            survivalNameText
+        };
+        placeholderValueText[Specialization.SpecializationType.Survival] = new List<TextMeshProUGUI>
+        {
+            survivalValueText
+        };
+
+        ResetPlaceholdersToDefault();
+    }
+
+    private void ResetPlaceholdersToDefault()
+    {
+        foreach (var type in placeholderNameText.Keys)
+        {
+            if (defaultPlaceholderText.TryGetValue(type, out var defaultTexts))
+            {
+                for (int i = 0; i < placeholderNameText[type].Count; i++)
+                {
+                    placeholderNameText[type][i].text = i < defaultTexts.Count ? defaultTexts[i] : "----";
+                }
+            }
+            foreach (var valueText in placeholderValueText[type])
+            {
+                valueText.text = ""; // Clear value
+            }
+        }
+    }
+
+    public void UpdateUI()
     {
         if (agentSO == null)
         {
@@ -36,103 +194,74 @@ public class AgentPanel : MonoBehaviour
             return;
         }
 
-        // Update Basic Info
-        agentNameText.text = $"Name: {agentSO.agentName}";
-        agentDescriptionText.text = $"Description: {agentSO.description}";
-        if (agentSO.portrait != null)
-        {
-            agentPortraitImage.sprite = agentSO.portrait;
-        }
-        else
-        {
-            agentPortraitImage.sprite = null;
-        }
+        // Update agent information
+        agentNameText.text = agentSO.agentName;
+        agentOccupationText.text = agentSO.agentOccupation;
+        agentAgeText.text = agentSO.agentAge.ToString();
+        agentSexText.text = agentSO.agentSex;
+        agentBackstoryText.text = agentSO.agentBackstory;
 
-        // Update Stats
-        statsText.text = "Stats:\n";
-        foreach (var stat in agentSO.currentStats)
-        {
-            statsText.text += $"{stat.Key}: {stat.Value}\n";
-        }
+        // Update portrait
+        portraitImage.sprite = agentSO.portrait;
 
-        // Update Skills (Abilities)
-        PopulateAbilities();
-
-        // Update Effects
-        effectsText.text = "Effects:\n";
-        if (agentSO.activeEffects.Count > 0)
-        {
-            foreach (var effect in agentSO.activeEffects)
-            {
-                effectsText.text += $"- {effect.displayName}\n";
-            }
-        }
-        else
-        {
-            effectsText.text += "None\n";
-        }
+        // Populate specializations
+        PopulateSpecializations();
     }
 
-    private void PopulateAbilities()
+    public void Initialize(AgentSO agent)
     {
-        if (abilityColumns == null || abilityColumns.Length != 4)
+        if (agent == null)
         {
-            Debug.LogError("Ability columns are not properly set up. Ensure there are exactly 4 VerticalLayoutGroups assigned.");
+            Debug.LogError("AgentSO passed to Initialize is null.");
             return;
         }
 
-        // Clear previous abilities
-        foreach (var column in abilityColumns)
-        {
-            foreach (Transform child in column)
-            {
-                Destroy(child.gameObject);
-            }
-        }
-
-        // Divide skills into columns
-        int columnIndex = 0;
-        int skillsPerColumn = Mathf.CeilToInt((float)agentSO.skills.Count / 4);
-        int currentSkillIndex = 0;
-
-        foreach (var skill in agentSO.skills)
-        {
-            if (currentSkillIndex >= skillsPerColumn)
-            {
-                currentSkillIndex = 0;
-                columnIndex++;
-            }
-
-            if (columnIndex < abilityColumns.Length)
-            {
-                CreateAbilityRow(abilityColumns[columnIndex], skill.Key, skill.Value);
-                currentSkillIndex++;
-            }
-        }
+        agentSO = agent;
+        UpdateUI();
+        Debug.Log($"AgentPanel initialized with Agent: {agent.agentName}");
     }
 
-    private void CreateAbilityRow(Transform parent, string skillName, int skillValue)
+    private void PopulateSpecializations()
     {
-        // Instantiate ability prefab
-        GameObject abilityRow = Instantiate(abilityPrefab, parent);
+        var usedPlaceholders = new Dictionary<Specialization.SpecializationType, int>
+        {
+            { Specialization.SpecializationType.ArtCraft, 0 },
+            { Specialization.SpecializationType.Fighting, 0 },
+            { Specialization.SpecializationType.Firearms, 0 },
+            { Specialization.SpecializationType.Science, 0 },
+            { Specialization.SpecializationType.Language, 0 },
+            { Specialization.SpecializationType.Other, 0 },
+            { Specialization.SpecializationType.Survival, 0 }
+        };
 
-        // Assign skill name and percentage
-        var texts = abilityRow.GetComponentsInChildren<TextMeshProUGUI>();
-        if (texts.Length >= 2)
+        foreach (var specialization in agentSO.specializations)
         {
-            texts[0].text = skillName;           // Skill name
-            texts[1].text = $"{skillValue}%";    // Skill percentage
-        }
-        else
-        {
-            Debug.LogWarning("Ability prefab does not contain at least 2 TextMeshProUGUI components.");
+            if (!placeholderNameText.TryGetValue(specialization.type, out var namePlaceholders) ||
+                !placeholderValueText.TryGetValue(specialization.type, out var valuePlaceholders))
+            {
+                Debug.LogWarning($"No placeholders found for specialization type: {specialization.type}");
+                continue;
+            }
+
+            int currentIndex = usedPlaceholders[specialization.type];
+
+            if (currentIndex >= namePlaceholders.Count || currentIndex >= valuePlaceholders.Count)
+            {
+                Debug.LogWarning($"Not enough placeholders for specialization: {specialization.name} of type {specialization.type}");
+                continue;
+            }
+
+            // Assign specialization
+            namePlaceholders[currentIndex].text = specialization.name;
+            valuePlaceholders[currentIndex].text = specialization.value.ToString();
+            usedPlaceholders[specialization.type]++;
         }
     }
 
-    // Method to toggle the clicked state
+
     public void ToggleClicked()
     {
         isClicked = !isClicked;
-        Debug.Log($"{agentNameText.text} isClicked set to {isClicked}");
+        Debug.Log($"Agent {agentSO.agentName} clicked state: {isClicked}");
     }
 }

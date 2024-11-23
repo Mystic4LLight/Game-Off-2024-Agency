@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public int currentDay = 1;
 
+    
+
     void Awake()
     {
         if (Instance == null)

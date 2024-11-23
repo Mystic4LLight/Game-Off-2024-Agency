@@ -12,20 +12,154 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a31e0f7ceb6a3746a5172fc8c3f5290, type: 3}
   m_Name: AgentStatTemplateSO
   m_EditorClassIdentifier: 
-  stats:
-  - name: HP
-    description: Hit Points
-    defaultValue: 100
-    icon: {fileID: 0}
-  - name: MP
-    description: Mana Points
+  baseStats:
+  - name: Strength
     defaultValue: 50
-    icon: {fileID: 0}
-  - name: San
-    description: Sanity
-    defaultValue: 100
-    icon: {fileID: 0}
-  - name: Luck
-    description: Luck
+  - name: Constitution
+    defaultValue: 50
+  - name: Size
+    defaultValue: 50
+  - name: Dexterity
+    defaultValue: 50
+  - name: Appearance
+    defaultValue: 50
+  - name: Education
+    defaultValue: 50
+  - name: Intelligence
+    defaultValue: 50
+  - name: Power
+    defaultValue: 50
+  barStats:
+  - name: HP
+    defaultValue: 8
+    maxValue: 15
+  - name: MP
     defaultValue: 10
-    icon: {fileID: 0}
+    maxValue: 18
+  - name: San
+    defaultValue: 50
+    maxValue: 85
+  - name: Luck
+    defaultValue: 50
+    maxValue: 75
+  abilities:
+  - name: Accounting
+    defaultValue: 5
+  - name: Anthropology
+    defaultValue: 1
+  - name: Appraise
+    defaultValue: 5
+  - name: Archaeology
+    defaultValue: 1
+  - name: Art/Craft
+    defaultValue: 5
+  - name: Art/Craft2
+    defaultValue: 0
+  - name: Art/Craft3
+    defaultValue: 0
+  - name: Charm
+    defaultValue: 15
+  - name: Climb
+    defaultValue: 20
+  - name: ComputerUse
+    defaultValue: 5
+  - name: CreditRating
+    defaultValue: 0
+  - name: CthulhuMythos
+    defaultValue: 0
+  - name: Disguise
+    defaultValue: 5
+  - name: Dodge
+    defaultValue: 10
+  - name: DriveAuto
+    defaultValue: 20
+  - name: ElecRepair
+    defaultValue: 10
+  - name: Electronics
+    defaultValue: 1
+  - name: FastTalk
+    defaultValue: 5
+  - name: Fighting(Brawl)
+    defaultValue: 25
+  - name: Fighting2
+    defaultValue: 0
+  - name: Fighting3
+    defaultValue: 0
+  - name: Firearms (Aiming)
+    defaultValue: 20
+  - name: Firearms(Hipshot)
+    defaultValue: 15
+  - name: Firearms3
+    defaultValue: 0
+  - name: History
+    defaultValue: 5
+  - name: Intimidate
+    defaultValue: 15
+  - name: Jump
+    defaultValue: 20
+  - name: Language(Other)
+    defaultValue: 1
+  - name: Language2
+    defaultValue: 0
+  - name: Language(Own)
+    defaultValue: 50
+  - name: Law
+    defaultValue: 5
+  - name: LibraryUse
+    defaultValue: 20
+  - name: Listen
+    defaultValue: 20
+  - name: Locksmith
+    defaultValue: 1
+  - name: MechRepair
+    defaultValue: 10
+  - name: Medicine
+    defaultValue: 1
+  - name: NaturalWorld
+    defaultValue: 10
+  - name: Navigate
+    defaultValue: 10
+  - name: Occult
+    defaultValue: 5
+  - name: OpHvMachine
+    defaultValue: 1
+  - name: Persuade
+    defaultValue: 10
+  - name: Pilot
+    defaultValue: 1
+  - name: Psychology
+    defaultValue: 10
+  - name: Psychanalysis
+    defaultValue: 1
+  - name: Science
+    defaultValue: 1
+  - name: Science2
+    defaultValue: 0
+  - name: Science3
+    defaultValue: 0
+  - name: SleightOfHand
+    defaultValue: 10
+  - name: SpotHidden
+    defaultValue: 25
+  - name: Stealth
+    defaultValue: 20
+  - name: Survival
+    defaultValue: 10
+  - name: Swim
+    defaultValue: 20
+  - name: Throw
+    defaultValue: 25
+  - name: Track
+    defaultValue: 10
+  - name: Other1
+    defaultValue: 0
+  - name: Other2
+    defaultValue: 0
+  - name: Other3
+    defaultValue: 0
+  - name: Other4
+    defaultValue: 0
+  - name: Other4
+    defaultValue: 0
+  - name: Other5
+    defaultValue: 0
