@@ -87,7 +87,7 @@ public class AgentSO : ScriptableObject
 
     // (Corris:) 
     [Header("Stats")]
-    public AgentStatTemplateSO statTemplate; // Link to shadblon with list of Stat parameters
+    public AgentStatTemplateSO statTemplate; // Link to template with list of Stat parameters
     // All stats - edit in Unity Editor
     public List<AgentStat> stats = new();
 
@@ -147,7 +147,6 @@ public class AgentSO : ScriptableObject
     private void FindStatTemplate(string _AgentStatTemplateName)
     {
         // Looking for existing in Unity Editor  template AgentStatTemplateSO
-      //  string[] guids = AssetDatabase.FindAssets("t:AgentStatTemplateSO");
         string[] guids = AssetDatabase.FindAssets("t:"+ _AgentStatTemplateName);
         if (guids.Length > 0)
         {

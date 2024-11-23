@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "ArtifactSO", menuName = "Scriptable Objects/ArtifactSO")]
 public class ArtifactSO : ScriptableObject
@@ -28,4 +29,8 @@ public class ArtifactSO : ScriptableObject
     [Header("R&D Integration")]
     public bool leadsToNewTool = false;       // Indicates if artifact unlocks a new tool in R&D
     public string toolDescription;            // Description of the new tool or function unlocked
+
+    [Header("Potential Mission Effects")]
+    // список потенциально накладываемых эффектов в ходе миссии
+    public List<EffectConfig> potentialMissionEffects = new();
 }

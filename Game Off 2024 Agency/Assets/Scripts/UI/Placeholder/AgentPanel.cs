@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using TMPro;
 public class AgentPanel : MonoBehaviour
 {
+    // Corris: shoud be Agent, not AgentSO 
+    [SerializeField] public Agent agent;
+
     [SerializeField] public AgentSO agentSO;
     [SerializeField] private TextMeshProUGUI agentName;
     [SerializeField] private TextMeshProUGUI description;
@@ -86,8 +89,15 @@ public class AgentPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (agent != null)
+            Update_Stat();
+    }
+
+    void Update_Stat()
+    {
 
     }
+
     public void clickButton(){
         isClicked = true;
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "AgentStatTemplateSO", menuName = "Scriptable Objects/AgentStatTemplateSO")]
 public class AgentStatTemplateSO : ScriptableObject
 {
-    public List<AgentStatTemplate> stats = new List<AgentStatTemplate>();
+    public List<AgentStatTemplate> stats = new();
 
     private void OnEnable()
     {
