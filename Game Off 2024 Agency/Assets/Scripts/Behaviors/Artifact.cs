@@ -69,4 +69,14 @@ public class Artifact : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = artifactSO.profilePhoto;
     }
+
+    // Apply all effects to an agent
+    public void ApplyEffects(Agent agent)
+    {
+        foreach (EffectConfig effectConfig in artifactSO.potentialMissionEffects)
+        {
+            var _effect = new Effect(effectConfig);
+            _effect.ApplyEffect(agent);
+        }
+    }
 }

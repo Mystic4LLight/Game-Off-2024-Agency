@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using NUnit.Framework.Internal;
+using System;
 
 public class Agent : MonoBehaviour
 {
@@ -80,16 +82,16 @@ public class Agent : MonoBehaviour
     [SerializeField] private int other5;
 
     // (Corris) properties for effects checks
-    public bool IsInjured => activeEffects.Any(effect => effect.effectSO is EffectSO_Injured);
-    public bool IsDying => activeEffects.Any(effect => effect.effectSO is EffectSO_Dying);
-    public bool IsPoisoned => activeEffects.Any(effect => effect.effectSO is EffectSO_Poisoned);
-    public bool IsInsane => activeEffects.Any(effect => effect.effectSO is EffectSO_Insane);
+    public bool IsInjured => activeEffects.Any(effect => effect.EffectSO is EffectSO_Injured);
+    public bool IsDying => activeEffects.Any(effect => effect.EffectSO is EffectSO_Dying);
+    public bool IsPoisoned => activeEffects.Any(effect => effect.EffectSO is EffectSO_Poisoned);
+    public bool IsInsane => activeEffects.Any(effect => effect.EffectSO is EffectSO_Insane);
 
     // Corris: List of current stats (standard)
-    public List<AgentStat> currentStats = new List<AgentStat>();
+    public List<AgentStat> currentStats = new();
 
     // List of active effects
-    private List<Effect> activeEffects = new List<Effect>();
+    private List<Effect> activeEffects = new();
 
     void Start()
     {
@@ -174,8 +176,42 @@ public class Agent : MonoBehaviour
         {
             // (Corris) TEST: Apply some effects to the agent
             Debug.Log("TEST Apply some effects to the agent");
-            var _effect = new Effect(EffectManager.Instance.GetEffectSOByName("EffectSO_Poisoned"));
-            ApplyEffect(_effect);
+
+            Effect _effect = null;
+
+            // Getting Artifact Cup Of Healing in scene
+            var _artifact = ArtifactManager.Instance.agencyArtifactCatalog.FirstOrDefault(a => a.artifactSO.displayName.Equals("Cup of healing", StringComparison.OrdinalIgnoreCase));
+            if (_artifact != null)
+            {
+                // Applying Artifact effects to the Agent
+                _artifact.ApplyEffects(this);
+
+                // to show effect on the panel - choose one of them
+                if (activeEffects.Count > 0)
+                {
+                    _effect = activeEffects[0];
+                }
+            }
+            else
+            {
+                Debug.LogError("Artifact not found in the catalog");
+            }
+
+            /*    
+             *    // Sample - to apply effect without Aerifact
+             *    // Effect template (default values + name, desription, image)
+                  EffectSO _effectSO = EffectManager.Instance.GetEffectSOByName("EffectSO_Poisoned");
+                  // object- holder of parameters to change with this effect (for example by Artifact)
+                  EffectConfig _effectConfig = new(_effectSO);
+                  // we want to modify "HP" stat by +5, and mult 1.2
+                  _effectConfig.statModifiers.Add(new EffectStatModifier("HP", +5, 1.2f));
+                  // now creating Effect object with this parameters
+                  var _effect = new Effect(_effectConfig);
+
+                  // and Applying this effect to the Agent
+                  ApplyEffect(_effect);
+            */
+
             // And show effect in the panel (like if player looking on Hint on agent profile minieffects icon (I guess we will have this one).
             GameObject.Find("Effect_Panel").GetComponent<EffectPanel>().Effect = _effect;
         }
@@ -189,7 +225,7 @@ public class Agent : MonoBehaviour
         // Corris: Call when needed (not sure do we have turn based system or real time)
         // UpdateEffects();
     }
-    
+
     public void InitializeAgentStats()
     {
         if (agentSO == null)
@@ -203,7 +239,7 @@ public class Agent : MonoBehaviour
             return;
         }
 
-        // Копируем шаблон и создаём текущие значения
+        // Copy the template and create current values
         currentStats = agentSO.statTemplate.stats
             .Select(template => new AgentStat(template))
             .ToList();
@@ -211,23 +247,45 @@ public class Agent : MonoBehaviour
 
     public void SetStatValue(string name, float newValue)
     {
-        var stat = currentStats.FirstOrDefault(s => s.template.name == name);
+        var stat = currentStats.FirstOrDefault(s => s.template.name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (stat != null)
         {
-          //  stat.currentValue = Mathf.Clamp(stat.currentValue + delta, 0, stat.template.defaultValue);
+            //  stat.currentValue = Mathf.Clamp(stat.currentValue + delta, 0, stat.template.defaultValue);
             stat.currentValue = newValue;
         }
     }
 
+    // return clear Stat value, without effects
     public float GetStatValue(string name)
     {
-        var stat = currentStats.FirstOrDefault(s => s.template.name == name);
+        var stat = currentStats.FirstOrDefault(s => s.template.name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (stat != null)
         {
             return stat.currentValue;
         }
         return 0;
     }
+
+    // return affected stat value
+    public float GetAffectedStatValue(string name)
+    {
+        var clearValue = GetStatValue(name);
+        float effectedValue = clearValue;
+        // If there is effect affecting this stas - applying it to the return value
+        foreach (var effect in activeEffects)
+        {
+            foreach (var stat in effect.effectConfig.statModifiers)
+            {
+                if (stat.statName.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    effectedValue += stat.delta;
+                    effectedValue *= stat.multiplier;
+                }
+            }
+        }
+        return effectedValue;
+    }
+
 
     public bool ApplyEffect(Effect effect)
     {
@@ -251,11 +309,11 @@ public class Agent : MonoBehaviour
     public void UpdateEffects()
     {
         // Update all active effects
-         foreach (var effect in activeEffects)
-         {
-             effect.UpdateEffect(this);
-         }
-        
+        foreach (var effect in activeEffects)
+        {
+            effect.UpdateEffect(this);
+        }
+
         // Remove all expired effects
         activeEffects.RemoveAll(effect => effect.IsExpired);
     }

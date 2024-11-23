@@ -2,16 +2,18 @@ using UnityEngine;
 
 
 // Class of Effect apply to the Agent or the Environment (rooms)
+[System.Serializable]
 public class Effect
 {
-    [SerializeField] public EffectSO effectSO;
+    [SerializeField] public EffectConfig effectConfig;
+    [SerializeField] public EffectSO EffectSO => effectConfig.effectSO;
 
     [SerializeField] private float expirationTime;
 
-    public string DisplayName => effectSO != null ? effectSO.displayName : "Default DisplayName";
-    public string Description => effectSO != null ? effectSO.description : "Default Description";
-    public Sprite ProfilePhoto => effectSO != null ? effectSO.profilePhoto : null;
-    public float Duration => effectSO != null ? effectSO.duration : 0f;
+    public string DisplayName => EffectSO != null ? EffectSO.displayName : "Default DisplayName";
+    public string Description => EffectSO != null ? EffectSO.description : "Default Description";
+    public Sprite ProfilePhoto => EffectSO != null ? EffectSO.profilePhoto : null;
+    public float Duration => EffectSO != null ? effectConfig.duration : 0f;
     public float TimeLeftToExpiration => GameTime() - expirationTime;
 
     // IsExpired tells if the effect is expired
@@ -23,20 +25,20 @@ public class Effect
         return 10;
     }
 
-    public bool ApplyEffect(Effect effect, Agent agent)
+    public bool ApplyEffect(Agent agent)
     {
-        expirationTime = GameTime() + (effectSO != null ? effectSO.duration : 0f);
+        expirationTime = GameTime() + Duration;
 
-        // Special effects appied by the effectSO
-        return effectSO != null && effectSO.ApplyEffect(effect, agent);
+        // Special effects appied by the EffectSO
+        return EffectSO != null && EffectSO.ApplyEffect(this, agent);
     }
 
     // Constructor with incoming EffectSO parameter
-    public Effect(EffectSO inEffectSO)
+    public Effect(EffectConfig inEffectConfig)
     {
-        effectSO = inEffectSO;
+        effectConfig = inEffectConfig;
     }
 
-    public void UpdateEffect(Agent agent) => effectSO.UpdateEffect(agent);
+    public void UpdateEffect(Agent agent) => EffectSO.UpdateEffect(agent);
 
 }
