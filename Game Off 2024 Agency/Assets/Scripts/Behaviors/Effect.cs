@@ -1,36 +1,44 @@
 using UnityEngine;
 
-/// <summary>
-/// Represents an effect applied to an agent.
-/// </summary>
+
+// Class of Effect apply to the Agent or the Environment (rooms)
+[System.Serializable]
 public class Effect
 {
-    public EffectSO sourceEffect; // Reference to the EffectSO ScriptableObject
+    [SerializeField] public EffectConfig effectConfig;
+    [SerializeField] public EffectSO EffectSO => effectConfig.effectSO;
 
-    public string DisplayName => sourceEffect != null ? sourceEffect.name : "Unknown Effect";
-    public string Description => sourceEffect != null ? sourceEffect.description : "No description available.";
-    public int TimeLeftToExpiration { get; private set; } // Expiration time as an integer
-    public Sprite ProfilePhoto => sourceEffect != null ? sourceEffect.icon : null;
+    [SerializeField] private float expirationTime;
 
-    public Effect(EffectSO effectSO)
+    public string DisplayName => EffectSO != null ? EffectSO.displayName : "Default DisplayName";
+    public string Description => EffectSO != null ? EffectSO.description : "Default Description";
+    public Sprite ProfilePhoto => EffectSO != null ? EffectSO.profilePhoto : null;
+    public float Duration => EffectSO != null ? effectConfig.duration : 0f;
+    public float TimeLeftToExpiration => GameTime() - expirationTime;
+
+    // IsExpired tells if the effect is expired
+    public bool IsExpired => GameTime() >= expirationTime;
+
+    // This is template function, it should be replaced with the real game time
+    private float GameTime()
     {
-        sourceEffect = effectSO;
-        TimeLeftToExpiration = (int)effectSO.duration; // Explicit cast to int
+        return 10;
     }
 
-    public void UpdateEffect(Agent agent)
+    public bool ApplyEffect(Agent agent)
     {
-        // Example logic for reducing expiration time
-        if (TimeLeftToExpiration > 0)
-        {
-            TimeLeftToExpiration--;
-        }
+        expirationTime = GameTime() + Duration;
+
+        // Special effects appied by the EffectSO
+        return EffectSO != null && EffectSO.ApplyEffect(this, agent);
     }
 
-    public bool IsExpired => TimeLeftToExpiration <= 0;
-
-    public EffectSO GetEffectSO()
+    // Constructor with incoming EffectSO parameter
+    public Effect(EffectConfig inEffectConfig)
     {
-        return sourceEffect;
+        effectConfig = inEffectConfig;
     }
+
+    public void UpdateEffect(Agent agent) => EffectSO.UpdateEffect(agent);
+
 }

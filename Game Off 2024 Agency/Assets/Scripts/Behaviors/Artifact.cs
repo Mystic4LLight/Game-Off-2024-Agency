@@ -27,16 +27,40 @@ public class Artifact : MonoBehaviour
 
     public void Identify()
     {
-        Debug.Log($"Artifact {artifactSO.artifactName} has been identified.");
-        // Update to identified state here
+        identified = true;
+        UpdateSprite();
     }
 
-
-    public void DisplayArtifactInfo()
+    public float GetRemainingResearchTime()
     {
-        Debug.Log($"Artifact Name: {artifactSO.artifactName}");
-        Debug.Log($"Required Skill: {artifactSO.requiredSkillForAnalysis}");
-        Debug.Log($"Research Time: {artifactSO.researchTimeRequired}");
+        return currentResearchTime;
+    }
+
+    public void ReduceResearchTime(float timeReduction)
+    {
+        currentResearchTime -= timeReduction;
+        if (currentResearchTime <= 0)
+        {
+            Identify();
+        }
+        
+        if (artifactSO.hasCurse)
+        {
+            // Apply curse effect to the agent (e.g., reduce sanity)
+            ApplySanityEffect(artifactSO.sanityEffectOnAgent);
+        }
+    }
+
+    void ApplySanityEffect(int effect)
+    {
+        // Assume you have a method to modify the agent's sanity
+        //agent.sanity -= effect;
+        // You can also trigger UI updates if necessary
+}
+    private void UpdateSprite()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = artifactSO.profilePhoto;
     }
 
     // Apply all effects to an agent
