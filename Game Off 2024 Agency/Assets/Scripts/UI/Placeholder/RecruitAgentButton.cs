@@ -5,22 +5,37 @@ public class RecruitAgentButton : MonoBehaviour
 {
     public Button recruitButton;
     public AgentPanel agentPanel; // Reference to the associated AgentPanel
+    public AgentManager agentManager; // Reference to AgentManager
 
     private void Start()
     {
-        recruitButton.onClick.AddListener(OnRecruitButtonClicked);
+        if (recruitButton != null)
+        {
+            recruitButton.onClick.AddListener(OnRecruitButtonClicked);
+        }
+        else
+        {
+            Debug.LogWarning("RecruitButton is not assigned!");
+        }
+
+        if (agentManager == null)
+        {
+            agentManager = AgentManager.Instance; // Auto-assign AgentManager if not set
+        }
     }
 
     private void OnRecruitButtonClicked()
     {
-        if (agentPanel != null)
+        if (agentPanel != null && agentPanel.AgentSO != null)
         {
-            agentPanel.ToggleClicked();
-            Debug.Log($"AgentPanel isClicked state: {agentPanel.isClicked}");
+            // Recruit the agent via AgentManager
+            agentManager.RecruitAgent(agentPanel.AgentSO);
+
+            Debug.Log($"Recruited Agent: {agentPanel.AgentSO.agentName}");
         }
         else
         {
-            Debug.LogWarning("AgentPanel is not assigned to RecruitAgentButton.");
+            Debug.LogWarning("AgentPanel or AgentSO is not assigned.");
         }
     }
 }

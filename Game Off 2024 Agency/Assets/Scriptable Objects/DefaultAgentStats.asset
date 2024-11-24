@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a31e0f7ceb6a3746a5172fc8c3f5290, type: 3}
-  m_Name: AgentStatTemplateSO
+  m_Name: DefaultAgentStats
   m_EditorClassIdentifier: 
   baseStats:
   - name: Strength
@@ -18,103 +18,83 @@ MonoBehaviour:
   - name: Constitution
     defaultValue: 50
   - name: Size
-    defaultValue: 50
+    defaultValue: 65
   - name: Dexterity
     defaultValue: 50
   - name: Appearance
     defaultValue: 50
   - name: Education
-    defaultValue: 50
+    defaultValue: 65
   - name: Intelligence
-    defaultValue: 50
+    defaultValue: 65
   - name: Power
     defaultValue: 50
   barStats:
   - name: HP
-    defaultValue: 8
-    maxValue: 15
+    defaultValue: 11
+    maxValue: 11
   - name: MP
     defaultValue: 10
-    maxValue: 18
+    maxValue: 10
   - name: San
     defaultValue: 50
-    maxValue: 85
+    maxValue: 50
   - name: Luck
     defaultValue: 50
-    maxValue: 75
+    maxValue: 50
   abilities:
   - name: Accounting
-    defaultValue: 5
+    defaultValue: 10
   - name: Anthropology
-    defaultValue: 1
+    defaultValue: 5
   - name: Appraise
     defaultValue: 5
   - name: Archaeology
-    defaultValue: 1
-  - name: Art/Craft
     defaultValue: 5
-  - name: Art/Craft2
-    defaultValue: 0
-  - name: Art/Craft3
-    defaultValue: 0
   - name: Charm
     defaultValue: 15
   - name: Climb
     defaultValue: 20
   - name: ComputerUse
-    defaultValue: 5
+    defaultValue: 30
   - name: CreditRating
-    defaultValue: 0
+    defaultValue: 20
   - name: CthulhuMythos
     defaultValue: 0
   - name: Disguise
     defaultValue: 5
   - name: Dodge
-    defaultValue: 10
+    defaultValue: 25
   - name: DriveAuto
     defaultValue: 20
   - name: ElecRepair
     defaultValue: 10
   - name: Electronics
-    defaultValue: 1
+    defaultValue: 20
   - name: FastTalk
     defaultValue: 5
   - name: Fighting(Brawl)
     defaultValue: 25
-  - name: Fighting2
-    defaultValue: 0
-  - name: Fighting3
-    defaultValue: 0
-  - name: Firearms (Aiming)
-    defaultValue: 20
-  - name: Firearms(Hipshot)
-    defaultValue: 15
-  - name: Firearms3
-    defaultValue: 0
+  - name: FirstAid
+    defaultValue: 10
   - name: History
-    defaultValue: 5
+    defaultValue: 20
   - name: Intimidate
     defaultValue: 15
   - name: Jump
     defaultValue: 20
-  - name: Language(Other)
-    defaultValue: 1
-  - name: Language2
-    defaultValue: 0
-  - name: Language(Own)
-    defaultValue: 50
   - name: Law
     defaultValue: 5
   - name: LibraryUse
-    defaultValue: 20
+    defaultValue: 25
   - name: Listen
-    defaultValue: 20
+    defaultValue: 25
   - name: Locksmith
     defaultValue: 1
   - name: MechRepair
     defaultValue: 10
   - name: Medicine
-    defaultValue: 1
+    defaultValue: 10
   - name: NaturalWorld
     defaultValue: 10
   - name: Navigate
@@ -131,35 +111,70 @@ MonoBehaviour:
     defaultValue: 10
   - name: Psychanalysis
     defaultValue: 1
-  - name: Science
-    defaultValue: 1
-  - name: Science2
-    defaultValue: 0
-  - name: Science3
-    defaultValue: 0
   - name: SleightOfHand
     defaultValue: 10
   - name: SpotHidden
     defaultValue: 25
   - name: Stealth
     defaultValue: 20
-  - name: Survival
-    defaultValue: 10
   - name: Swim
     defaultValue: 20
   - name: Throw
-    defaultValue: 25
+    defaultValue: 20
   - name: Track
     defaultValue: 10
-  - name: Other1
+  specializations:
+  - type: 0
+    name: Art/Craft
+    defaultValue: 5
+  - type: 0
+    name: Art/Craft2
     defaultValue: 0
-  - name: Other2
+  - type: 0
+    name: Art/Craft3
     defaultValue: 0
-  - name: Other3
+  - type: 4
+    name: Language(Other)
+    defaultValue: 1
+  - type: 4
+    name: Language2
     defaultValue: 0
-  - name: Other4
+  - type: 4
+    name: Language(Own)
+    defaultValue: 50
+  - type: 3
+    name: Science
+    defaultValue: 20
+  - type: 3
+    name: Science2
     defaultValue: 0
-  - name: Other4
+  - type: 3
+    name: Science3
     defaultValue: 0
-  - name: Other5
+  - type: 1
+    name: Fighting2
+    defaultValue: 0
+  - type: 1
+    name: Fighting3
+    defaultValue: 0
+  - type: 2
+    name: Firearms3
+    defaultValue: 0
+  - type: 6
+    name: Survival
+    defaultValue: 0
+  - type: 5
+    name: Other1
+    defaultValue: 0
+  - type: 5
+    name: Other2
+    defaultValue: 0
+  - type: 5
+    name: Other3
+    defaultValue: 0
+  - type: 5
+    name: Other4
+    defaultValue: 0
+  - type: 5
+    name: Other5
     defaultValue: 0

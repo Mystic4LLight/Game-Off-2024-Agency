@@ -19,4 +19,26 @@ MonoBehaviour:
   agentBackstory: Mi-6
   portrait: {fileID: 7114782437234694498, guid: 1ef0225bbbc52fc4796d000b9196f69a, type: 3}
   activeEffects: []
-  statTemplate: {fileID: 11400000, guid: 38a7f90e9265fd844a232724905883d6, type: 2}
+  statTemplate: {fileID: 11400000, guid: fab95d4fa02044049a4923cc405e3ec5, type: 2}
+  specializations:
+  - type: 0
+    name: Art/Craft
+    value: 3
+  - type: 1
+    name: Fighting(Brawl)
+    value: 2
+  - type: 2
+    name: Firearms(Hipshot)
+    value: 1
+  - type: 3
+    name: Biology
+    value: 3
+  - type: 4
+    name: Latin
+    value: 3
+  - type: 5
+    name: Other1
+    value: 5
+  - type: 6
+    name: Survival
+    value: 1
