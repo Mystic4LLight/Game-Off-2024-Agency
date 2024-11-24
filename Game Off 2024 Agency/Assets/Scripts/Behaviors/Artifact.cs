@@ -38,4 +38,14 @@ public class Artifact : MonoBehaviour
         Debug.Log($"Required Skill: {artifactSO.requiredSkillForAnalysis}");
         Debug.Log($"Research Time: {artifactSO.researchTimeRequired}");
     }
+
+    // Apply all effects to an agent
+    public void ApplyEffects(Agent agent)
+    {
+        foreach (EffectConfig effectConfig in artifactSO.potentialMissionEffects)
+        {
+            var _effect = new Effect(effectConfig);
+            _effect.ApplyEffect(agent);
+        }
+    }
 }

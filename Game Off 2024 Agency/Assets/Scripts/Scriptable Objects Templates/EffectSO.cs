@@ -7,7 +7,8 @@ public class EffectSO : ScriptableObject
     public string displayName;
     public string description;
     public Sprite profilePhoto;
-    public float duration;
+    public float durationDefault;  // Corris: commented because param with Editor - for Each effectConfig
+    // any proprs you want to add
 
     public virtual bool ApplyEffect(Effect effect, Agent agent)
     {

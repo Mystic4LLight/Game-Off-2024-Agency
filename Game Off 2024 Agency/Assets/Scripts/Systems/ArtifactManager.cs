@@ -17,16 +17,16 @@ public class ArtifactManager : MonoBehaviour
     [SerializeField] Artifact artifactPrefab;
 
     // A comprehensive list of all artifacts existing within the game.
-    [SerializeField] public List<Artifact> agencyArtifactCatalog = new List<Artifact>();
+    [SerializeField] public List<Artifact> agencyArtifactCatalog = new();
 
     // A list of artifacts currently owned by the agency (acquired or starting artifacts).
-    [SerializeField] public List<Artifact> agencyOwnedArtifacts = new List<Artifact>();
+    [SerializeField] public List<Artifact> agencyOwnedArtifacts = new();
 
     // A list of artifacts currently stored at the agency's headquarters (some artifacts may be taken on active missions).
-    [SerializeField] public List<Artifact> headquartersStoredArtifacts = new List<Artifact>();
+    [SerializeField] public List<Artifact> headquartersStoredArtifacts = new();
 
     // A list of artifacts assigned to active missions.
-    [SerializeField] public List<Artifact> missionAssignedArtifacts = new List<Artifact>();
+    [SerializeField] public List<Artifact> missionAssignedArtifacts = new();
 
     private void Awake()
     {

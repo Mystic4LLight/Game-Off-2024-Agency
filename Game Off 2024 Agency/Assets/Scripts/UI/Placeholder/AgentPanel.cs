@@ -5,167 +5,103 @@ using TMPro;
 
 public class AgentPanel : MonoBehaviour
 {
-    private Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderNameText = new();
-    private Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderValueText = new();
-    private Dictionary<Specialization.SpecializationType, List<string>> defaultPlaceholderText = new();
+    // Corris: shoud be Agent, not AgentSO 
+    [SerializeField] public Agent agent;
 
-    public AgentSO agentSO;
-
-    [Header("Agent Information")]
-    public TextMeshProUGUI agentNameText, agentOccupationText, agentAgeText, agentSexText, agentBackstoryText;
-
-    [Header("Portrait")]
-    public Image portraitImage;
-
-    [Header("Characteristics")]
-    public TextMeshProUGUI strengthText, constitutionText, sizeText, dexterityText, appearanceText;
-    public TextMeshProUGUI educationText, intelligenceText, powerText;
-
-    [Header("Bar Stats UI")]
-    public Image hpFillBar, mpFillBar, sanFillBar, luckFillBar;
-    public TextMeshProUGUI hpText, mpText, sanText, luckText;
-
-    [Header("Specialization Placeholders")]
-    public TextMeshProUGUI artCraftNameText, artCraftValueText, artCraft2NameText, artCraft2ValueText, artCraft3NameText, artCraft3ValueText;
-    public TextMeshProUGUI fighting2NameText, fighting2ValueText, fighting3NameText, fighting3ValueText;
-    public TextMeshProUGUI firearms3NameText, firearms3ValueText;
-    public TextMeshProUGUI scienceNameText, scienceValueText, science2NameText, science2ValueText, science3NameText, science3ValueText;
-    public TextMeshProUGUI languageOtherNameText, languageOtherValueText, language2NameText, language2ValueText, languageOwnNameText, languageOwnValueText;
-    public TextMeshProUGUI other1NameText, other1ValueText, other2NameText, other2ValueText, other3NameText, other3ValueText;
-    public TextMeshProUGUI other4NameText, other4ValueText, other5NameText, other5ValueText;
-    [Header("Survival Specialization")]
-    public TextMeshProUGUI survivalNameText;
-    public TextMeshProUGUI survivalValueText;
-
-    public AgentSO AgentSO => agentSO;
-
-    private bool _isClicked = false;
-    public bool isClicked
+    [SerializeField] public AgentSO agentSO;
+    [SerializeField] private TextMeshProUGUI agentName;
+    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private Image profilePhoto;
+    [Header("Stats")]
+    [SerializeField] private TextMeshProUGUI strength;
+    [SerializeField] private TextMeshProUGUI constitution;
+    [SerializeField] private TextMeshProUGUI size;
+    [SerializeField] private TextMeshProUGUI dexterity;
+    [SerializeField] private TextMeshProUGUI appearance;
+    [SerializeField] private TextMeshProUGUI education;
+    [SerializeField] private TextMeshProUGUI intelligence;
+    [SerializeField] private TextMeshProUGUI power;
+    [Header("Abilities")]
+    [SerializeField] private TextMeshProUGUI accounting;
+    [SerializeField] private TextMeshProUGUI anthropology;
+    [SerializeField] private TextMeshProUGUI appraise;
+    [SerializeField] private TextMeshProUGUI archaeology;
+    [SerializeField] private TextMeshProUGUI artCraft1;
+    [SerializeField] private TextMeshProUGUI artCraft2;
+    [SerializeField] private TextMeshProUGUI artCraft3;
+    [SerializeField] private TextMeshProUGUI charm;
+    [SerializeField] private TextMeshProUGUI climb;
+    [SerializeField] private TextMeshProUGUI computerUse;
+    [SerializeField] private TextMeshProUGUI creditRating;
+    [SerializeField] private TextMeshProUGUI cthulhuMythos;
+    [SerializeField] private TextMeshProUGUI disguise;
+    [SerializeField] private TextMeshProUGUI dodge;
+    [SerializeField] private TextMeshProUGUI driveAuto;
+    [SerializeField] private TextMeshProUGUI elecRepair;
+    [SerializeField] private TextMeshProUGUI electronics;
+    [SerializeField] private TextMeshProUGUI fastTalk;
+    [SerializeField] private TextMeshProUGUI fightingBrawl;
+    [SerializeField] private TextMeshProUGUI fighting2;
+    [SerializeField] private TextMeshProUGUI fighting3;
+    [SerializeField] private TextMeshProUGUI firearmsAiming;
+    [SerializeField] private TextMeshProUGUI firearmsHipshot;
+    [SerializeField] private TextMeshProUGUI firearms3;
+    [SerializeField] private TextMeshProUGUI firstAid;
+    [SerializeField] private TextMeshProUGUI history;
+    [SerializeField] private TextMeshProUGUI intimidate;
+    [SerializeField] private TextMeshProUGUI jump;
+    [SerializeField] private TextMeshProUGUI languageOther1;
+    [SerializeField] private TextMeshProUGUI languageOther2;
+    [SerializeField] private TextMeshProUGUI languageOwn;
+    [SerializeField] private TextMeshProUGUI law;
+    [SerializeField] private TextMeshProUGUI libraryUse;
+    [SerializeField] private TextMeshProUGUI listen;
+    [SerializeField] private TextMeshProUGUI locksmith;
+    [SerializeField] private TextMeshProUGUI mechRepair;
+    [SerializeField] private TextMeshProUGUI medicine;
+    [SerializeField] private TextMeshProUGUI naturalWorld;
+    [SerializeField] private TextMeshProUGUI navigate;
+    [SerializeField] private TextMeshProUGUI occult;
+    [SerializeField] private TextMeshProUGUI opHvMachine;
+    [SerializeField] private TextMeshProUGUI persuade;
+    [SerializeField] private TextMeshProUGUI pilot;
+    [SerializeField] private TextMeshProUGUI psychology;
+    [SerializeField] private TextMeshProUGUI psychanalysis;
+    [SerializeField] private TextMeshProUGUI science1;
+    [SerializeField] private TextMeshProUGUI science2;
+    [SerializeField] private TextMeshProUGUI science3;
+    [SerializeField] private TextMeshProUGUI sleightOfHand;
+    [SerializeField] private TextMeshProUGUI spotHidden;
+    [SerializeField] private TextMeshProUGUI stealth;
+    [SerializeField] private TextMeshProUGUI survival1;
+    [SerializeField] private TextMeshProUGUI swim;
+    [SerializeField] private TextMeshProUGUI throw1;
+    [SerializeField] private TextMeshProUGUI track;
+    [SerializeField] private TextMeshProUGUI other1;
+    [SerializeField] private TextMeshProUGUI other2;
+    [SerializeField] private TextMeshProUGUI other3;
+    [SerializeField] private TextMeshProUGUI other4;
+    [SerializeField] private TextMeshProUGUI other5;
+    public bool isClicked = false;
+    void Start()
     {
-        get => _isClicked;
-        private set => _isClicked = value;
+        
     }
 
-    private void OnEnable()
+    // Update is called once per frame
+    void Update()
     {
-        // Initialize placeholder dictionaries
-        placeholderNameText.Clear();
-        placeholderValueText.Clear();
-        InitializeDefaultPlaceholderText();
-        InitializePlaceholders();
+        if (agent != null)
+            Update_Stat();
     }
 
-    private void InitializeDefaultPlaceholderText()
+    void Update_Stat()
     {
-        defaultPlaceholderText[Specialization.SpecializationType.Science] = new List<string>
-        {
-            "Science\n----", "----", "----"
-        };
 
-        defaultPlaceholderText[Specialization.SpecializationType.ArtCraft] = new List<string>
-        {
-            "Art/Craft\n----", "----", "----"
-        };
-
-        defaultPlaceholderText[Specialization.SpecializationType.Language] = new List<string>
-        {
-            "Language(Other)\n----", "----", "Language(Own)\nEnglish"
-        };
-
-        defaultPlaceholderText[Specialization.SpecializationType.Fighting] = new List<string>
-        {
-            "Fighting\n----", "Fighting\n----"
-        };
-
-        defaultPlaceholderText[Specialization.SpecializationType.Firearms] = new List<string>
-        {
-            "Firearms\n----"
-        };
-
-        defaultPlaceholderText[Specialization.SpecializationType.Other] = new List<string>
-        {
-            "----", "----", "----", "----", "----"
-        };
-
-        defaultPlaceholderText[Specialization.SpecializationType.Survival] = new List<string>
-        {
-            "Survival\n----"
-        };
     }
 
-    private void InitializePlaceholders()
-    {
-        // Art/Craft placeholders
-        placeholderNameText[Specialization.SpecializationType.ArtCraft] = new List<TextMeshProUGUI>
-        {
-            artCraftNameText, artCraft2NameText, artCraft3NameText
-        };
-        placeholderValueText[Specialization.SpecializationType.ArtCraft] = new List<TextMeshProUGUI>
-        {
-            artCraftValueText, artCraft2ValueText, artCraft3ValueText
-        };
-
-        // Fighting placeholders
-        placeholderNameText[Specialization.SpecializationType.Fighting] = new List<TextMeshProUGUI>
-        {
-            fighting2NameText, fighting3NameText
-        };
-        placeholderValueText[Specialization.SpecializationType.Fighting] = new List<TextMeshProUGUI>
-        {
-            fighting2ValueText, fighting3ValueText
-        };
-
-        // Firearms placeholders
-        placeholderNameText[Specialization.SpecializationType.Firearms] = new List<TextMeshProUGUI>
-        {
-            firearms3NameText
-        };
-        placeholderValueText[Specialization.SpecializationType.Firearms] = new List<TextMeshProUGUI>
-        {
-            firearms3ValueText
-        };
-
-        // Science placeholders
-        placeholderNameText[Specialization.SpecializationType.Science] = new List<TextMeshProUGUI>
-        {
-            scienceNameText, science2NameText, science3NameText
-        };
-        placeholderValueText[Specialization.SpecializationType.Science] = new List<TextMeshProUGUI>
-        {
-            scienceValueText, science2ValueText, science3ValueText
-        };
-
-        // Language placeholders
-        placeholderNameText[Specialization.SpecializationType.Language] = new List<TextMeshProUGUI>
-        {
-            languageOtherNameText, language2NameText, languageOwnNameText
-        };
-        placeholderValueText[Specialization.SpecializationType.Language] = new List<TextMeshProUGUI>
-        {
-            languageOtherValueText, language2ValueText, languageOwnValueText
-        };
-
-        // Other placeholders
-        placeholderNameText[Specialization.SpecializationType.Other] = new List<TextMeshProUGUI>
-        {
-            other1NameText, other2NameText, other3NameText, other4NameText, other5NameText
-        };
-        placeholderValueText[Specialization.SpecializationType.Other] = new List<TextMeshProUGUI>
-        {
-            other1ValueText, other2ValueText, other3ValueText, other4ValueText, other5ValueText
-        };
-
-        // Survival placeholder
-        placeholderNameText[Specialization.SpecializationType.Survival] = new List<TextMeshProUGUI>
-        {
-            survivalNameText
-        };
-        placeholderValueText[Specialization.SpecializationType.Survival] = new List<TextMeshProUGUI>
-        {
-            survivalValueText
-        };
-
-        ResetPlaceholdersToDefault();
+    public void clickButton(){
+        isClicked = true;
     }
 
     private void ResetPlaceholdersToDefault()

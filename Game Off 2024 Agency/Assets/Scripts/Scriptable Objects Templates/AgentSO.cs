@@ -21,25 +21,74 @@ public class AgentSO : ScriptableObject
 
 
     [Header("Abilities")]
-    public Dictionary<string, int> skills;
+    public int accounting;
+    public int anthropology;
+    public int appraise;
+    public int archaeology;
+    public int artCraft1;
+    public int artCraft2;
+    public int artCraft3;
+    public int charm;
+    public int climb;
+    public int computerUse;
+    public int creditRating;
+    public int cthulhuMythos;
+    public int disguise;
+    public int dodge;
+    public int driveAuto;
+    public int elecRepair;
+    public int electronics;
+    public int fastTalk;
+    public int fightingBrawl;
+    public int fighting2;
+    public int fighting3;
+    public int firearmsAiming;
+    public int firearmsHipshot;
+    public int firearms3;
+    public int firstAid;
+    public int history;
+    public int intimidate;
+    public int jump;
+    public int languageOther1;
+    public int languageOther2;
+    public int languageOwn;
+    public int law;
+    public int libraryUse;
+    public int listen;
+    public int locksmith;
+    public int mechRepair;
+    public int medicine;
+    public int naturalWorld;
+    public int navigate;
+    public int occult;
+    public int opHvMachine;
+    public int persuade;
+    public int pilot;
+    public int psychology;
+    public int psychanalysis;
+    public int science1;
+    public int science2;
+    public int science3;
+    public int sleightOfHand;
+    public int spotHidden;
+    public int stealth;
+    public int survival1;
+    public int swim;
+    public int throw1;
+    public int track;
+    public int other1;
+    public int other2;
+    public int other3;
+    public int other4;
+    public int other5;
 
-    [Header("Effects")]
-    public List<EffectSO> activeEffects = new List<EffectSO>();
+    // (Corris:) 
+    [Header("Stats")]
+    public AgentStatTemplateSO statTemplate; // Link to shadblon with list of Stat parameters
+    // All stats - edit in Unity Editor
+    public List<AgentStat> stats = new();
 
-    [Header("Stat Template")]
-    public AgentStatTemplateSO statTemplate;
-
-    [Header("Specializations")]
-    public List<Specialization> specializations = new List<Specialization>();
-
-    [System.Serializable]
-    public class BarStatInstance
-    {
-        public float currentValue; // Current value of the stat
-        public float maxValue;     // Maximum value of the stat
-    }
-
-
+    // 'Constructor' to add default properties to list
     private void OnEnable()
     {
         Debug.Log($"AgentSO '{name}' is being initialized.");
@@ -171,143 +220,27 @@ public class AgentSO : ScriptableObject
             }
         }
 
-        // Specialization placeholders
-        string[] specializationPlaceholders = new string[]
-        {
-            // Art/Craft Specializations
-            "Art/Craft", "Art/Craft2", "Art/Craft3",
-            
-            // Fighting Specializations
-            "Fighting2", "Fighting3",
-            
-            // Firearms Specialization
-            "Firearms3",
-            
-            // Science Specializations
-            "Science", "Science2", "Science3",
-            
-            // Language Specializations
-            "Language(Other)", "Language2", "Language(Own)",
-            
-            // Other Specializations
-            "Other1", "Other2", "Other3", "Other4", "Other5", "Survival"
-        };
-
-        // Ensure the specializations list is initialized
-        if (specializations == null)
-        {
-            specializations = new List<Specialization>();
-        }
-
-        // Add placeholders for specialization skills
-        foreach (var placeholder in specializationPlaceholders)
-        {
-            if (!skills.ContainsKey(placeholder))
-            {
-                skills[placeholder] = 0;
-            }
-
-            // Ensure specialization placeholders exist
-            if (!specializations.Exists(s => s.name == placeholder))
-            {
-                specializations.Add(new Specialization(Specialization.SpecializationType.Language, placeholder, 0));
-            }
-        }
-
-        // Populate skills from the stat template
-        if (statTemplate != null)
-        {
-            foreach (var templateSkill in statTemplate.abilities)
-            {
-                if (!skills.ContainsKey(templateSkill.name))
-                {
-                    skills[templateSkill.name] = (int)templateSkill.defaultValue;
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"StatTemplate is not assigned for AgentSO: {agentName}. Skills will not be populated.");
-        }
-
-        if (!specializations.Exists(s => s.name == "Biology"))
-        {
-            specializations.Add(new Specialization(Specialization.SpecializationType.Science, "Biology", 60));
-        }
-        if (!specializations.Exists(s => s.name == "Latin"))
-        {
-            specializations.Add(new Specialization(Specialization.SpecializationType.Language, "Latin", 70));
-        }
+        // remove stats that are not in template  (maybe they from old ersion of template)
+        stats.RemoveAll(s => !statTemplate.stats.Contains(s.template));
     }
 
-
-    private static readonly string[] coreSkills = new string[]
+    private void InitializeStats()
     {
-        "Accounting", "Anthropology", "Appraise", "Archaeology", 
-            "Charm", "Climb", "ComputerUse", "CreditRating", "CthulhuMythos",
-            "Disguise", "Dodge", "DriveAuto", "ElecRepair", "Electronics", "FastTalk",
-            "Fighting(Brawl)", "Firearms (Aiming)", "Firearms(Hipshot)",
-            "FirstAid", "History", "Intimidate", "Jump",
-            "Law", "LibraryUse", "Listen", "Locksmith", "MechRepair", "Medicine",
-            "NaturalWorld", "Navigate", "Occult", "OpHvMachine", "Persuade", "Pilot",
-            "Psychology", "Psychanalysis",
-            "SleightOfHand", "SpotHidden", "Stealth", "Survival", "Swim", "Throw", "Track"
-    };
-    
-
-
-    public void ApplyEffect(EffectSO effect)
-    {
-        if (effect == null)
-        {
-            Debug.LogWarning("Tried to apply a null effect.");
-            return;
-        }
-
-        Effect effectInstance = new Effect(effect); // Pass EffectSO to Effect
-        Agent runtimeAgent = new Agent(this);       // Convert AgentSO to runtime Agent
-
-        if (effect.ApplyEffect(effectInstance, runtimeAgent)) // Pass runtime Agent
-        {
-            activeEffects.Add(effect);
-            Debug.Log($"Effect {effect.name} applied to {agentName}.");
-        }
+        stats = statTemplate.stats
+            .Select(template => new AgentStat(template))
+            .ToList();
     }
 
-
-    public void RemoveEffect(EffectSO effect)
+#if UNITY_EDITOR
+    private void FindStatTemplate(string _AgentStatTemplateName)
     {
-        if (activeEffects.Contains(effect))
+        // Looking for existing in Unity Editor  template AgentStatTemplateSO
+      //  string[] guids = AssetDatabase.FindAssets("t:AgentStatTemplateSO");
+        string[] guids = AssetDatabase.FindAssets("t:"+ _AgentStatTemplateName);
+        if (guids.Length > 0)
         {
-            activeEffects.Remove(effect);
-            effect.RemoveEffect(currentStats);
-            Debug.Log($"Effect {effect.name} removed from {agentName}.");
-        }
-        else
-        {
-            Debug.LogWarning($"Effect {effect.name} not found on {agentName}.");
-        }
-    }
-
-    public int GetStat(string statName)
-    {
-        if (currentStats.ContainsKey(statName))
-        {
-            return currentStats[statName];
-        }
-        else
-        {
-            Debug.LogWarning($"Stat {statName} not found for {agentName}.");
-            return 0;
-        }
-    }
-
-    public void UpdateStat(string statName, int value)
-    {
-        if (currentStats.ContainsKey(statName))
-        {
-            currentStats[statName] = Mathf.Max(0, value); // Prevent negative stats
-            Debug.Log($"{agentName}'s {statName} updated to {value}.");
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            statTemplate = AssetDatabase.LoadAssetAtPath<AgentStatTemplateSO>(path);
         }
         else
         {
