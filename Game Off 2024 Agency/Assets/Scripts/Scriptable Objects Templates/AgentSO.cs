@@ -91,7 +91,7 @@ public class AgentSO : ScriptableObject
     }
     
 
-    private void InitializeStats()
+    public void InitializeStats()
     {
         if (statTemplate == null)
         {
@@ -99,12 +99,14 @@ public class AgentSO : ScriptableObject
             return;
         }
 
+        // Clear and populate `currentStats`
         currentStats.Clear();
         foreach (var stat in statTemplate.baseStats)
         {
             currentStats[stat.name] = (int)stat.defaultValue;
         }
 
+        // Clear and populate `barStats`
         barStats.Clear();
         foreach (var barStat in statTemplate.barStats)
         {
@@ -114,12 +116,21 @@ public class AgentSO : ScriptableObject
                 maxValue = barStat.maxValue
             };
         }
-
-        foreach (var specialization in specializations)
+        if (statTemplate == null)
         {
-            Debug.Log($"Specialization Initialized: Name = {specialization.name}, Type = {specialization.type}, Value = {specialization.value}");
+            Debug.LogError($"StatTemplate is not assigned for AgentSO: {agentName}.");
+            return;
+        }
+
+        foreach (var stat in statTemplate.baseStats)
+        {
+            if (!currentStats.ContainsKey(stat.name))
+            {
+                currentStats.Add(stat.name, (int)stat.defaultValue);
+            }
         }
     }
+
 
 
     public void UpdateBarStat(string statName, float amount)
@@ -150,7 +161,7 @@ public class AgentSO : ScriptableObject
     
 
     
-    private void InitializeSkills()
+    public void InitializeSkills()
     {
         // Ensure the skills dictionary is initialized
         if (skills == null)

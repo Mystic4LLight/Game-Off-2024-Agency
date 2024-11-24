@@ -175,7 +175,7 @@ public class AgentPanel : MonoBehaviour
             if (!placeholderNameText.TryGetValue(specialization.type, out var namePlaceholders) ||
                 !placeholderValueText.TryGetValue(specialization.type, out var valuePlaceholders))
             {
-                Debug.LogWarning($"No placeholders found for specialization type: {specialization.type}");
+                //Debug.LogWarning($"No placeholders found for specialization type: {specialization.type}");
                 continue;
             }
 
@@ -199,5 +199,16 @@ public class AgentPanel : MonoBehaviour
     {
         isClicked = !isClicked;
         Debug.Log($"Agent {agentSO.agentName} clicked state: {isClicked}");
+    }
+
+    public void ClearPanel()
+    {
+        // Reset UI elements (e.g., text, images) to default/empty values
+        agentNameText.text = "No Agent";
+        portraitImage.sprite = null;
+        //statsText.text = string.Empty;
+
+        // Optional: Hide the panel if needed
+        gameObject.SetActive(false);
     }
 }
