@@ -6,7 +6,7 @@ public class EffectSO : ScriptableObject
 {
     public string displayName;
     public string description;
-    public Sprite profilePhoto;
+    public Sprite icon;
     public float duration;
 
     public virtual bool ApplyEffect(Effect effect, Agent agent)

@@ -23,16 +23,22 @@ public class ArtifactAnalysis : MonoBehaviour
 
     public void AnalyzeArtifact()
     {
-        if (artifactToAnalyze == null || assignedAgent == null)
+        if (artifactToAnalyze == null || assignedAgent == null || assignedAgent.agentSO == null)
         {
             Debug.LogWarning("Artifact or Agent not assigned.");
             return;
         }
 
-        int skillLevel = assignedAgent.GetSkillLevel(artifactToAnalyze.requiredSkillForAnalysis);
-        remainingResearchTime -= skillLevel;
-
-        Debug.Log($"Analyzed artifact: {artifactToAnalyze.artifactName}. Remaining time: {remainingResearchTime}");
+        // Correctly access the skill level from the AgentSO skills dictionary
+        if (assignedAgent.agentSO.skills.TryGetValue(artifactToAnalyze.requiredSkillForAnalysis, out int skillLevel))
+        {
+            remainingResearchTime -= skillLevel;
+            Debug.Log($"Analyzed artifact: {artifactToAnalyze.artifactName}. Remaining time: {remainingResearchTime}");
+        }
+        else
+        {
+            Debug.LogWarning($"Skill {artifactToAnalyze.requiredSkillForAnalysis} not found for Agent {assignedAgent.agentSO.agentName}.");
+        }
 
         if (remainingResearchTime <= 0)
         {

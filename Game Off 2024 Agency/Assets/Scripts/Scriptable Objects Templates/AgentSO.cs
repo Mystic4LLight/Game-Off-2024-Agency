@@ -39,6 +39,31 @@ public class AgentSO : ScriptableObject
         public float maxValue;     // Maximum value of the stat
     }
 
+// Initialization method for cloning or copying data from another AgentSO
+    public void InitializeFrom(AgentSO other)
+    {
+        if (other == null)
+        {
+            Debug.LogWarning("Source AgentSO is null, cannot initialize.");
+            return;
+        }
+
+        agentName = other.agentName;
+        agentOccupation = other.agentOccupation;
+        agentAge = other.agentAge;
+        agentSex = other.agentSex;
+        agentBackstory = other.agentBackstory;
+        portrait = other.portrait;
+
+        currentStats = new Dictionary<string, int>(other.currentStats);
+        barStats = new Dictionary<string, BarStatInstance>(other.barStats);
+        skills = new Dictionary<string, int>(other.skills);
+        activeEffects = new List<EffectSO>(other.activeEffects);
+        statTemplate = other.statTemplate;
+        specializations = new List<Specialization>(other.specializations);
+    }
+
+
 
     private void OnEnable()
     {
@@ -265,7 +290,8 @@ public class AgentSO : ScriptableObject
         }
 
         Effect effectInstance = new Effect(effect); // Pass EffectSO to Effect
-        Agent runtimeAgent = new Agent(this);       // Convert AgentSO to runtime Agent
+        Agent runtimeAgent = new Agent();
+        runtimeAgent.agentSO = this;       // Convert AgentSO to runtime Agent
 
         if (effect.ApplyEffect(effectInstance, runtimeAgent)) // Pass runtime Agent
         {
