@@ -21,24 +21,26 @@ public class StatBar : MonoBehaviour
         var _agent = GetAgent();
         if ((_agent != null) && (sliderTMP != null))
         {
-            var statValue = _agent.GetStatValue(statName);
-            var affectedStat = _agent.GetAffectedStatValue(statName);
-
-            sliderTMP.text = affectedStat.ToString() + "/" + statValue.ToString();
-
-            sliderTMP.color = affectedStat < statValue ? Color.yellow : Color.green;
-            if (affectedStat == statValue)
+            // Directly use the stat value from the currentStats dictionary
+            int statValue;
+            if (_agent.currentStats.TryGetValue(statName, out statValue))
             {
-                sliderTMP.color = Color.black;
+                // Set the stat value text
+                sliderTMP.text = $"{statValue}/{statValue}";
             }
-
+            else
+            {
+                Debug.LogWarning($"Stat '{statName}' not found for Agent '{_agent.agentName}'.");
+            }
         }
     }
 
-    private Agent GetAgent()
+
+
+    public AgentSO GetAgent()
     {
         var agentPanel = GetComponentInParent<AgentPanel>();
-        return agentPanel != null ? agentPanel.agent : null;
+        return agentPanel != null ? agentPanel.agentSO : null;
     }
 
 }

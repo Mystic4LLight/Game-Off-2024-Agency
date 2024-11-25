@@ -22,14 +22,15 @@ public class ArtifactSO : ScriptableObject
 
 
     [Header("Effects")]
-    public bool hasCurse = false;             // Indicates if artifact has a negative effect
-    public string curseDescription;           // Description of the curse or negative effect
-    public bool hasBonusEffect = false;       // Indicates if artifact has a positive effect
+    public bool isCursed;            // Indicates if artifact has a negative effect
+    public List<EffectSO_Cursed> cursedEffects = new List<EffectSO_Cursed>(); // List of cursed effects
+    public bool hasBonusEffect;      // Indicates if artifact has a positive effect
     public string bonusEffectDescription;     // Description of the bonus effect or benefit
     public int sanityEffectOnAgent;
+    public int sanityLossThreshold;
 
     [Header("R&D Integration")]
-    public bool leadsToNewTool = false;       // Indicates if artifact unlocks a new tool in R&D
+    public bool leadsToNewTool;       // Indicates if artifact unlocks a new tool in R&D
     public string toolDescription;            // Description of the new tool or function unlocked
 
     [Header("Potential Mission Effects")]

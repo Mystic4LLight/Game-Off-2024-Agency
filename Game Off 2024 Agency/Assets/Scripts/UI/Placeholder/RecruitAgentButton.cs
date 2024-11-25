@@ -26,12 +26,12 @@ public class RecruitAgentButton : MonoBehaviour
 
     private void OnRecruitButtonClicked()
     {
-        if (agentPanel != null && agentPanel.AgentSO != null)
+        if (agentPanel != null && agentPanel.agentSO != null)
         {
             // Recruit the agent via AgentManager
-            agentManager.RecruitAgent(agentPanel.AgentSO);
+            agentManager.RecruitAgent(agentPanel.agentSO);
 
-            Debug.Log($"Recruited Agent: {agentPanel.AgentSO.agentName}");
+            Debug.Log($"Recruited Agent: {agentPanel.agentSO.agentName}");
         }
         else
         {

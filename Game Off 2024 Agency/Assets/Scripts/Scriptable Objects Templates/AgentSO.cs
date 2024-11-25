@@ -6,12 +6,12 @@ public class AgentSO : ScriptableObject
 {
     [Header("Basic Information")]
     public string agentName;
-    public string agentOccupation;
+    public string occupation;
     public int agentAge;
     public string agentSex;
-    [TextArea]
-    public string agentBackstory;
-    public Sprite portrait;
+    public string backstory;
+    public string description;
+    public Sprite profilePhoto;
 
     [Header("Characteristics")]
     public Dictionary<string, int> currentStats = new Dictionary<string, int>();
@@ -32,6 +32,39 @@ public class AgentSO : ScriptableObject
     [Header("Specializations")]
     public List<Specialization> specializations = new List<Specialization>();
 
+    public EffectSO effectSO;  // Correct definition of effectSO
+    public bool isCursed;      // Correct definition if needed elsewhere
+    public AgentSO agentSO;    // Correct definition of agentSO
+
+    public bool HasAntidote()
+    {
+        // Logic to check for antidote
+        return false;
+    }
+
+    public int IsInInfirmary()
+    {
+        // Logic to get time spent in infirmary
+        return 0;
+    }
+
+    public bool HasUndergoneTherapy()
+    {
+        return false; // Replace with actual logic.
+    }
+
+    public bool HasRitualItem()
+    {
+        return false; // Replace with actual logic.
+    }
+    
+    public void Effect(EffectSO effectSO)
+    {
+        this.effectSO = effectSO;
+        // Initialize other fields if necessary.
+    }
+
+
     [System.Serializable]
     public class BarStatInstance
     {
@@ -49,11 +82,12 @@ public class AgentSO : ScriptableObject
         }
 
         agentName = other.agentName;
-        agentOccupation = other.agentOccupation;
+        occupation = other.occupation; // Corrected property name
         agentAge = other.agentAge;
         agentSex = other.agentSex;
-        agentBackstory = other.agentBackstory;
-        portrait = other.portrait;
+        backstory = other.backstory; // Corrected property name
+        description = other.description; // Added the description property
+        profilePhoto = other.profilePhoto; // Corrected property name
 
         currentStats = new Dictionary<string, int>(other.currentStats);
         barStats = new Dictionary<string, BarStatInstance>(other.barStats);
@@ -63,7 +97,25 @@ public class AgentSO : ScriptableObject
         specializations = new List<Specialization>(other.specializations);
     }
 
+    public int GetStatValue(string statName)
+    {
+        if (currentStats.ContainsKey(statName))
+            return currentStats[statName];
+        Debug.LogWarning($"Stat {statName} not found for {agentName}");
+        return 0;
+    }
 
+    public void UpdateStatValue(string statName, int value)
+    {
+        if (currentStats.ContainsKey(statName))
+        {
+            currentStats[statName] = Mathf.Clamp(currentStats[statName] + value, 0, 100); // Example range
+        }
+        else
+        {
+            Debug.LogWarning($"Stat {statName} not found for {agentName}");
+        }
+    }
 
     private void OnEnable()
     {
@@ -300,30 +352,37 @@ public class AgentSO : ScriptableObject
             return;
         }
 
-        Effect effectInstance = new Effect(effect); // Pass EffectSO to Effect
-        Agent runtimeAgent = new Agent();
-        runtimeAgent.agentSO = this;       // Convert AgentSO to runtime Agent
+        Effect effectInstance = new Effect(effect, this); // Pass EffectSO to Effect
+        AgentSO runtimeAgent = new AgentSO();
 
-        if (effect.ApplyEffect(effectInstance, runtimeAgent)) // Pass runtime Agent
-        {
-            activeEffects.Add(effect);
-            Debug.Log($"Effect {effect.name} applied to {agentName}.");
-        }
+        effect.ApplyEffect(this, effectInstance); // No need to check for boolean return here
+        activeEffects.Add(effect);
+        Debug.Log($"Effect {effect.effectName} applied to {agentName}.");
+
     }
 
 
-    public void RemoveEffect(EffectSO effect)
+    public void RemoveEffect(EffectSO effectSO, Effect effect)
     {
-        if (activeEffects.Contains(effect))
+        if (effectSO == null)
         {
-            activeEffects.Remove(effect);
-            effect.RemoveEffect(currentStats);
-            Debug.Log($"Effect {effect.name} removed from {agentName}.");
+            Debug.LogWarning("EffectSO is null, cannot remove effect.");
+            return;
         }
-        else
+
+        if (!activeEffects.Contains(effectSO))
         {
-            Debug.LogWarning($"Effect {effect.name} not found on {agentName}.");
+            Debug.LogWarning($"Effect {effectSO.name} is not active on this agent.");
+            return;
         }
+
+        // Revert the changes made by the effect
+        effectSO.RevertEffect(this);
+
+        // Remove the effect from activeEffects list
+        activeEffects.Remove(effectSO);
+
+        Debug.Log($"Effect {effectSO.name} removed from agent {agentName}.");
     }
 
     public int GetStat(string statName)

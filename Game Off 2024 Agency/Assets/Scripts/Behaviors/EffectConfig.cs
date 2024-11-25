@@ -16,7 +16,6 @@ public class EffectConfig
     public EffectConfig(EffectSO _effectSO)
     {
         this.effectSO = _effectSO;
-        duration = _effectSO.durationDefault;
     }
 
 }

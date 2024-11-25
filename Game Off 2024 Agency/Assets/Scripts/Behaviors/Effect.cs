@@ -1,48 +1,92 @@
 using UnityEngine;
 
-
-// Class of Effect apply to the Agent or the Environment (rooms)
-[System.Serializable]
 public class Effect
 {
-    [SerializeField] public EffectConfig effectConfig;
-    [SerializeField] public EffectSO EffectSO => effectConfig.effectSO;
+    public EffectSO effectSO { get; private set; }
+    public AgentSO agentSO { get; private set; }
 
-    [SerializeField] private float expirationTime;
+    public int intensity;  // New field to resolve the error in EffectSO_Cursed
 
-    public string DisplayName => EffectSO != null ? EffectSO.displayName : "Default DisplayName";
-    public string Description => EffectSO != null ? EffectSO.description : "Default Description";
-    public Sprite ProfilePhoto => EffectSO != null ? EffectSO.profilePhoto : null;
-    public float Duration => EffectSO != null ? effectConfig.duration : 0f;
-    public float TimeLeftToExpiration => GameTime() - expirationTime;
+    public bool IsActive { get; private set; }
 
-    // IsExpired tells if the effect is expired
-    public bool IsExpired => GameTime() >= expirationTime;
-
-    // This is template function, it should be replaced with the real game time
-    private float GameTime()
+    public Effect(EffectSO effectSO, AgentSO agentSO)
     {
-        return 10;
+
+        this.effectSO = effectSO;
+        this.agentSO = agentSO;
+        this.IsActive = true;
+
+        // Initialize intensity or any other property as needed
+        intensity = 1; // Default value or set dynamically based on the effect
     }
 
-    public bool ApplyEffect(Agent agent)
-    {
-        expirationTime = GameTime() + Duration;
-
-        // Special effects appied by the EffectSO
-        return EffectSO != null && EffectSO.ApplyEffect(this, agent);
-    }
-
-    // Constructor with incoming EffectSO parameter
-    public Effect(EffectConfig inEffectConfig)
-    {
-        effectConfig = inEffectConfig;
-    }
+    // New getter method to resolve the error in Agent.cs
     public EffectSO GetEffectSO()
     {
-        return effectSO; // Replace 'effectSO' with the actual property
+        return effectSO;
     }
 
-    public void UpdateEffect(Agent agent) => EffectSO.UpdateEffect(agent);
+    public string DisplayName => effectSO != null ? effectSO.effectName : "Unknown Effect";
+    public string Description => effectSO != null ? effectSO.description : "No Description Available";
+    public int TimeLeftToExpiration => 0; // Set an appropriate value if time-based effects are needed in the future.
+    public Sprite Icon => effectSO != null ? effectSO.icon : null; // Assuming `effectSO` has an icon.
 
+
+    public void ApplyEffect()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot apply effect.");
+            return;
+        }
+        Sprite effectIcon = effectSO.icon;
+
+        effectSO.ApplyEffect(agentSO, this);
+    }
+
+    public void CheckForRemoval()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot check for removal.");
+            return;
+        }
+
+        if (effectSO.IsRemovable(agentSO))
+        {
+            Debug.Log($"Effect '{effectSO.effectName}' is removable.");
+            RemoveEffect();
+        }
+    }
+
+    public void RemoveEffect()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot remove effect.");
+            return;
+        }
+
+        effectSO.RemoveEffect(agentSO, this);
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+    }
+
+    /// <summary>
+    /// Updates the effect for the assigned agent.
+    /// </summary>
+    public void UpdateEffect()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot update effect.");
+            return;
+        }
+
+        // Add your custom update logic here if required
+        Debug.Log($"Updating effect '{effectSO.effectName}' for agent '{agentSO.agentName}'.");
+    }
 }

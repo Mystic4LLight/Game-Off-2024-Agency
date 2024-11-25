@@ -5,124 +5,93 @@ using TMPro;
 
 public class AgentPanel : MonoBehaviour
 {
-    // Corris: shoud be Agent, not AgentSO 
-    [SerializeField] public Agent agent;
+    [Header("Agent Data")]
+    public AgentSO agentSO; // Ensure this is the correct case-sensitive definition
+    public AgentSO GetAgentSO()
+    {
+        return agentSO;
+    }
 
-    [SerializeField] public AgentSO agentSO;
-    [SerializeField] private TextMeshProUGUI agentNameText;
-    [SerializeField] private TextMeshProUGUI description;
-    [SerializeField] private Image portraitImage;
+    [Header("Agent Details")]
+    [SerializeField] public TextMeshProUGUI agentNameText;
+    [SerializeField] public TextMeshProUGUI agentOccupationText;
+    [SerializeField] public TextMeshProUGUI agentAgeText;
+    [SerializeField] public TextMeshProUGUI agentSexText;
+    [SerializeField] public TextMeshProUGUI agentBackstoryText;
+    [SerializeField] public Image portraitImage;
+    [SerializeField] public TextMeshProUGUI description; // Retained
+
     [Header("Stats")]
-    [SerializeField] private TextMeshProUGUI strength;
-    [SerializeField] private TextMeshProUGUI constitution;
-    [SerializeField] private TextMeshProUGUI size;
-    [SerializeField] private TextMeshProUGUI dexterity;
-    [SerializeField] private TextMeshProUGUI appearance;
-    [SerializeField] private TextMeshProUGUI education;
-    [SerializeField] private TextMeshProUGUI intelligence;
-    [SerializeField] private TextMeshProUGUI power;
+    [SerializeField] public Dictionary<string, TextMeshProUGUI> statTexts = new(); // Simplified for clarity
+
     [Header("Abilities")]
-    [SerializeField] private TextMeshProUGUI accounting;
-    [SerializeField] private TextMeshProUGUI anthropology;
-    [SerializeField] private TextMeshProUGUI appraise;
-    [SerializeField] private TextMeshProUGUI archaeology;
-    [SerializeField] private TextMeshProUGUI artCraft1;
-    [SerializeField] private TextMeshProUGUI artCraft2;
-    [SerializeField] private TextMeshProUGUI artCraft3;
-    [SerializeField] private TextMeshProUGUI charm;
-    [SerializeField] private TextMeshProUGUI climb;
-    [SerializeField] private TextMeshProUGUI computerUse;
-    [SerializeField] private TextMeshProUGUI creditRating;
-    [SerializeField] private TextMeshProUGUI cthulhuMythos;
-    [SerializeField] private TextMeshProUGUI disguise;
-    [SerializeField] private TextMeshProUGUI dodge;
-    [SerializeField] private TextMeshProUGUI driveAuto;
-    [SerializeField] private TextMeshProUGUI elecRepair;
-    [SerializeField] private TextMeshProUGUI electronics;
-    [SerializeField] private TextMeshProUGUI fastTalk;
-    [SerializeField] private TextMeshProUGUI fightingBrawl;
-    [SerializeField] private TextMeshProUGUI fighting2;
-    [SerializeField] private TextMeshProUGUI fighting3;
-    [SerializeField] private TextMeshProUGUI firearmsAiming;
-    [SerializeField] private TextMeshProUGUI firearmsHipshot;
-    [SerializeField] private TextMeshProUGUI firearms3;
-    [SerializeField] private TextMeshProUGUI firstAid;
-    [SerializeField] private TextMeshProUGUI history;
-    [SerializeField] private TextMeshProUGUI intimidate;
-    [SerializeField] private TextMeshProUGUI jump;
-    [SerializeField] private TextMeshProUGUI languageOther1;
-    [SerializeField] private TextMeshProUGUI languageOther2;
-    [SerializeField] private TextMeshProUGUI languageOwn;
-    [SerializeField] private TextMeshProUGUI law;
-    [SerializeField] private TextMeshProUGUI libraryUse;
-    [SerializeField] private TextMeshProUGUI listen;
-    [SerializeField] private TextMeshProUGUI locksmith;
-    [SerializeField] private TextMeshProUGUI mechRepair;
-    [SerializeField] private TextMeshProUGUI medicine;
-    [SerializeField] private TextMeshProUGUI naturalWorld;
-    [SerializeField] private TextMeshProUGUI navigate;
-    [SerializeField] private TextMeshProUGUI occult;
-    [SerializeField] private TextMeshProUGUI opHvMachine;
-    [SerializeField] private TextMeshProUGUI persuade;
-    [SerializeField] private TextMeshProUGUI pilot;
-    [SerializeField] private TextMeshProUGUI psychology;
-    [SerializeField] private TextMeshProUGUI psychanalysis;
-    [SerializeField] private TextMeshProUGUI science1;
-    [SerializeField] private TextMeshProUGUI science2;
-    [SerializeField] private TextMeshProUGUI science3;
-    [SerializeField] private TextMeshProUGUI sleightOfHand;
-    [SerializeField] private TextMeshProUGUI spotHidden;
-    [SerializeField] private TextMeshProUGUI stealth;
-    [SerializeField] private TextMeshProUGUI survival1;
-    [SerializeField] private TextMeshProUGUI swim;
-    [SerializeField] private TextMeshProUGUI throw1;
-    [SerializeField] private TextMeshProUGUI track;
-    [SerializeField] private TextMeshProUGUI other1;
-    [SerializeField] private TextMeshProUGUI other2;
-    [SerializeField] private TextMeshProUGUI other3;
-    [SerializeField] private TextMeshProUGUI other4;
-    [SerializeField] private TextMeshProUGUI other5;
+    [SerializeField] public Dictionary<string, TextMeshProUGUI> abilityTexts = new(); // Simplified for clarity
+
+    // Placeholder dictionaries
+    [Header("Placeholders")]
+    public Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderNameText = new();
+    public Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderValueText = new();
+    public Dictionary<Specialization.SpecializationType, List<string>> defaultPlaceholderText = new();
+
     public bool isClicked = false;
-    void Start()
+
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (agent != null)
-            Update_Stat();
-    }
-
-    void Update_Stat()
-    {
-
-    }
-
-    public void clickButton(){
-        isClicked = true;
-    }
-
-    private void ResetPlaceholdersToDefault()
-    {
-        foreach (var type in placeholderNameText.Keys)
+        if (agentSO == null)
         {
-            if (defaultPlaceholderText.TryGetValue(type, out var defaultTexts))
-            {
-                for (int i = 0; i < placeholderNameText[type].Count; i++)
-                {
-                    placeholderNameText[type][i].text = i < defaultTexts.Count ? defaultTexts[i] : "----";
-                }
-            }
-            foreach (var valueText in placeholderValueText[type])
-            {
-                valueText.text = ""; // Clear value
-            }
+            Debug.LogError("AgentSO is not assigned in AgentPanel");
         }
+        // Initialize or clear the UI
+        ClearPanel();
     }
 
-    public void UpdateUI()
+    public void DisplayAgentData()
+    {
+        if (agentSO == null)
+        {
+            Debug.LogError("AgentSO is not assigned!");
+            return;
+        }
+
+        // Example of accessing properties from agentSO
+        Debug.Log($"Displaying data for Agent: {agentSO.agentName}");
+    }
+
+    public void SetAgentData(AgentSO newAgentSO)
+    {
+        if (newAgentSO == null)
+        {
+            Debug.LogError("New AgentSO is null!");
+            return;
+        }
+
+        agentSO = newAgentSO;
+        DisplayAgentData();
+    }
+
+
+    /// <summary>
+    /// Initializes the panel with an agent.
+    /// </summary>
+    /// <param name="agentData">The agent to display.</param>
+    public void Initialize(AgentSO agentData)
+    {
+
+        // Correct reference for Initialize() in AgentPanel
+    if (agentData != null)
+    {
+        Debug.LogError("Agent data is null. Unable to initialize.");
+        return;
+    }
+        agentSO = agentData;
+
+        UpdateUI();
+    }
+
+    /// <summary>
+    /// Updates the UI elements with the agent's data.
+    /// </summary>
+    private void UpdateUI()
     {
         if (agentSO == null)
         {
@@ -130,31 +99,19 @@ public class AgentPanel : MonoBehaviour
             return;
         }
 
-        // Update agent information
+        // Update text fields
         agentNameText.text = agentSO.agentName;
-        agentOccupationText.text = agentSO.agentOccupation;
-        agentAgeText.text = agentSO.agentAge.ToString();
-        agentSexText.text = agentSO.agentSex;
-        agentBackstoryText.text = agentSO.agentBackstory;
+        agentOccupationText.text = agentSO.occupation;
+        agentAgeText.text = $"Age: {agentSO.agentAge}";
+        agentSexText.text = $"Sex: {agentSO.agentSex}";
+        agentBackstoryText.text = agentSO.backstory;
+        description.text = agentSO.description;
 
         // Update portrait
-        portraitImage.sprite = agentSO.portrait;
+        portraitImage.sprite = agentSO.profilePhoto;
 
         // Populate specializations
         PopulateSpecializations();
-    }
-
-    public void Initialize(AgentSO agent)
-    {
-        if (agent == null)
-        {
-            Debug.LogError("AgentSO passed to Initialize is null.");
-            return;
-        }
-
-        agentSO = agent;
-        UpdateUI();
-        Debug.Log($"AgentPanel initialized with Agent: {agent.agentName}");
     }
 
     private void PopulateSpecializations()
@@ -175,7 +132,6 @@ public class AgentPanel : MonoBehaviour
             if (!placeholderNameText.TryGetValue(specialization.type, out var namePlaceholders) ||
                 !placeholderValueText.TryGetValue(specialization.type, out var valuePlaceholders))
             {
-                //Debug.LogWarning($"No placeholders found for specialization type: {specialization.type}");
                 continue;
             }
 
@@ -194,21 +150,15 @@ public class AgentPanel : MonoBehaviour
         }
     }
 
-
-    public void ToggleClicked()
-    {
-        isClicked = !isClicked;
-        Debug.Log($"Agent {agentSO.agentName} clicked state: {isClicked}");
-    }
-
     public void ClearPanel()
     {
         // Reset UI elements (e.g., text, images) to default/empty values
         agentNameText.text = "No Agent";
+        agentOccupationText.text = "";
+        agentAgeText.text = "";
+        agentSexText.text = "";
+        agentBackstoryText.text = "";
+        description.text = "";
         portraitImage.sprite = null;
-        //statsText.text = string.Empty;
-
-        // Optional: Hide the panel if needed
-        gameObject.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class ActiveAgentsMenu : MonoBehaviour
             if (agentPanel != null)
             {
                 // Access the AgentSO using the public property
-                AgentSO agent = agentPanel.AgentSO;
+                AgentSO agent = agentPanel.agentSO;
 
                 if (agent != null)
                 {

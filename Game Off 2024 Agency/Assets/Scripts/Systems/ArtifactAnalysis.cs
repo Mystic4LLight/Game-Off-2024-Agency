@@ -28,9 +28,9 @@ public class ArtifactAnalysis : MonoBehaviour
             Debug.LogWarning("Artifact or Agent not assigned.");
             return;
         }
-
+        string skillKey = artifactToAnalyze.requiredSkillForAnalysis.ToString();
         // Correctly access the skill level from the AgentSO skills dictionary
-        if (assignedAgent.agentSO.skills.TryGetValue(artifactToAnalyze.requiredSkillForAnalysis, out int skillLevel))
+        if (assignedAgent.agentSO.skills.TryGetValue(skillKey, out int skillLevel))
         {
             remainingResearchTime -= skillLevel;
             Debug.Log($"Analyzed artifact: {artifactToAnalyze.artifactName}. Remaining time: {remainingResearchTime}");
@@ -45,4 +45,5 @@ public class ArtifactAnalysis : MonoBehaviour
             Debug.Log($"Artifact {artifactToAnalyze.artifactName} fully researched!");
         }
     }
+
 }

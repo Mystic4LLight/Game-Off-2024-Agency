@@ -1,14 +1,33 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EffectSO_Insane", menuName = "Scriptable Objects/EffectSO_Insane")]
+[CreateAssetMenu(fileName = "EffectSO_Insane", menuName = "Scriptable Objects/Effects/Insane")]
 public class EffectSO_Insane : EffectSO
 {
-    public override bool ApplyEffect(Effect effect, Agent agent)
+    public new Sprite icon;
+    public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {
-        // Common part of the effect (log for example)
-        return base.ApplyEffect(effect, agent);
+        Debug.Log($"{effectName} applied to {agentSO.agentName}");
+        // Logic to apply "Insane" effect, e.g., reduce sanity stat
+        agentSO.UpdateStat("Sanity", -10);
+    }
 
-        // Unique part of the effect
-        // .. Insane logic if needed
+    public override bool CanRemoveEffect(AgentSO agentSO)
+    {
+        // Check if the agent has undergone therapy
+        return agentSO.HasUndergoneTherapy();
+    }
+
+    public override void RemoveEffect(AgentSO agentSO, Effect effect)
+    {
+        if (CanRemoveEffect(agentSO))
+        {
+            Debug.Log($"{effectName} removed from {agentSO.agentName}");
+            // Logic to remove "Insane" effect, e.g., restore sanity
+            agentSO.UpdateStat("Sanity", 10);
+        }
+        else
+        {
+            Debug.LogWarning($"Cannot remove {effectName} from {agentSO.agentName}");
+        }
     }
 }

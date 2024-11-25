@@ -5,16 +5,22 @@ public class RecruitButtonHandler : MonoBehaviour
     public GameObject agentFileUI; // Reference to AgentFile UI
     public AgentManager agentManager; // Reference to AgentManager
     public RecruitmentPanel recruitmentPanel; // Reference to RecruitmentPanel
+    public AgentSO agentSO;
+
+    public AgentSO GetAgentSO()
+    {
+        return agentSO;
+    }
 
     public void RecruitAgent()
     {
         var agentPanel = agentFileUI.GetComponent<AgentPanel>();
-        if (agentPanel != null && agentPanel.AgentSO != null)
+        if (agentPanel != null && agentPanel.agentSO != null)
         {
-            var agent = agentPanel.AgentSO;
+            var agentSO = agentPanel.agentSO;
 
             // Recruit agent via AgentManager
-            agentManager.RecruitAgent(agent);
+            agentManager.RecruitAgent(agentSO);
 
             // Refresh the recruitment grid
             recruitmentPanel.RefreshPanel();
@@ -22,7 +28,7 @@ public class RecruitButtonHandler : MonoBehaviour
             // Close the AgentFile UI
             agentFileUI.SetActive(false);
 
-            Debug.Log($"Recruited Agent: {agent.agentName}");
+            Debug.Log($"Recruited Agent: {agentSO.agentName}");
         }
         else
         {
