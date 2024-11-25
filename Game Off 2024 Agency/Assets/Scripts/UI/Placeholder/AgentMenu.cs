@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class AgentMenu : MonoBehaviour
 {
-    public AgentPanel agentPanel; // Reference to the AgentPanel
+    public AgentPanel agentPanel;
+    private AgentSO AgentSO;
 
     private void Start()
     {
         if (agentPanel != null)
         {
             // Access the agentSO via the getter
-            AgentSO agent = agentPanel.AgentSO;
+            AgentSO agent = agentPanel.agentSO;
             if (agent != null)
             {
                 Debug.Log($"Agent selected: {agent.agentName}");

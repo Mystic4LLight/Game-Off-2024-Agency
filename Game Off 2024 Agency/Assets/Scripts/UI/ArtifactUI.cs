@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class ArtifactUI : MonoBehaviour
 {
+    public ArtifactSO artifactSO { get; private set; }
+
     [SerializeField] private Artifact artifact;
     [Header("Panels")]
     [SerializeField] private GameObject unidentifiedPanel;
@@ -24,8 +26,39 @@ public class ArtifactUI : MonoBehaviour
     [SerializeField] private TMP_Text usageNameText;
     [SerializeField] private Image profileImage;
 
+    [Header("Cursed Artifact UI")]
+    [SerializeField] private TMP_Text cursedStatusText;
+    [SerializeField] private TMP_Text cursedDetailsText;
+
     private ArtifactSO currentArtifact;
     [SerializeField] private TextMeshProUGUI researchTimeText;
+
+    public void UpdateArtifactUI(ArtifactSO artifactSO)
+    {
+        identifiedNameText.text = artifactSO.artifactName;  // Change to identifiedNameText
+        descriptionText.text = artifactSO.description;
+
+        // Check if artifact is cursed and update UI accordingly
+        if (artifactSO.isCursed)
+        {
+            cursedStatusText.text = "Cursed Artifact"; // Add a specific UI element for curses
+            cursedStatusText.color = Color.red; // Optional: change text color to indicate danger
+
+            // List all curses
+            string curseDescriptions = "";
+            foreach (var curse in artifactSO.cursedEffects)
+            {
+                curseDescriptions += $"- {curse.effectName}: {curse.description}\n";
+            }
+            cursedDetailsText.text = curseDescriptions;
+        }
+        else
+        {
+            cursedStatusText.text = "Not Cursed";
+            cursedDetailsText.text = "";
+        }
+    }
+
 
     public void DisplayArtifact(ArtifactSO artifactSO, bool isIdentified)
     {
@@ -57,7 +90,7 @@ public class ArtifactUI : MonoBehaviour
 
     private string GetArtifactEffectText(ArtifactSO artifact)
     {
-        return artifact.hasCurse ? "Cursed - Negative Effect" : "Blessed - Positive Effect";
+        return artifact.isCursed ? "Cursed - Negative Effect" : "Blessed - Positive Effect";
     }
 
     private void UpdateUsagePage()
@@ -68,14 +101,19 @@ public class ArtifactUI : MonoBehaviour
 
     public void InitializeUI(Artifact artifact)
     {
-        if (artifact != null)
+        if (artifact == null)
         {
-            researchTimeText.text = $"Time Left: {artifact.GetRemainingResearchTime()} hours";
+            Debug.LogError("Artifact is null!");
+            return;
+        }
 
-            if (artifact.artifactSO.hasCurse)
-            {
-                // Display curse information on the UI
-            }
+        artifactSO = artifact.artifactSO; // Ensure the artifactSO is assigned properly.
+        researchTimeText.text = $"Time Left: {artifact.GetRemainingResearchTime()} hours";
+
+        if (artifactSO != null && artifactSO.isCursed)
+        {
+            Debug.Log($"Artifact '{artifactSO.displayName}' is cursed!");
+            // Display curse-related information on the UI
         }
     }
 

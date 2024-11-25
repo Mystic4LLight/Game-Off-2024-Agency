@@ -1,62 +1,32 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "EffectSO_Poisoned", menuName = "Scriptable Objects/Effects/Poisoned")]
 public class EffectSO_Poisoned : EffectSO
 {
-    public int severityMin = 1; // Minimum poison severity
-    public int severityMax = 5; // Maximum poison severity
-
-    /// <summary>
-    /// Applies the poison effect to an agent.
-    /// </summary>
-    /// <param name="effect">The effect instance being applied.</param>
-    /// <param name="agent">The agent receiving the effect.</param>
-    /// <returns>True if the effect is successfully applied, false otherwise.</returns>
-    public override bool ApplyEffect(Effect effect, Agent agent)
+    public new Sprite icon;
+    public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {
-        if (agent == null || agent.agentSO == null)
-        {
-            Debug.LogWarning("Agent or AgentSO is null, cannot apply poison effect.");
-            return false;
-        }
-
-        // Each in-game day, roll for poison severity
-        int dailySeverity = Random.Range(severityMin, severityMax);
-        int currentConstitution = agent.GetStatValue("Constitution");
-
-        if (currentConstitution <= 0)
-        {
-            Debug.LogWarning($"Agent {agent.agentSO.agentName} already has 0 Constitution and cannot take further damage.");
-            return false;
-        }
-
-        // Reduce Constitution based on daily severity
-        agent.UpdateStatValue("Constitution", currentConstitution - dailySeverity);
-        Debug.Log($"Agent {agent.agentSO.agentName} takes {dailySeverity} poison damage. Remaining Constitution: {agent.GetStatValue("Constitution")}");
-
-        // Check if the agent's Constitution reaches 0
-        if (agent.GetStatValue("Constitution") <= 0)
-        {
-            agent.TakeDamage(currentConstitution); // Trigger death handling in TakeDamage
-            Debug.Log($"Agent {agent.agentSO.agentName} has succumbed to poison.");
-        }
-
-        return true;
+        Debug.Log($"{effectName} applied to {agentSO.agentName}");
+        // Logic to apply "Poisoned" effect, e.g., reduce health over time
+        agentSO.UpdateBarStat("Health", -5);
     }
 
-    /// <summary>
-    /// Removes the poison effect from an agent.
-    /// </summary>
-    /// <param name="agent">The agent from which the effect is being removed.</param>
-    /// <param name="effect">The effect instance being removed.</param>
-    public void RemoveEffect(Agent agent, Effect effect)
+    public override bool CanRemoveEffect(AgentSO agentSO)
     {
-        if (agent == null)
-        {
-            Debug.LogWarning("Agent is null, cannot remove poison effect.");
-            return;
-        }
+        // Check if the agent has an antidote
+        return agentSO.HasAntidote();
+    }
 
-        agent.RemoveEffect(effect); // Ensure the effect instance is properly removed
-        Debug.Log($"Poison effect removed from Agent {agent.agentSO.agentName}.");
+    public override void RemoveEffect(AgentSO agentSO, Effect effect)
+    {
+        if (CanRemoveEffect(agentSO))
+        {
+            Debug.Log($"{effectName} removed from {agentSO.agentName}");
+            // Logic to stop poison damage
+        }
+        else
+        {
+            Debug.LogWarning($"Cannot remove {effectName} from {agentSO.agentName}");
+        }
     }
 }

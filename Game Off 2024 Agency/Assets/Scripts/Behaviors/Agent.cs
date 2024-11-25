@@ -8,6 +8,7 @@ public class Agent : MonoBehaviour
     [SerializeField] public AgentSO agentSO;
 
     private List<Effect> activeEffects = new(); // List of active effects on the agent
+    
 
     // Start is called before the first frame update
     void Start()
@@ -98,10 +99,14 @@ public class Agent : MonoBehaviour
             return false;
         }
 
-        EffectSO effectSO = effect.GetEffectSO(); // Ensure Effect class has GetEffectSO()
+        EffectSO effectSO = effect.effectSO;
 
-        if (effectSO != null && effectSO.ApplyEffect(effect, this))
+        if (effectSO != null)
         {
+            // Apply the effect, assuming it's a void method
+            effectSO.ApplyEffect(agentSO, effect);
+
+            // If you need to add the effect, do it after ensuring ApplyEffect() executes
             activeEffects.Add(effect);
             Debug.Log($"Effect '{effectSO.name}' applied to Agent '{agentSO.agentName}'.");
             return true;
@@ -116,14 +121,16 @@ public class Agent : MonoBehaviour
     /// <param name="effect">The effect to remove.</param>
     public void RemoveEffect(Effect effect)
     {
+        EffectSO effectSO = effect.effectSO;
+
         if (activeEffects.Contains(effect))
         {
             activeEffects.Remove(effect);
-            Debug.Log($"Effect '{effect.GetEffectSO().name}' removed from Agent '{agentSO.agentName}'.");
+            Debug.Log($"Effect '{effectSO.name}' removed from Agent '{agentSO.agentName}'.");
         }
         else
         {
-            Debug.LogWarning($"Effect '{effect.GetEffectSO().name}' not found on Agent '{agentSO.agentName}'.");
+            Debug.LogWarning($"Effect '{effectSO.name}' not found on Agent '{agentSO.agentName}'.");
         }
     }
 
@@ -134,10 +141,10 @@ public class Agent : MonoBehaviour
     {
         foreach (var effect in activeEffects)
         {
-            effect.UpdateEffect(this);
+            effect.UpdateEffect();
         }
 
-        activeEffects.RemoveAll(effect => effect.IsExpired);
+        //activeEffects.RemoveAll(effect => effect.IsExpired);
         Debug.Log($"Updated effects for Agent '{agentSO.agentName}'.");
     }
 
@@ -177,5 +184,11 @@ public class Agent : MonoBehaviour
     {
         agentSO.ResetStatsAndSkills();
         Debug.Log($"Agent {agentSO.agentName}'s stats and skills have been reset.");
+    }
+
+    public int GetAffectedStatValue(string statName)
+    {
+        // Example logic for fetching stats
+        return 0; // Replace with actual stat-fetching logic
     }
 }

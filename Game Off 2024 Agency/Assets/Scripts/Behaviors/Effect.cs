@@ -1,36 +1,92 @@
 using UnityEngine;
 
-/// <summary>
-/// Represents an effect applied to an agent.
-/// </summary>
 public class Effect
 {
-    public EffectSO sourceEffect; // Reference to the EffectSO ScriptableObject
+    public EffectSO effectSO { get; private set; }
+    public AgentSO agentSO { get; private set; }
 
-    public string DisplayName => sourceEffect != null ? sourceEffect.name : "Unknown Effect";
-    public string Description => sourceEffect != null ? sourceEffect.description : "No description available.";
-    public int TimeLeftToExpiration { get; private set; } // Expiration time as an integer
-    public Sprite ProfilePhoto => sourceEffect != null ? sourceEffect.icon : null;
+    public int intensity;  // New field to resolve the error in EffectSO_Cursed
 
-    public Effect(EffectSO effectSO)
+    public bool IsActive { get; private set; }
+
+    public Effect(EffectSO effectSO, AgentSO agentSO)
     {
-        sourceEffect = effectSO;
-        TimeLeftToExpiration = (int)effectSO.duration; // Explicit cast to int
+
+        this.effectSO = effectSO;
+        this.agentSO = agentSO;
+        this.IsActive = true;
+
+        // Initialize intensity or any other property as needed
+        intensity = 1; // Default value or set dynamically based on the effect
     }
 
-    public void UpdateEffect(Agent agent)
+    // New getter method to resolve the error in Agent.cs
+    public EffectSO GetEffectSO()
     {
-        // Example logic for reducing expiration time
-        if (TimeLeftToExpiration > 0)
+        return effectSO;
+    }
+
+    public string DisplayName => effectSO != null ? effectSO.effectName : "Unknown Effect";
+    public string Description => effectSO != null ? effectSO.description : "No Description Available";
+    public int TimeLeftToExpiration => 0; // Set an appropriate value if time-based effects are needed in the future.
+    public Sprite Icon => effectSO != null ? effectSO.icon : null; // Assuming `effectSO` has an icon.
+
+
+    public void ApplyEffect()
+    {
+        if (effectSO == null || agentSO == null)
         {
-            TimeLeftToExpiration--;
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot apply effect.");
+            return;
+        }
+        Sprite effectIcon = effectSO.icon;
+
+        effectSO.ApplyEffect(agentSO, this);
+    }
+
+    public void CheckForRemoval()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot check for removal.");
+            return;
+        }
+
+        if (effectSO.IsRemovable(agentSO))
+        {
+            Debug.Log($"Effect '{effectSO.effectName}' is removable.");
+            RemoveEffect();
         }
     }
 
-    public bool IsExpired => TimeLeftToExpiration <= 0;
-
-    public EffectSO GetEffectSO()
+    public void RemoveEffect()
     {
-        return sourceEffect;
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot remove effect.");
+            return;
+        }
+
+        effectSO.RemoveEffect(agentSO, this);
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+    }
+
+    /// <summary>
+    /// Updates the effect for the assigned agent.
+    /// </summary>
+    public void UpdateEffect()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            Debug.LogWarning("EffectSO or AgentSO is null! Cannot update effect.");
+            return;
+        }
+
+        // Add your custom update logic here if required
+        Debug.Log($"Updating effect '{effectSO.effectName}' for agent '{agentSO.agentName}'.");
     }
 }

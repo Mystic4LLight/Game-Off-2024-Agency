@@ -86,7 +86,7 @@ public class AgentGenerator : MonoBehaviour
             if (activator != null)
             {
                 activator.agentFileUI = agentFileContainer.gameObject; // Assign the AgentFile container
-                activator.Initialize(agentPanel.AgentSO); // Pass the generated AgentSO to the activator
+                activator.Initialize(agentPanel.agentSO); // Pass the generated AgentSO to the activator
             }
             else
             {
