@@ -1,180 +1,164 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class AgentPanel : MonoBehaviour
 {
-    // Corris: shoud be Agent, not AgentSO 
-    [SerializeField] public Agent agent;
+    [Header("Agent Data")]
+    public AgentSO agentSO; // Ensure this is the correct case-sensitive definition
+    public AgentSO GetAgentSO()
+    {
+        return agentSO;
+    }
 
-    [SerializeField] public AgentSO agentSO;
-    [SerializeField] private TextMeshProUGUI agentName;
-    [SerializeField] private TextMeshProUGUI description;
-    [SerializeField] private Image profilePhoto;
+    [Header("Agent Details")]
+    [SerializeField] public TextMeshProUGUI agentNameText;
+    [SerializeField] public TextMeshProUGUI agentOccupationText;
+    [SerializeField] public TextMeshProUGUI agentAgeText;
+    [SerializeField] public TextMeshProUGUI agentSexText;
+    [SerializeField] public TextMeshProUGUI agentBackstoryText;
+    [SerializeField] public Image portraitImage;
+    [SerializeField] public TextMeshProUGUI description; // Retained
+
     [Header("Stats")]
-    [SerializeField] private TextMeshProUGUI strength;
-    [SerializeField] private TextMeshProUGUI constitution;
-    [SerializeField] private TextMeshProUGUI size;
-    [SerializeField] private TextMeshProUGUI dexterity;
-    [SerializeField] private TextMeshProUGUI appearance;
-    [SerializeField] private TextMeshProUGUI education;
-    [SerializeField] private TextMeshProUGUI intelligence;
-    [SerializeField] private TextMeshProUGUI power;
+    [SerializeField] public Dictionary<string, TextMeshProUGUI> statTexts = new(); // Simplified for clarity
+
     [Header("Abilities")]
-    [SerializeField] private TextMeshProUGUI accounting;
-    [SerializeField] private TextMeshProUGUI anthropology;
-    [SerializeField] private TextMeshProUGUI appraise;
-    [SerializeField] private TextMeshProUGUI archaeology;
-    [SerializeField] private TextMeshProUGUI artCraft1;
-    [SerializeField] private TextMeshProUGUI artCraft2;
-    [SerializeField] private TextMeshProUGUI artCraft3;
-    [SerializeField] private TextMeshProUGUI charm;
-    [SerializeField] private TextMeshProUGUI climb;
-    [SerializeField] private TextMeshProUGUI computerUse;
-    [SerializeField] private TextMeshProUGUI creditRating;
-    [SerializeField] private TextMeshProUGUI cthulhuMythos;
-    [SerializeField] private TextMeshProUGUI disguise;
-    [SerializeField] private TextMeshProUGUI dodge;
-    [SerializeField] private TextMeshProUGUI driveAuto;
-    [SerializeField] private TextMeshProUGUI elecRepair;
-    [SerializeField] private TextMeshProUGUI electronics;
-    [SerializeField] private TextMeshProUGUI fastTalk;
-    [SerializeField] private TextMeshProUGUI fightingBrawl;
-    [SerializeField] private TextMeshProUGUI fighting2;
-    [SerializeField] private TextMeshProUGUI fighting3;
-    [SerializeField] private TextMeshProUGUI firearmsAiming;
-    [SerializeField] private TextMeshProUGUI firearmsHipshot;
-    [SerializeField] private TextMeshProUGUI firearms3;
-    [SerializeField] private TextMeshProUGUI firstAid;
-    [SerializeField] private TextMeshProUGUI history;
-    [SerializeField] private TextMeshProUGUI intimidate;
-    [SerializeField] private TextMeshProUGUI jump;
-    [SerializeField] private TextMeshProUGUI languageOther1;
-    [SerializeField] private TextMeshProUGUI languageOther2;
-    [SerializeField] private TextMeshProUGUI languageOwn;
-    [SerializeField] private TextMeshProUGUI law;
-    [SerializeField] private TextMeshProUGUI libraryUse;
-    [SerializeField] private TextMeshProUGUI listen;
-    [SerializeField] private TextMeshProUGUI locksmith;
-    [SerializeField] private TextMeshProUGUI mechRepair;
-    [SerializeField] private TextMeshProUGUI medicine;
-    [SerializeField] private TextMeshProUGUI naturalWorld;
-    [SerializeField] private TextMeshProUGUI navigate;
-    [SerializeField] private TextMeshProUGUI occult;
-    [SerializeField] private TextMeshProUGUI opHvMachine;
-    [SerializeField] private TextMeshProUGUI persuade;
-    [SerializeField] private TextMeshProUGUI pilot;
-    [SerializeField] private TextMeshProUGUI psychology;
-    [SerializeField] private TextMeshProUGUI psychanalysis;
-    [SerializeField] private TextMeshProUGUI science1;
-    [SerializeField] private TextMeshProUGUI science2;
-    [SerializeField] private TextMeshProUGUI science3;
-    [SerializeField] private TextMeshProUGUI sleightOfHand;
-    [SerializeField] private TextMeshProUGUI spotHidden;
-    [SerializeField] private TextMeshProUGUI stealth;
-    [SerializeField] private TextMeshProUGUI survival1;
-    [SerializeField] private TextMeshProUGUI swim;
-    [SerializeField] private TextMeshProUGUI throw1;
-    [SerializeField] private TextMeshProUGUI track;
-    [SerializeField] private TextMeshProUGUI other1;
-    [SerializeField] private TextMeshProUGUI other2;
-    [SerializeField] private TextMeshProUGUI other3;
-    [SerializeField] private TextMeshProUGUI other4;
-    [SerializeField] private TextMeshProUGUI other5;
+    [SerializeField] public Dictionary<string, TextMeshProUGUI> abilityTexts = new(); // Simplified for clarity
+
+    // Placeholder dictionaries
+    [Header("Placeholders")]
+    public Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderNameText = new();
+    public Dictionary<Specialization.SpecializationType, List<TextMeshProUGUI>> placeholderValueText = new();
+    public Dictionary<Specialization.SpecializationType, List<string>> defaultPlaceholderText = new();
+
     public bool isClicked = false;
-    void Start()
+
+    private void Start()
     {
-        
+        if (agentSO == null)
+        {
+            Debug.LogError("AgentSO is not assigned in AgentPanel");
+        }
+        // Initialize or clear the UI
+        ClearPanel();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisplayAgentData()
     {
-        if (agent != null)
-            Update_Stat();
+        if (agentSO == null)
+        {
+            Debug.LogError("AgentSO is not assigned!");
+            return;
+        }
+
+        // Example of accessing properties from agentSO
+        Debug.Log($"Displaying data for Agent: {agentSO.agentName}");
     }
 
-    void Update_Stat()
+    public void SetAgentData(AgentSO newAgentSO)
+    {
+        if (newAgentSO == null)
+        {
+            Debug.LogError("New AgentSO is null!");
+            return;
+        }
+
+        agentSO = newAgentSO;
+        DisplayAgentData();
+    }
+
+
+    /// <summary>
+    /// Initializes the panel with an agent.
+    /// </summary>
+    /// <param name="agentData">The agent to display.</param>
+    public void Initialize(AgentSO agentData)
     {
 
+        // Correct reference for Initialize() in AgentPanel
+    if (agentData != null)
+    {
+        Debug.LogError("Agent data is null. Unable to initialize.");
+        return;
+    }
+        agentSO = agentData;
+
+        UpdateUI();
     }
 
-    public void clickButton(){
-        isClicked = true;
-    }
-    public void fillPanel(){
-        
-        agentName.text = agentSO.name;
+    /// <summary>
+    /// Updates the UI elements with the agent's data.
+    /// </summary>
+    private void UpdateUI()
+    {
+        if (agentSO == null)
+        {
+            Debug.LogWarning("No AgentSO assigned to AgentPanel.");
+            return;
+        }
+
+        // Update text fields
+        agentNameText.text = agentSO.agentName;
+        agentOccupationText.text = agentSO.occupation;
+        agentAgeText.text = $"Age: {agentSO.agentAge}";
+        agentSexText.text = $"Sex: {agentSO.agentSex}";
+        agentBackstoryText.text = agentSO.backstory;
         description.text = agentSO.description;
-        profilePhoto.sprite = agentSO.profilePhoto;
-        strength.text = agentSO.strength.ToString();
-        constitution.text = agentSO.constitution.ToString();
-        size.text = agentSO.size.ToString();
-        dexterity.text = agentSO.dexterity.ToString();
-        appearance.text = agentSO.appearance.ToString();
-        education.text = agentSO.education.ToString();
-        intelligence.text = agentSO.intelligence.ToString();
-        power.text = agentSO.power.ToString();
 
-        accounting.text = agentSO.accounting.ToString();
-        anthropology.text = agentSO.anthropology.ToString();
-        appraise.text = agentSO.appraise.ToString();
-        archaeology.text = agentSO.archaeology.ToString();
-        artCraft1.text = agentSO.artCraft1.ToString();
-        artCraft2.text = agentSO.artCraft2.ToString();
-        artCraft3.text = agentSO.artCraft3.ToString();
-        charm.text = agentSO.charm.ToString();
-        climb.text = agentSO.climb.ToString();
-        computerUse.text = agentSO.computerUse.ToString();
-        creditRating.text = agentSO.creditRating.ToString();
-        cthulhuMythos.text = agentSO.cthulhuMythos.ToString();
-        disguise.text = agentSO.disguise.ToString();
-        dodge.text = agentSO.dodge.ToString();
-        driveAuto.text = agentSO.driveAuto.ToString();
-        elecRepair.text = agentSO.elecRepair.ToString();
-        electronics.text = agentSO.electronics.ToString();
-        fastTalk.text = agentSO.fastTalk.ToString();
-        fightingBrawl.text = agentSO.fightingBrawl.ToString();
-        fighting2.text = agentSO.fighting2.ToString();
-        fighting3.text = agentSO.fighting3.ToString();
-        firearmsAiming.text = agentSO.firearmsAiming.ToString();
-        firearmsHipshot.text = agentSO.firearmsHipshot.ToString();
-        firearms3.text = agentSO.firearms3.ToString();
-        firstAid.text = agentSO.firstAid.ToString();
-        history.text = agentSO.history.ToString();
-        intimidate.text = agentSO.intimidate.ToString();
-        jump.text = agentSO.jump.ToString();
-        languageOther1.text = agentSO.languageOther1.ToString();
-        languageOther2.text = agentSO.languageOther2.ToString();
-        languageOwn.text = agentSO.languageOwn.ToString();
-        law.text = agentSO.law.ToString();
-        libraryUse.text = agentSO.libraryUse.ToString();
-        listen.text = agentSO.listen.ToString();
-        locksmith.text = agentSO.locksmith.ToString();
-        mechRepair.text = agentSO.mechRepair.ToString();
-        medicine.text = agentSO.medicine.ToString();
-        naturalWorld.text = agentSO.naturalWorld.ToString();
-        navigate.text = agentSO.navigate.ToString();
-        occult.text = agentSO.occult.ToString();
-        opHvMachine.text = agentSO.opHvMachine.ToString();
-        persuade.text = agentSO.persuade.ToString();
-        pilot.text = agentSO.pilot.ToString();
-        psychology.text = agentSO.psychology.ToString();
-        psychanalysis.text = agentSO.psychanalysis.ToString();
-        science1.text = agentSO.science1.ToString();
-        science2.text = agentSO.science2.ToString();
-        science3.text = agentSO.science3.ToString();
-        sleightOfHand.text = agentSO.sleightOfHand.ToString();
-        spotHidden.text = agentSO.spotHidden.ToString();
-        stealth.text = agentSO.stealth.ToString();
-        survival1.text = agentSO.survival1.ToString();
-        swim.text = agentSO.swim.ToString();
-        throw1.text = agentSO.throw1.ToString();
-        track.text = agentSO.track.ToString();
-        other1.text = agentSO.other1.ToString();
-        other2.text = agentSO.other2.ToString();
-        other3.text = agentSO.other3.ToString();
-        other4.text = agentSO.other4.ToString();
-        other5.text = agentSO.other5.ToString();
-        
+        // Update portrait
+        portraitImage.sprite = agentSO.profilePhoto;
+
+        // Populate specializations
+        PopulateSpecializations();
+    }
+
+    private void PopulateSpecializations()
+    {
+        var usedPlaceholders = new Dictionary<Specialization.SpecializationType, int>
+        {
+            { Specialization.SpecializationType.ArtCraft, 0 },
+            { Specialization.SpecializationType.Fighting, 0 },
+            { Specialization.SpecializationType.Firearms, 0 },
+            { Specialization.SpecializationType.Science, 0 },
+            { Specialization.SpecializationType.Language, 0 },
+            { Specialization.SpecializationType.Other, 0 },
+            { Specialization.SpecializationType.Survival, 0 }
+        };
+
+        foreach (var specialization in agentSO.specializations)
+        {
+            if (!placeholderNameText.TryGetValue(specialization.type, out var namePlaceholders) ||
+                !placeholderValueText.TryGetValue(specialization.type, out var valuePlaceholders))
+            {
+                continue;
+            }
+
+            int currentIndex = usedPlaceholders[specialization.type];
+
+            if (currentIndex >= namePlaceholders.Count || currentIndex >= valuePlaceholders.Count)
+            {
+                Debug.LogWarning($"Not enough placeholders for specialization: {specialization.name} of type {specialization.type}");
+                continue;
+            }
+
+            // Assign specialization
+            namePlaceholders[currentIndex].text = specialization.name;
+            valuePlaceholders[currentIndex].text = specialization.value.ToString();
+            usedPlaceholders[specialization.type]++;
+        }
+    }
+
+    public void ClearPanel()
+    {
+        // Reset UI elements (e.g., text, images) to default/empty values
+        agentNameText.text = "No Agent";
+        agentOccupationText.text = "";
+        agentAgeText.text = "";
+        agentSexText.text = "";
+        agentBackstoryText.text = "";
+        description.text = "";
+        portraitImage.sprite = null;
     }
 }

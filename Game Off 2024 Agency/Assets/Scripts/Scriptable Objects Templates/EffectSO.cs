@@ -1,35 +1,32 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
-[CreateAssetMenu(fileName = "EffectSO", menuName = "Scriptable Objects/EffectSO")]
-public class EffectSO : ScriptableObject
+public abstract class EffectSO : ScriptableObject
 {
-    public string displayName;
+    public string effectName;
     public string description;
-    public Sprite profilePhoto;
-    public float durationDefault;  // Corris: commented because param with Editor - for Each effectConfig
-    // any proprs you want to add
+    // Add the icon property here
+    public Sprite icon;
 
-    public virtual bool ApplyEffect(Effect effect, Agent agent)
+    // Apply the effect to the agent
+    public abstract void ApplyEffect(AgentSO agentSO, Effect effect);
+
+    // Check if the effect can be removed
+    public abstract bool CanRemoveEffect(AgentSO agentSO);
+
+    // Remove the effect from the agent
+    public abstract void RemoveEffect(AgentSO agentSO, Effect effect);
+
+    // Optional method to revert any lingering effect impact
+    public virtual void RevertEffect(AgentSO agentSO)
     {
-        if (agent == null)
-        {
-            Debug.LogWarning("Agent is null, cannot apply effect.");
-            return false;
-        }
-
-        if (effect == null)
-        {
-            Debug.LogWarning("Effect is null, cannot apply effect.");
-            return false;
-        }
-
-        return agent.ApplyEffect(effect);
-
+        Debug.Log($"{effectName} effect reverted for {agentSO.agentName}");
     }
-
-    public virtual void UpdateEffect(Agent agent)
+    public virtual bool IsRemovable(AgentSO agentSO)
     {
-        // overriden in child classes
+        // You can add logic here that determines if an effect is removable
+        // For now, it returns true, meaning all effects are removable by default.
+        return true;
     }
 }

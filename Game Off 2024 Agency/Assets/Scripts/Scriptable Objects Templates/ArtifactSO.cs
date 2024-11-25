@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "ArtifactSO", menuName = "Scriptable Objects/ArtifactSO")]
+[CreateAssetMenu(fileName = "New Artifact", menuName = "Game/Artifact")]
 public class ArtifactSO : ScriptableObject
 {
     [Header("Identification")]
@@ -16,21 +16,32 @@ public class ArtifactSO : ScriptableObject
     public float researchTimeRequired = 168f; // Total time in in-game hours (e.g., one week)
     public bool isIdentified = false;         // Tracks if artifact has been fully analyzed
     public int maxSanityLoss = 5; 
+    public string artifactName;
+    public int researchTime; // Assuming this is an integer.
     public AgentSkill requiredSkillForAnalysis;            // Maximum sanity points the artifact can cause
 
 
     [Header("Effects")]
-    public bool hasCurse = false;             // Indicates if artifact has a negative effect
-    public string curseDescription;           // Description of the curse or negative effect
-    public bool hasBonusEffect = false;       // Indicates if artifact has a positive effect
+    public bool isCursed;            // Indicates if artifact has a negative effect
+    public List<EffectSO_Cursed> cursedEffects = new List<EffectSO_Cursed>(); // List of cursed effects
+    public bool hasBonusEffect;      // Indicates if artifact has a positive effect
     public string bonusEffectDescription;     // Description of the bonus effect or benefit
     public int sanityEffectOnAgent;
+    public int sanityLossThreshold;
 
     [Header("R&D Integration")]
-    public bool leadsToNewTool = false;       // Indicates if artifact unlocks a new tool in R&D
+    public bool leadsToNewTool;       // Indicates if artifact unlocks a new tool in R&D
     public string toolDescription;            // Description of the new tool or function unlocked
 
     [Header("Potential Mission Effects")]
-    // список потенциально накладываемых эффектов в ходе миссии
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public List<EffectConfig> potentialMissionEffects = new();
+
+    [System.Serializable]
+    public class AgentSkill
+    {
+        public string skillName; // Name of the skill
+        public int skillLevel;   // Skill level
+    }
+
 }
