@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using NUnit.Framework.Internal;
 using System;
 using System.Linq;
-using NUnit.Framework.Internal;
-using System;
 
 public class Agent : MonoBehaviour
 {
@@ -88,19 +86,12 @@ public class Agent : MonoBehaviour
     public bool IsDying => activeEffects.Any(effect => effect.EffectSO is EffectSO_Dying);
     public bool IsPoisoned => activeEffects.Any(effect => effect.EffectSO is EffectSO_Poisoned);
     public bool IsInsane => activeEffects.Any(effect => effect.EffectSO is EffectSO_Insane);
-    public bool IsInjured => activeEffects.Any(effect => effect.EffectSO is EffectSO_Injured);
-    public bool IsDying => activeEffects.Any(effect => effect.EffectSO is EffectSO_Dying);
-    public bool IsPoisoned => activeEffects.Any(effect => effect.EffectSO is EffectSO_Poisoned);
-    public bool IsInsane => activeEffects.Any(effect => effect.EffectSO is EffectSO_Insane);
 
     // Corris: List of current stats (standard)
     public List<AgentStat> currentStats = new();
 
     // List of active effects
     private List<Effect> activeEffects = new();
-
-
-    private activeEffects = new(); // List of active effects on the agent
 
     // Start is called before the first frame update
     void Start()
@@ -244,22 +235,13 @@ public class Agent : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Initializing Agent: {agentSO.agentName}");
-        InitializeAgentStats();
-    }
-
-    /// <summary>
-    /// Initializes the agent's stats based on the AgentSO and its stat template.
-    /// </summary>
-    public void InitializeAgentStats()
-    {
         if (agentSO.statTemplate == null)
         {
             Debug.LogError($"AgentSO '{agentSO.agentName}' does not have a stat template assigned.");
             return;
         }
 
-        // Copy the template and create current values
+        Debug.Log($"Initializing Agent: {agentSO.agentName}");
         currentStats = agentSO.statTemplate.stats
             .Select(template => new AgentStat(template))
             .ToList();
@@ -272,24 +254,10 @@ public class Agent : MonoBehaviour
         {
             //  stat.currentValue = Mathf.Clamp(stat.currentValue + delta, 0, stat.template.defaultValue);
             stat.currentValue = newValue;
-        agentSO.ResetStatsAndSkills();
-    }
-
-    /// <summary>
-    /// Gets the current value of a stat from the AgentSO.
-    /// </summary>
-    /// <param name="statName">The name of the stat.</param>
-    /// <returns>The current value of the stat, or 0 if not found.</returns>
-    public int GetStatValue(string statName)
-    {
-        if (agentSO.currentStats.ContainsKey(statName))
-        {
-            return agentSO.currentStats[statName];
+            agentSO.ResetStatsAndSkills();
         }
-
-        Debug.LogWarning($"Stat '{statName}' not found for Agent '{agentSO.agentName}'.");
-        return 0;
     }
+
 
     /// <summary>
     /// Updates the value of a stat in the AgentSO.
@@ -310,9 +278,13 @@ public class Agent : MonoBehaviour
     {
         var stat = currentStats.FirstOrDefault(s => s.template.name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (stat != null)
+        {
+        return stat.currentValue; // Return the value if found.
+        }
         else
         {
             Debug.LogWarning($"Stat '{statName}' not found for Agent '{agentSO.agentName}'.");
+            return 0; // Default return value.
         }
     }
 
@@ -395,12 +367,6 @@ public class Agent : MonoBehaviour
     /// </summary>
     public void UpdateEffects()
     {
-        // Update all active effects
-        foreach (var effect in activeEffects)
-        {
-            effect.UpdateEffect(this);
-        }
-
         // Remove all expired effects
         foreach (var effect in activeEffects)
         {

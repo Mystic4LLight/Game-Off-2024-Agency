@@ -21,7 +21,7 @@ public class EffectSO_Poisoned : EffectSO
 
         // Each in-game day, roll for poison severity
         int dailySeverity = Random.Range(severityMin, severityMax);
-        int currentConstitution = agent.GetStatValue("Constitution");
+        int currentConstitution = (int)agent.GetStatValue("Constitution");
 
         if (currentConstitution <= 0)
         {

@@ -38,6 +38,10 @@ public class Effect
     {
         effectConfig = inEffectConfig;
     }
+    public EffectSO GetEffectSO()
+    {
+        return effectSO; // Replace 'effectSO' with the actual property
+    }
 
     public void UpdateEffect(Agent agent) => EffectSO.UpdateEffect(agent);
 

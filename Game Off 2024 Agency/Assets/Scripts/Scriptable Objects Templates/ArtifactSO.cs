@@ -16,6 +16,8 @@ public class ArtifactSO : ScriptableObject
     public float researchTimeRequired = 168f; // Total time in in-game hours (e.g., one week)
     public bool isIdentified = false;         // Tracks if artifact has been fully analyzed
     public int maxSanityLoss = 5; 
+    public string artifactName;
+    public int researchTime; // Assuming this is an integer.
     public AgentSkill requiredSkillForAnalysis;            // Maximum sanity points the artifact can cause
 
 
@@ -33,4 +35,12 @@ public class ArtifactSO : ScriptableObject
     [Header("Potential Mission Effects")]
     // ������ ������������ ������������� �������� � ���� ������
     public List<EffectConfig> potentialMissionEffects = new();
+
+    [System.Serializable]
+    public class AgentSkill
+    {
+        public string skillName; // Name of the skill
+        public int skillLevel;   // Skill level
+    }
+
 }

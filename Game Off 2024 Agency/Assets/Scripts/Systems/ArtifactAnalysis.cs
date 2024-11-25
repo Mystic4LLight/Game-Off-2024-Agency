@@ -21,7 +21,7 @@ public class ArtifactAnalysis : MonoBehaviour
         Debug.Log($"Artifact {artifact.artifactName} assigned for analysis.");
     }
 
-    public void AnalyzeArtifact()
+    public void AnalyzeArtifact(string skillName)
     {
         if (artifactToAnalyze == null || assignedAgent == null || assignedAgent.agentSO == null)
         {

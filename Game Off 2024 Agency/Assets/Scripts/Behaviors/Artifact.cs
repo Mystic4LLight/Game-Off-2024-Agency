@@ -31,11 +31,6 @@ public class Artifact : MonoBehaviour
         UpdateSprite();
     }
 
-    public float GetRemainingResearchTime()
-    {
-        return currentResearchTime;
-    }
-
     public void ReduceResearchTime(float timeReduction)
     {
         currentResearchTime -= timeReduction;

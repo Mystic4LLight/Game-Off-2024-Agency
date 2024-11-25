@@ -9,9 +9,9 @@ public class AgentPanel : MonoBehaviour
     [SerializeField] public Agent agent;
 
     [SerializeField] public AgentSO agentSO;
-    [SerializeField] private TextMeshProUGUI agentName;
+    [SerializeField] private TextMeshProUGUI agentNameText;
     [SerializeField] private TextMeshProUGUI description;
-    [SerializeField] private Image profilePhoto;
+    [SerializeField] private Image portraitImage;
     [Header("Stats")]
     [SerializeField] private TextMeshProUGUI strength;
     [SerializeField] private TextMeshProUGUI constitution;

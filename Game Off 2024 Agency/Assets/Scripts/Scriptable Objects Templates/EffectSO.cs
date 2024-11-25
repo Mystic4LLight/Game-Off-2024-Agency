@@ -31,4 +31,6 @@ public class EffectSO : ScriptableObject
     {
         // Overridden in child classes for time-based effects
     }
+
+    
 }
