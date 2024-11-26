@@ -16,7 +16,7 @@ public class UniqueList<T>
     {
         if (items.Contains(item))
         {
-            Debug.LogWarning($"Duplicate item detected: {item}");
+            GameLogger.LogWarning($"Duplicate item detected: {item}");
             return false;
         }
         items.Add(item);

@@ -103,7 +103,7 @@ public class ArtifactUI : MonoBehaviour
     {
         if (artifact == null)
         {
-            Debug.LogError("Artifact is null!");
+            GameLogger.LogError("Artifact is null!");
             return;
         }
 
@@ -112,7 +112,7 @@ public class ArtifactUI : MonoBehaviour
 
         if (artifactSO != null && artifactSO.isCursed)
         {
-            Debug.Log($"Artifact '{artifactSO.displayName}' is cursed!");
+            GameLogger.Log($"Artifact '{artifactSO.displayName}' is cursed!");
             // Display curse-related information on the UI
         }
     }

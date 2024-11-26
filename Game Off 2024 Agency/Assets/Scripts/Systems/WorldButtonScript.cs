@@ -47,7 +47,7 @@ public class WorldButtonScript : MonoBehaviour
         {
             UIManager.Instance.OpenWindow(targetWindow); // Open the specified window
             buttonRenderer.material.color = clickColor;  // Change color on click
-            Debug.Log("World Window Opened!");
+            GameLogger.Log("World Window Opened!");
         }
     }
 }

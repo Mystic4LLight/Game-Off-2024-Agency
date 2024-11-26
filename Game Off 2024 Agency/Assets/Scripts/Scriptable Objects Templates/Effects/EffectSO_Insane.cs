@@ -6,7 +6,7 @@ public class EffectSO_Insane : EffectSO
     public new Sprite icon;
     public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {
-        Debug.Log($"{effectName} applied to {agentSO.agentName}");
+        GameLogger.Log($"{effectName} applied to {agentSO.agentName}");
         // Logic to apply "Insane" effect, e.g., reduce sanity stat
         agentSO.UpdateStat("Sanity", -10);
     }
@@ -21,13 +21,13 @@ public class EffectSO_Insane : EffectSO
     {
         if (CanRemoveEffect(agentSO))
         {
-            Debug.Log($"{effectName} removed from {agentSO.agentName}");
+            GameLogger.Log($"{effectName} removed from {agentSO.agentName}");
             // Logic to remove "Insane" effect, e.g., restore sanity
             agentSO.UpdateStat("Sanity", 10);
         }
         else
         {
-            Debug.LogWarning($"Cannot remove {effectName} from {agentSO.agentName}");
+            GameLogger.LogWarning($"Cannot remove {effectName} from {agentSO.agentName}");
         }
     }
 }

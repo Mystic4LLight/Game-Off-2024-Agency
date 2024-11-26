@@ -49,7 +49,7 @@ public class ArtifactManager : MonoBehaviour
             //=======================
             // TEST PART
 
-            Debug.Log("TEST Adding Random artifacts to catalog and identifying one of it");
+            GameLogger.Log("TEST Adding Random artifacts to catalog and identifying one of it");
             // Add new artifact to Agency
             var newOwnedArtifact = AddRandomArtifactToAgency();
             IdentifyArtifact(newOwnedArtifact);
@@ -78,7 +78,7 @@ public class ArtifactManager : MonoBehaviour
         }
 
         // Log with Green color Artifact Catalog filled with the number of artifacts.
-        Debug.Log("<color=yellow>Artifact Catalog filled with " + agencyArtifactCatalog.Count + " artifacts.</color>");
+        GameLogger.Log("<color=yellow>Artifact Catalog filled with " + agencyArtifactCatalog.Count + " artifacts.</color>");
     }
 
     private void InitializeArtifact(ArtifactSO template)
@@ -97,7 +97,7 @@ public class ArtifactManager : MonoBehaviour
     {
         agencyOwnedArtifacts.Add(artifact);
         headquartersStoredArtifacts.Add(artifact);
-        Debug.Log("<color=purple>New artifact '" + artifact.name + "' added to headquarters storage.</color>");
+        GameLogger.Log("<color=purple>New artifact '" + artifact.name + "' added to headquarters storage.</color>");
     }
 
     // TEST Function to check Artifacts working
@@ -112,7 +112,7 @@ public class ArtifactManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Artifact catalog is empty. Cannot add a random artifact to the agency.");
+            GameLogger.LogWarning("Artifact catalog is empty. Cannot add a random artifact to the agency.");
             return null;
         }
     }
@@ -132,7 +132,7 @@ public class ArtifactManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Artifact not found in headquarters storage.");
+            GameLogger.LogWarning("Artifact not found in headquarters storage.");
             return false;
         }
     }
@@ -148,7 +148,7 @@ public class ArtifactManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Artifact not found in mission assigned artifacts.");
+            GameLogger.LogWarning("Artifact not found in mission assigned artifacts.");
             return false;
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "AgentSO", menuName = "Scriptable Objects/AgentSO")]
 public class AgentSO : ScriptableObject
@@ -15,6 +16,16 @@ public class AgentSO : ScriptableObject
 
     [Header("Characteristics")]
     public Dictionary<string, int> currentStats = new Dictionary<string, int>();
+
+    [Header("Base Stats")]
+    public int strength;
+    public int constitution;
+    public int size;
+    public int dexterity;
+    public int appearance;
+    public int education;
+    public int intelligence;
+    public int power;
 
     [Header("Bar Stats")]
     public Dictionary<string, BarStatInstance> barStats = new Dictionary<string, BarStatInstance>();
@@ -117,23 +128,95 @@ public class AgentSO : ScriptableObject
         }
     }
 
-    private void OnEnable()
+    // Public method to initialize the Agent after assigning the stat template
+    public void InitializeAgent()
     {
-        Debug.Log($"AgentSO '{name}' is being initialized.");
+        if (statTemplate == null)
+        {
+            Debug.LogError($"AgentSO '{name}' does not have a stat template assigned. Please assign one before initialization.");
+            return;
+        }
+
         InitializeStats();
         InitializeSkills();
+        InitializeSpecializations();
+    }
 
-        // Clear existing specializations to avoid duplicates
+    private void InitializeSpecializations()
+    {
+            // Create a HashSet to track specializations that have already been added
+        HashSet<string> addedSpecializations = new HashSet<string>();
+
+        foreach (Specialization.SpecializationType type in Enum.GetValues(typeof(Specialization.SpecializationType)))
+        {
+            string specializationName = type.ToString();
+
+            // Check if the specialization has already been added
+            if (!addedSpecializations.Contains(specializationName))
+            {
+                addedSpecializations.Add(specializationName);
+                Specialization newSpecialization = new Specialization(type, specializationName, 0);
+                // Add to the specialization list
+                specializations.Add(newSpecialization);
+            }
+        }
+        // Accessing the fields correctly:
+        foreach (var specialization in specializations)
+        {
+            Debug.Log($"Name: {specialization.name}, Type: {specialization.type}, Value: {specialization.value}");
+        }
+
+        specializations?.Clear();
+        if (specializations != null && specializations.Count > 0)
+        {
+            Debug.LogWarning("Specializations are already initialized, skipping re-initialization.");
+            return; // Specializations already initialized, skip further processing.
+        }
+        specializations = new List<Specialization>();
+        foreach (var specializationTemplate in statTemplate.specializations)
+        {
+            Specialization newSpecialization = new Specialization(specializationTemplate.type, specializationTemplate.name, (int)specializationTemplate.defaultValue);
+            specializations.Add(newSpecialization);
+            Debug.Log($"Specialization created: Name = {newSpecialization.name}, Type = {newSpecialization.type}, Value = {newSpecialization.value}");
+        }
+        Debug.Log("Specializations initialized:");
+        foreach (var specialization in specializations)
+        {
+            Debug.Log($"Name: {specialization.name}, Type: {specialization.type}, Value: {specialization.value}");
+        }
+            // Clear existing specializations to avoid duplication
         specializations.Clear();
 
-        // Add specializations with consistent names and values
-        specializations.Add(new Specialization(Specialization.SpecializationType.ArtCraft, "Art/Craft", 3));
-        specializations.Add(new Specialization(Specialization.SpecializationType.Fighting, "Fighting(Brawl)", 2));
-        specializations.Add(new Specialization(Specialization.SpecializationType.Firearms, "Firearms(Hipshot)", 1));
-        specializations.Add(new Specialization(Specialization.SpecializationType.Science, "Biology", 3));
-        specializations.Add(new Specialization(Specialization.SpecializationType.Language, "Latin", 3));
-        specializations.Add(new Specialization(Specialization.SpecializationType.Other, "Other1", 5));
-        specializations.Add(new Specialization(Specialization.SpecializationType.Survival, "Survival", 1));
+        // Add specializations as required, ensuring there are no duplicates
+        if (!specializations.Exists(s => s.name == "Art/Craft"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.ArtCraft, "Art/Craft", 3));
+        }
+        if (!specializations.Exists(s => s.name == "Fighting(Brawl)"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.Fighting, "Fighting(Brawl)", 2));
+        }
+        if (!specializations.Exists(s => s.name == "Firearms(Hipshot)"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.Firearms, "Firearms(Hipshot)", 1));
+        }
+        if (!specializations.Exists(s => s.name == "Biology"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.Science, "Biology", 3));
+        }
+        if (!specializations.Exists(s => s.name == "Latin"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.Language, "Latin", 3));
+        }
+        if (!specializations.Exists(s => s.name == "Other"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.Other, "Other", 5));
+        }
+        if (!specializations.Exists(s => s.name == "Survival"))
+        {
+            specializations.Add(new Specialization(Specialization.SpecializationType.Survival, "Survival", 1));
+        }
+    
 
         Debug.Log("Specializations initialized:");
         foreach (var specialization in specializations)
@@ -142,7 +225,6 @@ public class AgentSO : ScriptableObject
         }
     }
     
-
     public void InitializeStats()
     {
         if (statTemplate == null)
@@ -150,40 +232,44 @@ public class AgentSO : ScriptableObject
             Debug.LogError($"AgentSO '{name}' does not have a stat template assigned. Please assign one in the Inspector.");
             return;
         }
-
-        // Clear and populate `currentStats`
-        currentStats.Clear();
+        // Initialize base stats
         foreach (var stat in statTemplate.baseStats)
-        {
-            currentStats[stat.name] = (int)stat.defaultValue;
-        }
-
-        // Clear and populate `barStats`
-        barStats.Clear();
-        foreach (var barStat in statTemplate.barStats)
-        {
-            barStats[barStat.name] = new BarStatInstance
             {
-                currentValue = barStat.defaultValue,
-                maxValue = barStat.maxValue
-            };
-        }
-        if (statTemplate == null)
-        {
-            Debug.LogError($"StatTemplate is not assigned for AgentSO: {agentName}.");
-            return;
-        }
-
-        foreach (var stat in statTemplate.baseStats)
-        {
-            if (!currentStats.ContainsKey(stat.name))
-            {
-                currentStats.Add(stat.name, (int)stat.defaultValue);
+            switch (stat.name)
+                {
+                case "Strength":
+                    strength = (int)stat.defaultValue;
+                    break;
+                case "Constitution":
+                    constitution = (int)stat.defaultValue;
+                    break;
+                case "Size":
+                    size = (int)stat.defaultValue;
+                    break;
+                case "Dexterity":
+                    dexterity = (int)stat.defaultValue;
+                    break;
+                case "Appearance":
+                    appearance = (int)stat.defaultValue;
+                    break;
+                case "Education":
+                    education = (int)stat.defaultValue;
+                    break;
+                case "Intelligence":
+                    intelligence = (int)stat.defaultValue;
+                    break;
+                case "Power":
+                    power = (int)stat.defaultValue;
+                    break;
+                    
+                default:
+                    Debug.LogWarning($"Stat '{stat.name}' is not recognized in AgentSO initialization.");
+                    break;
+                }
             }
+
+            Debug.Log($"Initialized stats for AgentSO '{name}' using StatTemplate '{statTemplate.name}'");
         }
-    }
-
-
 
     public void UpdateBarStat(string statName, float amount)
     {
@@ -208,10 +294,6 @@ public class AgentSO : ScriptableObject
     {
         return barStats.ContainsKey(statName) ? barStats[statName].maxValue : 0;
     }
-
-
-    
-
     
     public void InitializeSkills()
     {
@@ -250,7 +332,6 @@ public class AgentSO : ScriptableObject
         };
 
 
-        // Add core skills to the dictionary
         foreach (var skillName in skillNames)
         {
             if (!skills.ContainsKey(skillName))
@@ -258,6 +339,22 @@ public class AgentSO : ScriptableObject
                 skills[skillName] = 0;
             }
         }
+
+        if (statTemplate != null)
+        {
+            foreach (var templateSkill in statTemplate.abilities)
+            {
+                if (!skills.ContainsKey(templateSkill.name))
+                {
+                    skills[templateSkill.name] = (int)templateSkill.defaultValue;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"StatTemplate is not assigned for AgentSO: {agentName}. Skills will not be populated.");
+        }
+    
 
         // Specialization placeholders
         string[] specializationPlaceholders = new string[]
@@ -462,8 +559,5 @@ public class AgentSO : ScriptableObject
     {
         return specializations.Exists(s => s.name == name);
     }
-
-    
-    
 }
 

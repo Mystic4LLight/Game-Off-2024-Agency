@@ -10,11 +10,18 @@ public class AgentGenerator : MonoBehaviour
     public Transform agentFileContainer; // Reference the AgentFile container inside AgentUI
     public int maxRecruitmentSlots = 3;
 
+    // New references for the individual agent slots
+    public Transform agentSlot1;
+    public Transform agentSlot2;
+    public Transform agentSlot3;
+
     [Header("Generated Agents")]
     public List<AgentSO> recruitmentSlots = new List<AgentSO>();
 
     private void Awake()
     {
+        Debug.Log("AgentGenerator Awake called."); // Add this log to track initialization.
+
         // Resolve agentFileContainer dynamically if not assigned
         if (agentFileContainer == null)
         {
@@ -34,46 +41,42 @@ public class AgentGenerator : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
-        // Ensure critical references before refreshing recruitment
-        if (!ValidateReferences())
-        {
-            return;
-        }
+        // Generate agents for recruitment slots
+        GenerateAgents();
 
+        // Refresh recruitment after all agents have been generated
         RefreshRecruitment();
     }
 
-    public void RefreshRecruitment()
+    private void GenerateAgents()
     {
-        // Validate references before proceeding
-        if (!ValidateReferences())
-        {
-            return;
-        }
+        Debug.Log("Generating agents."); // Tracking log
 
-        // Clear existing recruitment slots
-        foreach (Transform child in recruitmentGrid)
-        {
-            Destroy(child.gameObject);
-        }
+        // Clear existing recruitment slots to prepare for new generation
         recruitmentSlots.Clear();
 
-        // Generate agents and populate recruitment slots
-        for (int i = 0; i < maxRecruitmentSlots; i++)
+        // Number of agents to be generated
+        int numberOfAgentsToGenerate = maxRecruitmentSlots;
+
+        // Generate agents
+        for (int i = 0; i < numberOfAgentsToGenerate; i++)
         {
             string archetype = GetRandomArchetype();
-            GameObject agentCard = Instantiate(agentUIPrefab, recruitmentGrid);
+            GameObject agentCard = Instantiate(agentUIPrefab);
 
-            // Assign agent data to the card
+            // Attempt to assign agent data to the card
             var agentPanel = agentCard.GetComponentInChildren<AgentPanel>();
             if (agentPanel != null)
             {
-                AgentSO agent = GenerateAgent(archetype, agentPanel);
+                // Generate and initialize agent with agentPanel
+                AgentSO agent = GenerateAgent(archetype, agentPanel); 
                 if (agent != null)
                 {
+                    // Add agent to recruitment slots and assign it to the corresponding UI slot
                     recruitmentSlots.Add(agent);
+                    AssignAgentToSlot(agentCard, i);
                 }
             }
             else
@@ -81,17 +84,94 @@ public class AgentGenerator : MonoBehaviour
                 Debug.LogError("AgentPanel component is missing on the agent card prefab!");
             }
 
-            // Assign the AgentFileActivator to open AgentFile UI
-            var activator = agentCard.GetComponent<AgentFileActivator>();
+            // Assign the AgentFileActivator to open the AgentFile UI
+            var activator = agentCard.GetComponentInChildren<AgentFileActivator>();
             if (activator != null)
             {
-                activator.agentFileUI = agentFileContainer.gameObject; // Assign the AgentFile container
+                activator.agentUI = agentCard.GetComponent<AgentUI>(); // Assign the AgentUI reference directly
                 activator.Initialize(agentPanel.agentSO); // Pass the generated AgentSO to the activator
             }
             else
             {
                 Debug.LogError("AgentFileActivator is missing on the agent card prefab!");
             }
+        }
+    }
+
+
+    public void RefreshRecruitment()
+    {
+        Debug.Log("Refreshing recruitment slots."); // Add this line for tracking.
+
+        // Validate references before proceeding
+        if (!ValidateReferences())
+        {
+            return;
+        }
+
+        // Clear existing agent slots in the UI
+        ClearAgentSlots();
+
+        // Assign agents to recruitment slots
+        for (int i = 0; i < recruitmentSlots.Count; i++)
+        {
+            GameObject agentCard = Instantiate(agentUIPrefab);
+            AssignAgentToSlot(agentCard, i);
+
+            var agentPanel = agentCard.GetComponentInChildren<AgentPanel>();
+            if (agentPanel != null)
+            {
+                agentPanel.Initialize(recruitmentSlots[i]);
+            }
+            else
+            {
+                Debug.LogError("AgentPanel component is missing on the agent card prefab!");
+            }
+
+            var activator = agentCard.GetComponentInChildren<AgentFileActivator>();
+            if (activator != null)
+            {
+                activator.agentUI = agentCard.GetComponent<AgentUI>();
+                activator.Initialize(recruitmentSlots[i]);
+            }
+            else
+            {
+                Debug.LogError("AgentFileActivator is missing on the agent card prefab!");
+            }
+        }
+    }
+
+    private void ClearAgentSlots()
+    {
+        // Clear each agent slot to make room for new agents
+        foreach (Transform slot in new[] { agentSlot1, agentSlot2, agentSlot3 })
+        {
+            if (slot.childCount > 0)
+            {
+                foreach (Transform child in slot)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+    }
+
+    private void AssignAgentToSlot(GameObject agentCard, int slotIndex)
+    {
+        switch (slotIndex)
+        {
+            case 0:
+                agentCard.transform.SetParent(agentSlot1, false);
+                break;
+            case 1:
+                agentCard.transform.SetParent(agentSlot2, false);
+                break;
+            case 2:
+                agentCard.transform.SetParent(agentSlot3, false);
+                break;
+            default:
+                Debug.LogWarning("Invalid slot index for agent card.");
+                break;
         }
     }
 
@@ -103,21 +183,13 @@ public class AgentGenerator : MonoBehaviour
             return null;
         }
 
-        // Create a new AgentSO instance
+        // Create a new, unique instance of AgentSO each time
         AgentSO agent = ScriptableObject.CreateInstance<AgentSO>();
-        agent.statTemplate = statTemplate;
-
-        // Initialize stats and skills
-        agent.InitializeStats();
-        agent.InitializeSkills();
-
-        // Assign basic properties
+        agent.statTemplate = statTemplate; // Assign the statTemplate immediately after creation3
         agent.agentName = GenerateRandomName();
-        agent.agentSex = Random.value > 0.5f ? "Male" : "Female";
-        agent.agentAge = Random.Range(18, 65);
 
-        // Assign archetype-specific attributes and skills
-        AssignAttributesAndSkills(agent, archetype);
+        agent.InitializeAgent();
+        Debug.Log($"Generating agent: {agent.agentName} with template: {statTemplate.name}");
 
         // Link the AgentSO to the AgentPanel
         if (agentPanel != null)
@@ -132,69 +204,12 @@ public class AgentGenerator : MonoBehaviour
         return agent;
     }
 
-    private string GetRandomArchetype()
-    {
-        string[] archetypes = { "Physical", "Athletic", "Combat", "Academic", "Charismatic" };
-        return archetypes[Random.Range(0, archetypes.Length)];
-    }
 
-    private void AssignAttributesAndSkills(AgentSO agent, string archetype)
-    {
-        switch (archetype)
-        {
-            case "Physical":
-                agent.currentStats["Strength"] = Roll3d6() * 5;
-                agent.currentStats["Dexterity"] = Roll3d6() * 5;
-                agent.currentStats["Intelligence"] = Roll2d6Plus6() * 5;
-                break;
-            case "Athletic":
-                agent.currentStats["Dexterity"] = Roll3d6() * 5;
-                agent.currentStats["Constitution"] = Roll3d6() * 5;
-                agent.currentStats["Education"] = Roll2d6Plus6() * 5;
-                break;
-            case "Combat":
-                agent.currentStats["Dexterity"] = Roll3d6() * 5;
-                agent.currentStats["Strength"] = Roll3d6() * 5;
-                agent.currentStats["Appearance"] = Roll2d6Plus6() * 5;
-                break;
-            case "Academic":
-                agent.currentStats["Intelligence"] = Roll3d6() * 5;
-                agent.currentStats["Education"] = Roll3d6() * 5;
-                agent.currentStats["Dexterity"] = Roll2d6Plus6() * 5;
-                break;
-            case "Charismatic":
-                agent.currentStats["Appearance"] = Roll3d6() * 5;
-                agent.currentStats["Dexterity"] = Roll3d6() * 5;
-                agent.currentStats["Strength"] = Roll2d6Plus6() * 5;
-                break;
-        }
-    }
-
-    private int Roll3d6() => Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7);
-    private int Roll2d6Plus6() => Random.Range(1, 7) + Random.Range(1, 7) + 6;
-
-    private string GenerateRandomName()
-    {
-        string[] firstNames = { "John", "Alice", "Robert", "Diana", "Michael", "Susan" };
-        string[] lastNames = { "Smith", "Brown", "Johnson", "Taylor", "White", "Lee" };
-        return $"{firstNames[Random.Range(0, firstNames.Length)]} {lastNames[Random.Range(0, lastNames.Length)]}";
-    }
-
-    /// <summary>
-    /// Validates all critical references before execution.
-    /// </summary>
-    /// <returns>True if all references are valid, otherwise false.</returns>
     private bool ValidateReferences()
     {
         if (statTemplate == null)
         {
             Debug.LogError("StatTemplate is not assigned in the AgentGenerator.");
-            return false;
-        }
-
-        if (recruitmentGrid == null)
-        {
-            Debug.LogError("RecruitmentGrid is not assigned in the AgentGenerator.");
             return false;
         }
 
@@ -204,12 +219,25 @@ public class AgentGenerator : MonoBehaviour
             return false;
         }
 
-        if (agentFileContainer == null)
+        if (agentSlot1 == null || agentSlot2 == null || agentSlot3 == null)
         {
-            Debug.LogError("AgentFileContainer is not assigned or found.");
+            Debug.LogError("Agent slots are not assigned in the AgentGenerator. Please assign them in the Inspector.");
             return false;
         }
 
         return true;
+    }
+
+    private string GetRandomArchetype()
+    {
+        string[] archetypes = { "Physical", "Athletic", "Combat", "Academic", "Charismatic" };
+        return archetypes[Random.Range(0, archetypes.Length)];
+    }
+
+    private string GenerateRandomName()
+    {
+        string[] firstNames = { "John", "Alice", "Robert", "Diana", "Michael", "Susan" };
+        string[] lastNames = { "Smith", "Brown", "Johnson", "Taylor", "White", "Lee" };
+        return $"{firstNames[Random.Range(0, firstNames.Length)]} {lastNames[Random.Range(0, lastNames.Length)]}";
     }
 }
