@@ -80,7 +80,7 @@ public class Artifact : MonoBehaviour
         bool sanityRoll = RollForSanityLoss(researcher);
         if (sanityRoll)
         {
-            researcher.UpdateStatValue("Sanity", researcher.GetStatValue("Sanity") - 1);
+            researcher.UpdateStat("Sanity", researcher.GetStatValue("Sanity") - 1);
             GameLogger.Log($"Researcher {researcher.agentName} lost 1 sanity point!");
         }
 

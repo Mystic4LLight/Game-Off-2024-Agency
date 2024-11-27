@@ -13,16 +13,16 @@ public class AgentMenu : MonoBehaviour
             AgentSO agent = agentPanel.agentSO;
             if (agent != null)
             {
-                Debug.Log($"Agent selected: {agent.agentName}");
+                GameLogger.Log($"Agent selected: {agent.agentName}");
             }
             else
             {
-                Debug.LogWarning("No agent assigned to the panel.");
+                GameLogger.LogWarning("No agent assigned to the panel.");
             }
         }
         else
         {
-            Debug.LogWarning("AgentPanel is not assigned in AgentMenu.");
+            GameLogger.LogWarning("AgentPanel is not assigned in AgentMenu.");
         }
     }
 }

@@ -14,7 +14,7 @@ public class AgentFileActivator : MonoBehaviour
         }
         else
         {
-            Debug.LogError("AgentUI reference is missing in AgentFileActivator.");
+            GameLogger.LogError("AgentUI reference is missing in AgentFileActivator.");
         }
     }
 
@@ -32,12 +32,12 @@ public class AgentFileActivator : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Another Agent File is already open. Please close it first.");
+                GameLogger.LogWarning("Another Agent File is already open. Please close it first.");
             }
         }
         else
         {
-            Debug.LogWarning("AgentUI or AgentFileManager is not properly assigned.");
+            GameLogger.LogWarning("AgentUI or AgentFileManager is not properly assigned.");
         }
     }
 

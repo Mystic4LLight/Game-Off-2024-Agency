@@ -19,7 +19,7 @@ public class AgentFileManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("AgentUI reference is missing in AgentFileActivator.");
+            GameLogger.LogError("AgentUI reference is missing in AgentFileActivator.");
         }
     }
 

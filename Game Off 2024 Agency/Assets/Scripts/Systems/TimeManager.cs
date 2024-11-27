@@ -59,7 +59,7 @@ public class TimeManager : MonoBehaviour
             currentDay++;
 
             // Trigger the daily recruitment refresh when a new day begins
-            Debug.Log($"Advancing to day {currentDay}.");
+            GameLogger.Log($"Advancing to day {currentDay}.");
             RefreshRecruitment();
         }
 
@@ -96,12 +96,12 @@ public class TimeManager : MonoBehaviour
     {
         if (agentGenerator != null)
         {
-            Debug.Log("Refreshing recruitment slots for the new day.");
+            GameLogger.Log("Refreshing recruitment slots for the new day.");
             agentGenerator.RefreshRecruitment();
         }
         else
         {
-            Debug.LogWarning("AgentGenerator reference is missing in TimeManager.");
+            GameLogger.LogWarning("AgentGenerator reference is missing in TimeManager.");
         }
     }
 

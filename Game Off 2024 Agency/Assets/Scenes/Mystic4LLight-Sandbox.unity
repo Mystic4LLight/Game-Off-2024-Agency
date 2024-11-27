@@ -1502,10 +1502,10 @@ MonoBehaviour:
   mouseEdgeScrollSpeed: 10
   dragSpeed: 0.5
   edgeBoundary: 10
-  minX: -20
-  maxX: 20
-  minY: -12.5
-  maxY: -2.5
+  minX: -11
+  maxX: 11
+  minY: -15
+  maxY: 0
   zoomSpeed: 2
   minZoom: 2
   maxZoom: 10
@@ -4356,57 +4356,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1249938796}
-  - {fileID: 1789228365}
   - {fileID: 358192762}
   - {fileID: 1022289917}
   - {fileID: 5664409}
   - {fileID: 1819080810}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1789228363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1789228365}
-  - component: {fileID: 1789228364}
-  m_Layer: 0
-  m_Name: TestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1789228364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789228363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a35f52c6446fa58499906d7bb4d62da2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentUI: {fileID: 144391868677946297, guid: 8dcb39257c327fe419a3ab782ee99611, type: 3}
---- !u!4 &1789228365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789228363}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 763.59875, y: 329.74997, z: 1.320385}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1777009711}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1818495095 stripped
 RectTransform:

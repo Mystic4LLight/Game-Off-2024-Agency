@@ -15,11 +15,11 @@ public class ActiveAgentsMenu : MonoBehaviour
 
                 if (agent != null)
                 {
-                    Debug.Log($"Active Agent: {agent.agentName}");
+                    GameLogger.Log($"Active Agent: {agent.agentName}");
                 }
                 else
                 {
-                    Debug.LogWarning("No AgentSO assigned to this panel.");
+                    GameLogger.LogWarning("No AgentSO assigned to this panel.");
                 }
             }
         }

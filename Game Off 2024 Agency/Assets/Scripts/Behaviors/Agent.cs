@@ -15,11 +15,11 @@ public class Agent : MonoBehaviour
     {
         if (agentSO == null)
         {
-            Debug.LogError("AgentSO is not assigned!");
+            GameLogger.LogError("AgentSO is not assigned!");
             return;
         }
 
-        Debug.Log($"Initializing Agent: {agentSO.agentName}");
+        GameLogger.Log($"Initializing Agent: {agentSO.agentName}");
         InitializeAgentStats();
     }
 
@@ -30,7 +30,7 @@ public class Agent : MonoBehaviour
     {
         if (agentSO.statTemplate == null)
         {
-            Debug.LogError($"AgentSO '{agentSO.agentName}' does not have a stat template assigned.");
+            GameLogger.LogError($"AgentSO '{agentSO.agentName}' does not have a stat template assigned.");
             return;
         }
 
@@ -49,7 +49,7 @@ public class Agent : MonoBehaviour
             return agentSO.currentStats[statName];
         }
 
-        Debug.LogWarning($"Stat '{statName}' not found for Agent '{agentSO.agentName}'.");
+        GameLogger.LogWarning($"Stat '{statName}' not found for Agent '{agentSO.agentName}'.");
         return 0;
     }
 
@@ -63,11 +63,11 @@ public class Agent : MonoBehaviour
         if (agentSO.currentStats.ContainsKey(statName))
         {
             agentSO.UpdateStat(statName, newValue);
-            Debug.Log($"Updated {statName} for Agent {agentSO.agentName} to {newValue}.");
+            GameLogger.Log($"Updated {statName} for Agent {agentSO.agentName} to {newValue}.");
         }
         else
         {
-            Debug.LogWarning($"Stat '{statName}' not found for Agent '{agentSO.agentName}'.");
+            GameLogger.LogWarning($"Stat '{statName}' not found for Agent '{agentSO.agentName}'.");
         }
     }
 
@@ -83,7 +83,7 @@ public class Agent : MonoBehaviour
             return agentSO.skills[skillName];
         }
 
-        Debug.LogWarning($"Skill '{skillName}' not found for Agent '{agentSO.agentName}'.");
+        GameLogger.LogWarning($"Skill '{skillName}' not found for Agent '{agentSO.agentName}'.");
         return 0;
     }
 
@@ -95,7 +95,7 @@ public class Agent : MonoBehaviour
     {
         if (effect == null)
         {
-            Debug.LogWarning("Effect is null, cannot apply.");
+            GameLogger.LogWarning("Effect is null, cannot apply.");
             return false;
         }
 
@@ -108,7 +108,7 @@ public class Agent : MonoBehaviour
 
             // If you need to add the effect, do it after ensuring ApplyEffect() executes
             activeEffects.Add(effect);
-            Debug.Log($"Effect '{effectSO.name}' applied to Agent '{agentSO.agentName}'.");
+            GameLogger.Log($"Effect '{effectSO.name}' applied to Agent '{agentSO.agentName}'.");
             return true;
         }
 
@@ -126,11 +126,11 @@ public class Agent : MonoBehaviour
         if (activeEffects.Contains(effect))
         {
             activeEffects.Remove(effect);
-            Debug.Log($"Effect '{effectSO.name}' removed from Agent '{agentSO.agentName}'.");
+            GameLogger.Log($"Effect '{effectSO.name}' removed from Agent '{agentSO.agentName}'.");
         }
         else
         {
-            Debug.LogWarning($"Effect '{effectSO.name}' not found on Agent '{agentSO.agentName}'.");
+            GameLogger.LogWarning($"Effect '{effectSO.name}' not found on Agent '{agentSO.agentName}'.");
         }
     }
 
@@ -145,7 +145,7 @@ public class Agent : MonoBehaviour
         }
 
         //activeEffects.RemoveAll(effect => effect.IsExpired);
-        Debug.Log($"Updated effects for Agent '{agentSO.agentName}'.");
+        GameLogger.Log($"Updated effects for Agent '{agentSO.agentName}'.");
     }
 
     /// <summary>
@@ -159,11 +159,11 @@ public class Agent : MonoBehaviour
 
         if (currentConstitution - damage <= 0)
         {
-            Debug.Log($"Agent '{agentSO.agentName}' has died due to damage.");
+            GameLogger.Log($"Agent '{agentSO.agentName}' has died due to damage.");
         }
         else
         {
-            Debug.Log($"Agent '{agentSO.agentName}' took {damage} damage. Remaining Constitution: {currentConstitution - damage}");
+            GameLogger.Log($"Agent '{agentSO.agentName}' took {damage} damage. Remaining Constitution: {currentConstitution - damage}");
         }
     }
 
@@ -183,7 +183,7 @@ public class Agent : MonoBehaviour
     public void ResetAgentStatsAndSkills()
     {
         agentSO.ResetStatsAndSkills();
-        Debug.Log($"Agent {agentSO.agentName}'s stats and skills have been reset.");
+        GameLogger.Log($"Agent {agentSO.agentName}'s stats and skills have been reset.");
     }
 
     public int GetAffectedStatValue(string statName)

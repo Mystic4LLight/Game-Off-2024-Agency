@@ -2,33 +2,19 @@ using UnityEngine;
 
 public static class GameLogger
 {
-    // Toggle to enable or disable logs globally
-    public static bool EnableLogging = false;
-
-    [System.Diagnostics.Conditional("UNITY_EDITOR")]
     public static void Log(string message)
     {
-        if (EnableLogging)
-        {
-            Debug.Log(message);
-        }
+        // Ensure this does not call itself
+        Debug.Log(message); // This must use Unity's Debug.Log directly
     }
 
-    [System.Diagnostics.Conditional("UNITY_EDITOR")]
     public static void LogWarning(string message)
     {
-        if (EnableLogging)
-        {
-            Debug.LogWarning(message);
-        }
+        Debug.LogWarning(message);
     }
 
-    [System.Diagnostics.Conditional("UNITY_EDITOR")]
     public static void LogError(string message)
     {
-        if (EnableLogging)
-        {
-            Debug.LogError(message);
-        }
+        Debug.LogError(message);
     }
 }

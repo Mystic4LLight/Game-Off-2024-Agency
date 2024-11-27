@@ -39,13 +39,13 @@ public class AgentManager : MonoBehaviour
     public void RemoveFromRecruitmentPool(AgentSO agentSO)
     {
         agentsSO.Remove(agentSO); // Remove from available agents
-        Debug.Log($"Removed {agentSO.agentName} from the recruitment pool.");
+        GameLogger.Log($"Removed {agentSO.agentName} from the recruitment pool.");
     }
 
     public void RejectAgent(AgentSO agentSO)
     {
         AgentManager.Instance.RemoveFromRecruitmentPool(agentSO);
-        Debug.Log($"Rejected Agent: {agentSO.agentName}");
+        GameLogger.Log($"Rejected Agent: {agentSO.agentName}");
         recruitmentPanel.RefreshPanel();
     }
 

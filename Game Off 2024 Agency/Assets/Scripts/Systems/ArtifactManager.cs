@@ -58,7 +58,7 @@ public class ArtifactManager : MonoBehaviour
             // Log the contents of the artifact catalog.
             /*     foreach (var artifact in agencyArtifactCatalog)
                 {
-                    Debug.Log("<color=blue>Artifact: " + artifact.name + " Address: " + artifact.GetInstanceID() + "</color>");
+                    GameLogger.Log("<color=blue>Artifact: " + artifact.name + " Address: " + artifact.GetInstanceID() + "</color>");
                 }   
            */
             //=======================

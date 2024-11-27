@@ -15,7 +15,7 @@ public class RecruitAgentButton : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("RecruitButton is not assigned!");
+            GameLogger.LogWarning("RecruitButton is not assigned!");
         }
 
         if (agentManager == null)
@@ -31,11 +31,11 @@ public class RecruitAgentButton : MonoBehaviour
             // Recruit the agent via AgentManager
             agentManager.RecruitAgent(agentPanel.agentSO);
 
-            Debug.Log($"Recruited Agent: {agentPanel.agentSO.agentName}");
+            GameLogger.Log($"Recruited Agent: {agentPanel.agentSO.agentName}");
         }
         else
         {
-            Debug.LogWarning("AgentPanel or AgentSO is not assigned.");
+            GameLogger.LogWarning("AgentPanel or AgentSO is not assigned.");
         }
     }
 }

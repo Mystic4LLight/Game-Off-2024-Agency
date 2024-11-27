@@ -33,7 +33,7 @@ public class ArrangeRoomsEditorTool : EditorWindow
             }
             else
             {
-                Debug.LogWarning("Please assign a Room Grid Container.");
+                GameLogger.LogWarning("Please assign a Room Grid Container.");
             }
         }
     }
@@ -61,6 +61,6 @@ public class ArrangeRoomsEditorTool : EditorWindow
             }
         }
 
-        Debug.Log("Rooms arranged successfully!");
+        GameLogger.Log("Rooms arranged successfully!");
     }
 }
