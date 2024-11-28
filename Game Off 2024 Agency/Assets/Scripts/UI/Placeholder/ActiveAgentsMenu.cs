@@ -1,29 +1,27 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class ActiveAgentsMenu : MonoBehaviour
 {
-    [SerializeField] private List<UIAgentFile> agentPanels = new List<UIAgentFile>();
-    void OnEnable(){
-        FillAgents();
-    }
-    void Start()
-    {
-        
-    }
+    public AgentPanel[] agentPanels; // Array of agent panels
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
-    }
-    public void FillAgents(){
-        for (int i = 0; i < AgentManager.Instance.activeAgents.Count; i++){
-            //agentPanels[i].agentSO = AgentManager.Instance.activeAgents[i].getAgentSO();
-            //if (agentPanels[i].getAgentSO != null){
-                //agentPanels[i].fillPanel();
-            //}
+        foreach (var agentPanel in agentPanels)
+        {
+            if (agentPanel != null)
+            {
+                // Access the AgentSO using the public property
+                AgentSO agent = agentPanel.agentSO;
+
+                if (agent != null)
+                {
+                    GameLogger.Log($"Active Agent: {agent.agentName}");
+                }
+                else
+                {
+                    GameLogger.LogWarning("No AgentSO assigned to this panel.");
+                }
+            }
         }
     }
-
 }

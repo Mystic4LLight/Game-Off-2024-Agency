@@ -12,7 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda66ea8e0714aa4297cd5305f216a26, type: 3}
   m_Name: Artifact_CupOfHealingSO
   m_EditorClassIdentifier: 
+  unidentifiedName: Mysterious Artifact
   displayName: Cup of healing
   description: Take this artifact to the mission to protect agent from weak poison.
     Or leave it in the store to heal injured agents on base.
   profilePhoto: {fileID: -7160911560061693589, guid: c83eafd421b97db4f969918cafee9b12, type: 3}
+  placeholderPhoto: {fileID: 0}
+  researchTimeRequired: 168
+  isIdentified: 0
+  maxSanityLoss: 5
+  requiredSkillForAnalysis: {fileID: 0}
+  hasCurse: 0
+  curseDescription: 
+  hasBonusEffect: 0
+  bonusEffectDescription: 
+  sanityEffectOnAgent: 0
+  leadsToNewTool: 0
+  toolDescription: 
+  potentialMissionEffects:
+  - effectSO: {fileID: 11400000, guid: 62d62f69a539f4948b097a22b491e5d6, type: 2}
+    duration: 1
+    statModifiers:
+    - statName: SAN
+      delta: -1
+      multiplier: 1
+    - statName: HP
+      delta: 5
+      multiplier: 1
+  - effectSO: {fileID: 11400000, guid: ab40ef35fedcba445a56a9e56ad46724, type: 2}
+    duration: 1
+    statModifiers:
+    - statName: LUCK
+      delta: 0
+      multiplier: 0.9

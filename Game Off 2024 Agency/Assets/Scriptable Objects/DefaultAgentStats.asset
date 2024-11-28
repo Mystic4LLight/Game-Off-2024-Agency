@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a31e0f7ceb6a3746a5172fc8c3f5290, type: 3}
+  m_Name: DefaultAgentStats
+  m_EditorClassIdentifier: 
+  baseStats:
+  - name: Strength
+    defaultValue: 50
+  - name: Constitution
+    defaultValue: 50
+  - name: Size
+    defaultValue: 65
+  - name: Dexterity
+    defaultValue: 50
+  - name: Appearance
+    defaultValue: 50
+  - name: Education
+    defaultValue: 65
+  - name: Intelligence
+    defaultValue: 65
+  - name: Power
+    defaultValue: 50
+  barStats:
+  - name: HP
+    defaultValue: 11
+    maxValue: 11
+  - name: MP
+    defaultValue: 10
+    maxValue: 10
+  - name: San
+    defaultValue: 50
+    maxValue: 50
+  - name: Luck
+    defaultValue: 50
+    maxValue: 50
+  abilities:
+  - name: Accounting
+    defaultValue: 10
+  - name: Anthropology
+    defaultValue: 5
+  - name: Appraise
+    defaultValue: 5
+  - name: Archaeology
+    defaultValue: 5
+  - name: Charm
+    defaultValue: 15
+  - name: Climb
+    defaultValue: 20
+  - name: ComputerUse
+    defaultValue: 30
+  - name: CreditRating
+    defaultValue: 20
+  - name: CthulhuMythos
+    defaultValue: 0
+  - name: Disguise
+    defaultValue: 5
+  - name: Dodge
+    defaultValue: 25
+  - name: DriveAuto
+    defaultValue: 20
+  - name: ElecRepair
+    defaultValue: 10
+  - name: Electronics
+    defaultValue: 20
+  - name: FastTalk
+    defaultValue: 5
+  - name: Fighting(Brawl)
+    defaultValue: 25
+  - name: FirstAid
+    defaultValue: 10
+  - name: History
+    defaultValue: 20
+  - name: Intimidate
+    defaultValue: 15
+  - name: Jump
+    defaultValue: 20
+  - name: Law
+    defaultValue: 5
+  - name: LibraryUse
+    defaultValue: 25
+  - name: Listen
+    defaultValue: 25
+  - name: Locksmith
+    defaultValue: 1
+  - name: MechRepair
+    defaultValue: 10
+  - name: Medicine
+    defaultValue: 10
+  - name: NaturalWorld
+    defaultValue: 10
+  - name: Navigate
+    defaultValue: 10
+  - name: Occult
+    defaultValue: 5
+  - name: OpHvMachine
+    defaultValue: 1
+  - name: Persuade
+    defaultValue: 10
+  - name: Pilot
+    defaultValue: 1
+  - name: Psychology
+    defaultValue: 10
+  - name: Psychanalysis
+    defaultValue: 1
+  - name: SleightOfHand
+    defaultValue: 10
+  - name: SpotHidden
+    defaultValue: 25
+  - name: Stealth
+    defaultValue: 20
+  - name: Swim
+    defaultValue: 20
+  - name: Throw
+    defaultValue: 20
+  - name: Track
+    defaultValue: 10
+  specializations:
+  - type: 0
+    name: Art/Craft
+    defaultValue: 5
+  - type: 0
+    name: Art/Craft2
+    defaultValue: 0
+  - type: 0
+    name: Art/Craft3
+    defaultValue: 0
+  - type: 4
+    name: Language(Other)
+    defaultValue: 1
+  - type: 4
+    name: Language2
+    defaultValue: 0
+  - type: 4
+    name: Language(Own)
+    defaultValue: 50
+  - type: 3
+    name: Science
+    defaultValue: 20
+  - type: 3
+    name: Science2
+    defaultValue: 0
+  - type: 3
+    name: Science3
+    defaultValue: 0
+  - type: 1
+    name: Fighting2
+    defaultValue: 0
+  - type: 1
+    name: Fighting3
+    defaultValue: 0
+  - type: 2
+    name: Firearms3
+    defaultValue: 0
+  - type: 6
+    name: Survival
+    defaultValue: 0
+  - type: 5
+    name: Other1
+    defaultValue: 0
+  - type: 5
+    name: Other2
+    defaultValue: 0
+  - type: 5
+    name: Other3
+    defaultValue: 0
+  - type: 5
+    name: Other4
+    defaultValue: 0
+  - type: 5
+    name: Other5
+    defaultValue: 0
