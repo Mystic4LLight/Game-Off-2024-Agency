@@ -1,42 +1,92 @@
 using UnityEngine;
 
-
-// Class of Effect apply to the Agent or the Environment (rooms)
 public class Effect
 {
-    [SerializeField] public EffectSO effectSO;
+    public EffectSO effectSO { get; private set; }
+    public AgentSO agentSO { get; private set; }
 
-    [SerializeField] private float expirationTime;
+    public int intensity;  // New field to resolve the error in EffectSO_Cursed
 
-    public string DisplayName => effectSO != null ? effectSO.displayName : "Default DisplayName";
-    public string Description => effectSO != null ? effectSO.description : "Default Description";
-    public Sprite ProfilePhoto => effectSO != null ? effectSO.profilePhoto : null;
-    public float Duration => effectSO != null ? effectSO.duration : 0f;
-    public float TimeLeftToExpiration => GameTime() - expirationTime;
+    public bool IsActive { get; private set; }
 
-    // IsExpired tells if the effect is expired
-    public bool IsExpired => GameTime() >= expirationTime;
-
-    // This is template function, it should be replaced with the real game time
-    private float GameTime()
+    public Effect(EffectSO effectSO, AgentSO agentSO)
     {
-        return 10;
+
+        this.effectSO = effectSO;
+        this.agentSO = agentSO;
+        this.IsActive = true;
+
+        // Initialize intensity or any other property as needed
+        intensity = 1; // Default value or set dynamically based on the effect
     }
 
-    public bool ApplyEffect(Effect effect, Agent agent)
+    // New getter method to resolve the error in Agent.cs
+    public EffectSO GetEffectSO()
     {
-        expirationTime = GameTime() + (effectSO != null ? effectSO.duration : 0f);
-
-        // Special effects appied by the effectSO
-        return effectSO != null && effectSO.ApplyEffect(effect, agent);
+        return effectSO;
     }
 
-    // Constructor with incoming EffectSO parameter
-    public Effect(EffectSO inEffectSO)
+    public string DisplayName => effectSO != null ? effectSO.effectName : "Unknown Effect";
+    public string Description => effectSO != null ? effectSO.description : "No Description Available";
+    public int TimeLeftToExpiration => 0; // Set an appropriate value if time-based effects are needed in the future.
+    public Sprite Icon => effectSO != null ? effectSO.icon : null; // Assuming `effectSO` has an icon.
+
+
+    public void ApplyEffect()
     {
-        effectSO = inEffectSO;
+        if (effectSO == null || agentSO == null)
+        {
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot apply effect.");
+            return;
+        }
+        Sprite effectIcon = effectSO.icon;
+
+        effectSO.ApplyEffect(agentSO, this);
     }
 
-    public void UpdateEffect(Agent agent) => effectSO.UpdateEffect(agent);
+    public void CheckForRemoval()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot check for removal.");
+            return;
+        }
 
+        if (effectSO.IsRemovable(agentSO))
+        {
+            GameLogger.Log($"Effect '{effectSO.effectName}' is removable.");
+            RemoveEffect();
+        }
+    }
+
+    public void RemoveEffect()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot remove effect.");
+            return;
+        }
+
+        effectSO.RemoveEffect(agentSO, this);
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+    }
+
+    /// <summary>
+    /// Updates the effect for the assigned agent.
+    /// </summary>
+    public void UpdateEffect()
+    {
+        if (effectSO == null || agentSO == null)
+        {
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot update effect.");
+            return;
+        }
+
+        // Add your custom update logic here if required
+        GameLogger.Log($"Updating effect '{effectSO.effectName}' for agent '{agentSO.agentName}'.");
+    }
 }

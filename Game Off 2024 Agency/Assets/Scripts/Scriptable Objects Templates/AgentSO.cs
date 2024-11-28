@@ -1,20 +1,23 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-#if UNITY_EDITOR   // to react on change in Unity Editor - AgentStarTemplateSO field of AgentSO
-using UnityEditor;
-#endif
+using System;
 
 [CreateAssetMenu(fileName = "AgentSO", menuName = "Scriptable Objects/AgentSO")]
 public class AgentSO : ScriptableObject
 {
-    public new string name;
+    [Header("Basic Information")]
+    public string agentName;
+    public string occupation;
+    public int agentAge;
+    public string agentSex;
+    public string backstory;
     public string description;
-
-    public AgentSkill requiredSkillForAnalysis; // The skill required for this artifact's analysis
-
     public Sprite profilePhoto;
-    [Header("Stats")]
+
+    [Header("Characteristics")]
+    public Dictionary<string, int> currentStats = new Dictionary<string, int>();
+
+    [Header("Base Stats")]
     public int strength;
     public int constitution;
     public int size;
@@ -23,166 +26,318 @@ public class AgentSO : ScriptableObject
     public int education;
     public int intelligence;
     public int power;
+    public int sanity;
+    public int hp;
+    public int mp;
+    public int luck;
+
+    [Header("Bar Stats")]
+    public Dictionary<string, BarStatInstance> barStats = new Dictionary<string, BarStatInstance>();
+
     [Header("Abilities")]
-    public int accounting;
-    public int anthropology;
-    public int appraise;
-    public int archaeology;
-    public int artCraft1;
-    public int artCraft2;
-    public int artCraft3;
-    public int charm;
-    public int climb;
-    public int computerUse;
-    public int creditRating;
-    public int cthulhuMythos;
-    public int disguise;
-    public int dodge;
-    public int driveAuto;
-    public int elecRepair;
-    public int electronics;
-    public int fastTalk;
-    public int fightingBrawl;
-    public int fighting2;
-    public int fighting3;
-    public int firearmsAiming;
-    public int firearmsHipshot;
-    public int firearms3;
-    public int firstAid;
-    public int history;
-    public int intimidate;
-    public int jump;
-    public int languageOther1;
-    public int languageOther2;
-    public int languageOwn;
-    public int law;
-    public int libraryUse;
-    public int listen;
-    public int locksmith;
-    public int mechRepair;
-    public int medicine;
-    public int naturalWorld;
-    public int navigate;
-    public int occult;
-    public int opHvMachine;
-    public int persuade;
-    public int pilot;
-    public int psychology;
-    public int psychanalysis;
-    public int science1;
-    public int science2;
-    public int science3;
-    public int sleightOfHand;
-    public int spotHidden;
-    public int stealth;
-    public int survival1;
-    public int swim;
-    public int throw1;
-    public int track;
-    public int other1;
-    public int other2;
-    public int other3;
-    public int other4;
-    public int other5;
+    public Dictionary<string, int> skills;
 
-    // (Corris:) 
-    [Header("Stats")]
-    public AgentStatTemplateSO statTemplate; // Link to shadblon with list of Stat parameters
-    // All stats - edit in Unity Editor
-    public List<AgentStat> stats = new();
+    [Header("Effects")]
+    public List<EffectSO> activeEffects = new List<EffectSO>();
 
-    // 'Constructor' to add default properties to list
-    private void OnEnable()
+    [Header("Stat Template")]
+    public AgentStatTemplateSO statTemplate;
+
+    [Header("Specializations")]
+    public List<Specialization> specializations = new List<Specialization>();
+
+    [System.Serializable]
+    public class BarStatInstance
     {
-#if UNITY_EDITOR
-        if (statTemplate == null) // if template didn't set - try to find it in Unity
-        {
-            FindStatTemplate("AgentStatTemplateSO");
-        }
-#endif
-        if (statTemplate != null)
-            SyncStatsWithTemplate();
+        public float currentValue;
+        public float maxValue;
     }
 
-    // Update stats list if template was changed (need this as reaction to Template changed in Unity Editor
-    private void OnValidate()
+    public void InitializeFrom(AgentSO other)
     {
-        if (statTemplate != null)
+        if (other == null)
         {
-            SyncStatsWithTemplate();
-        }
-    }
-
-
-    private void SyncStatsWithTemplate()
-    {
-        // if list is empty, add all stats from template
-        if (stats.Count == 0)
-        {
-            InitializeStats();
+            GameLogger.LogWarning("Source AgentSO is null, cannot initialize.");
             return;
         }
 
-        // check if all stats from template are in list
-        foreach (var templateStat in statTemplate.stats)
+        agentName = other.agentName;
+        occupation = other.occupation;
+        agentAge = other.agentAge;
+        agentSex = other.agentSex;
+        backstory = other.backstory;
+        description = other.description;
+        profilePhoto = other.profilePhoto;
+
+        currentStats = new Dictionary<string, int>(other.currentStats);
+        barStats = new Dictionary<string, BarStatInstance>(other.barStats);
+        skills = new Dictionary<string, int>(other.skills);
+        activeEffects = new List<EffectSO>(other.activeEffects);
+        statTemplate = other.statTemplate;
+        specializations = new List<Specialization>(other.specializations);
+    }
+
+    public void InitializeAgent()
+    {
+        if (statTemplate == null)
         {
-            if (!stats.Any(s => s.template == templateStat))
+            GameLogger.LogError($"AgentSO '{name}' does not have a stat template assigned. Please assign one before initialization.");
+            return;
+        }
+
+        InitializeStats();
+        InitializeSkills();
+        InitializeSpecializations();
+    }
+
+    public void InitializeStats()
+    {
+        if (statTemplate == null)
+        {
+            GameLogger.LogError($"AgentSO '{name}' does not have a stat template assigned. Please assign one in the Inspector.");
+            return;
+        }
+
+        currentStats.Clear();
+
+        foreach (var stat in statTemplate.baseStats)
+        {
+            int value = (int)stat.defaultValue;
+            switch (stat.name)
             {
-                stats.Add(new AgentStat(templateStat)); // add new stat
+                case "Strength":
+                    strength = value;
+                    currentStats["Strength"] = value;
+                    break;
+                case "Constitution":
+                    constitution = value;
+                    currentStats["Constitution"] = value;
+                    break;
+                case "Size":
+                    size = value;
+                    currentStats["Size"] = value;
+                    break;
+                case "Dexterity":
+                    dexterity = value;
+                    currentStats["Dexterity"] = value;
+                    break;
+                case "Appearance":
+                    appearance = value;
+                    currentStats["Appearance"] = value;
+                    break;
+                case "Education":
+                    education = value;
+                    currentStats["Education"] = value;
+                    break;
+                case "Intelligence":
+                    intelligence = value;
+                    currentStats["Intelligence"] = value;
+                    break;
+                case "Power":
+                    power = value;
+                    currentStats["Power"] = value;
+                    break;
+                case "Sanity":
+                    sanity = value;
+                    currentStats["Sanity"] = value;
+                    break;
+                case "HP":
+                    hp = value;
+                    currentStats["HP"] = value;
+                    break;
+                case "MP":
+                    mp = value;
+                    currentStats["MP"] = value;
+                    break;
+                case "Luck":
+                    luck = value;
+                    currentStats["Luck"] = value;
+                    break;
+                default:
+                    GameLogger.LogWarning($"Stat '{stat.name}' is not recognized in AgentSO initialization.");
+                    break;
             }
         }
 
-        // remove stats that are not in template  (maybe they from old ersion of template)
-        stats.RemoveAll(s => !statTemplate.stats.Contains(s.template));
+        GameLogger.Log($"Initialized stats for AgentSO '{name}' using StatTemplate '{statTemplate.name}'");
     }
 
-    private void InitializeStats()
+    public void InitializeSkills()
     {
-        stats = statTemplate.stats
-            .Select(template => new AgentStat(template))
-            .ToList();
-    }
-
-#if UNITY_EDITOR
-    private void FindStatTemplate(string _AgentStatTemplateName)
-    {
-        // Looking for existing in Unity Editor  template AgentStatTemplateSO
-      //  string[] guids = AssetDatabase.FindAssets("t:AgentStatTemplateSO");
-        string[] guids = AssetDatabase.FindAssets("t:"+ _AgentStatTemplateName);
-        if (guids.Length > 0)
+        if (skills == null)
         {
-            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-            statTemplate = AssetDatabase.LoadAssetAtPath<AgentStatTemplateSO>(path);
+            skills = new Dictionary<string, int>();
+        }
+
+        string[] skillNames = new string[]
+        {
+            "Accounting", "Anthropology", "Appraise", "Archaeology", "History", "Law", "LibraryUse",
+            "Charm", "FastTalk", "Intimidate", "Persuade",
+            "Climb", "Dodge", "Jump", "SleightOfHand", "Stealth", "Swim", "Throw", "Track",
+            "Fighting(Brawl)", "Firearms (Aiming)", "Firearms(Hipshot)", "FirstAid",
+            "ElecRepair", "Electronics", "MechRepair", "Locksmith", "OpHvMachine",
+            "Medicine", "NaturalWorld", "Occult", "Psychanalysis", "Psychology", "Navigate",
+            "SpotHidden", "Listen",
+            "ComputerUse", "CthulhuMythos", "Pilot"
+        };
+
+        foreach (var skillName in skillNames)
+        {
+            if (!skills.ContainsKey(skillName))
+            {
+                skills[skillName] = 0;
+            }
+        }
+
+        if (statTemplate != null)
+        {
+            foreach (var templateSkill in statTemplate.abilities)
+            {
+                if (!skills.ContainsKey(templateSkill.name))
+                {
+                    skills[templateSkill.name] = (int)templateSkill.defaultValue;
+                }
+            }
         }
         else
         {
-       /*     // If not found - creating new one
-            statTemplate = ScriptableObject.CreateInstance<AgentStatTemplateSO>();
-            string assetPath = "Assets/AgentStatTemplateSO.asset";
-            AssetDatabase.CreateAsset(statTemplate, assetPath);
-            AssetDatabase.SaveAssets();
-            Debug.Log("Created new AgentStatTemplateSO at " + assetPath);   
-       */
+            GameLogger.LogWarning($"StatTemplate is not assigned for AgentSO: {agentName}. Skills will not be populated.");
+        }
+    }
+
+    public void InitializeSpecializations()
+    {
+        if (specializations != null && specializations.Count > 0)
+        {
+            GameLogger.Log("Specializations already initialized.");
+            return;
         }
 
-        EditorUtility.SetDirty(this); // Mark object as dirty to save changes
+        if (statTemplate == null || statTemplate.specializations == null || statTemplate.specializations.Count == 0)
+        {
+            GameLogger.LogWarning("StatTemplate or its specializations are null or empty.");
+            return;
+        }
+
+        specializations.Clear();
+
+        foreach (var templateSpec in statTemplate.specializations)
+        {
+            specializations.Add(new Specialization(
+                templateSpec.type,
+                templateSpec.name,
+                Mathf.FloorToInt(templateSpec.defaultValue)
+            ));
+        }
+
+        GameLogger.Log("Specializations initialized:");
+        foreach (var spec in specializations)
+        {
+            GameLogger.Log($"Name: {spec.name}, Type: {spec.type}, Value: {spec.value}");
+        }
     }
-#endif
 
-
-    [SerializeField] private AgentSkill primarySkill;
-    public Dictionary<AgentSkill, int> skills = new Dictionary<AgentSkill, int>();
-
-    // Initialize or set a skill level
-    public void SetSkillLevel(AgentSkill skill, int level)
+    public void UpdateStat(string statName, int value)
     {
-        skills[skill] = level;
+        if (currentStats.ContainsKey(statName))
+        {
+            currentStats[statName] = Mathf.Max(0, value);
+            GameLogger.Log($"{agentName}'s {statName} updated to {value}.");
+        }
+        else
+        {
+            GameLogger.LogWarning($"Stat {statName} not found for {agentName}.");
+        }
     }
 
-    // Get the skill level for a given skill type
-    public int GetSkillLevel(AgentSkill skill)
+    public void UpdateBarStat(string statName, float amount)
     {
-        return skills.ContainsKey(skill) ? skills[skill] : 0;
+        if (!barStats.ContainsKey(statName))
+        {
+            GameLogger.LogWarning($"Bar Stat {statName} not found for {agentName}.");
+            return;
+        }
+
+        barStats[statName].currentValue = Mathf.Clamp(
+            barStats[statName].currentValue + amount,
+            0,
+            barStats[statName].maxValue
+        );
     }
 
+    public bool HasAntidote()
+    {
+        return false;
+    }
+
+    public int IsInInfirmary()
+    {
+        return 0;
+    }
+
+    public bool HasUndergoneTherapy()
+    {
+        return false;
+    }
+
+    public bool HasRitualItem()
+    {
+        return false;
+    }
+
+    public void ResetStatsAndSkills()
+    {
+        InitializeStats();
+        InitializeSkills();
+        GameLogger.Log($"{agentName}'s stats and skills have been reset.");
+    }
+
+    public void AddSpecialization(Specialization.SpecializationType type, string name, int value = 0)
+    {
+        if (specializations.Exists(s => s.type == type && s.name == name))
+        {
+            GameLogger.LogWarning($"Specialization {name} of type {type} already exists for {agentName}.");
+            return;
+        }
+
+        specializations.Add(new Specialization(type, name, value));
+        GameLogger.Log($"Added specialization: {name} ({type}) with value {value} to {agentName}.");
+    }
+
+    public void UpdateSpecialization(string name, int value)
+    {
+        var specialization = specializations.Find(s => s.name == name);
+        if (specialization != null)
+        {
+            specialization.value = value;
+            GameLogger.Log($"Updated specialization: {name} to value {value}.");
+        }
+        else
+        {
+            GameLogger.LogWarning($"Specialization {name} not found for {agentName}.");
+        }
+    }
+
+    public bool HasSpecialization(string name)
+    {
+        return specializations.Exists(s => s.name == name);
+    }
+
+    public int GetStatValue(string statName)
+    {
+        if (currentStats.ContainsKey(statName))
+            return currentStats[statName];
+        GameLogger.LogWarning($"Stat {statName} not found for {agentName}");
+        return 0;
+    }
+
+    public float GetBarStatCurrentValue(string statName)
+    {
+        return barStats.ContainsKey(statName) ? barStats[statName].currentValue : 0;
+    }
+
+    public float GetBarStatMaxValue(string statName)
+    {
+        return barStats.ContainsKey(statName) ? barStats[statName].maxValue : 0;
+    }
 }

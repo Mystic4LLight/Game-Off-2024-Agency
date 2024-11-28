@@ -39,7 +39,7 @@ public class Mission : MonoBehaviour
         if (!_artifacts.Contains(artifact))
         {
             _artifacts.Add(artifact);
-            Debug.Log($"Artifact {artifact.name} was added to the mission.");
+            GameLogger.Log($"Artifact {artifact.name} was added to the mission.");
             return true;
         }
         else

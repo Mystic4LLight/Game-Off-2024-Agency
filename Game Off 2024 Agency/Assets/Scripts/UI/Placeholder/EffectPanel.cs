@@ -9,7 +9,7 @@ public class EffectPanel : MonoBehaviour
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI DescriptionText;
     public TextMeshProUGUI TimeLeftToExpiration;
-    public Image ProfileImage;
+    public Image Icon;
 
     public Effect Effect
     {
@@ -22,7 +22,7 @@ public class EffectPanel : MonoBehaviour
                 NameText.text = _effect.DisplayName;
                 DescriptionText.text = _effect.Description;
                 TimeLeftToExpiration.text = _effect.TimeLeftToExpiration.ToString();
-                ProfileImage.sprite = _effect.ProfilePhoto;
+                Icon.sprite = _effect.Icon;
             }
         }
     }
