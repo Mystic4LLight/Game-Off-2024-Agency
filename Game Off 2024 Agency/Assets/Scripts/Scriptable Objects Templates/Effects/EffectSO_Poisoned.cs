@@ -6,7 +6,7 @@ public class EffectSO_Poisoned : EffectSO
     public new Sprite icon;
     public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {
-        Debug.Log($"{effectName} applied to {agentSO.agentName}");
+        GameLogger.Log($"{effectName} applied to {agentSO.agentName}");
         // Logic to apply "Poisoned" effect, e.g., reduce health over time
         agentSO.UpdateBarStat("Health", -5);
     }
@@ -21,12 +21,12 @@ public class EffectSO_Poisoned : EffectSO
     {
         if (CanRemoveEffect(agentSO))
         {
-            Debug.Log($"{effectName} removed from {agentSO.agentName}");
+            GameLogger.Log($"{effectName} removed from {agentSO.agentName}");
             // Logic to stop poison damage
         }
         else
         {
-            Debug.LogWarning($"Cannot remove {effectName} from {agentSO.agentName}");
+            GameLogger.LogWarning($"Cannot remove {effectName} from {agentSO.agentName}");
         }
     }
 }

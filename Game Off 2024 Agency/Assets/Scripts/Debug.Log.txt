@@ -1,0 +1,543 @@
+AgentGenerator Awake called.
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentGenerator:Awake () (at Assets/Scripts/Systems/AgentGenerator.cs:23)
+
+Generating agents.
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:55)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Initialized stats for AgentSO '' using StatTemplate 'DefaultAgentStats'
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeStats () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:162)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:88)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Art/Craft, Type = ArtCraft, Value = 5
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Art/Craft2, Type = ArtCraft, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Art/Craft3, Type = ArtCraft, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Language(Other), Type = Language, Value = 1
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Language2, Type = Language, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Language(Own), Type = Language, Value = 50
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Science, Type = Science, Value = 20
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Science2, Type = Science, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Science3, Type = Science, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Fighting2, Type = Fighting, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Fighting3, Type = Fighting, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Firearms3, Type = Firearms, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Survival, Type = Survival, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Other1, Type = Other, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Other2, Type = Other, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Other3, Type = Other, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Other4, Type = Other, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specialization created: Name = Other5, Type = Other, Value = 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+Specialization:.ctor (Specialization/SpecializationType,string,int) (at Assets/Scripts/Systems/Specialization.cs:27)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:226)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Specializations initialized:
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:233)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Art/Craft, Type: ArtCraft, Value: 5
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Art/Craft2, Type: ArtCraft, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Art/Craft3, Type: ArtCraft, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Language(Other), Type: Language, Value: 1
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Language2, Type: Language, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Language(Own), Type: Language, Value: 50
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Science, Type: Science, Value: 20
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Science2, Type: Science, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Science3, Type: Science, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Fighting2, Type: Fighting, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Fighting3, Type: Fighting, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Firearms3, Type: Firearms, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Survival, Type: Survival, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Other1, Type: Other, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Other2, Type: Other, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Other3, Type: Other, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Other4, Type: Other, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Name: Other5, Type: Other, Value: 0
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentSO:InitializeSpecializations () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:236)
+AgentSO:InitializeAgent () (at Assets/Scripts/Scriptable Objects Templates/AgentSO.cs:90)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:210)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Generating agent: Susan White with template: DefaultAgentStats
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:212)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Initializing AgentPanel for Agent: Susan White
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:217)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+AgentPanel successfully initialized for Agent: Susan White
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:217)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Generating agent: Diana Johnson with template: DefaultAgentStats
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:212)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Initializing AgentPanel for Agent: Diana Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:217)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+AgentPanel successfully initialized for Agent: Diana Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:217)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Generating agent: John Johnson with template: DefaultAgentStats
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:212)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Initializing AgentPanel for Agent: John Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:217)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+AgentPanel successfully initialized for Agent: John Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+AgentGenerator:GenerateAgent (string,AgentPanel) (at Assets/Scripts/Systems/AgentGenerator.cs:217)
+AgentGenerator:GenerateAgents () (at Assets/Scripts/Systems/AgentGenerator.cs:74)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:47)
+
+Refreshing recruitment slots.
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:104)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+Initializing AgentPanel for Agent: Susan White
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:124)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+AgentPanel successfully initialized for Agent: Susan White
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:124)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+Initializing AgentPanel for Agent: Diana Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:124)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+AgentPanel successfully initialized for Agent: Diana Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:124)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+Initializing AgentPanel for Agent: John Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:124)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+AgentPanel successfully initialized for Agent: John Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+AgentGenerator:RefreshRecruitment () (at Assets/Scripts/Systems/AgentGenerator.cs:124)
+AgentGenerator:Start () (at Assets/Scripts/Systems/AgentGenerator.cs:50)
+
+Opened window: Recruitment
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+UIManager:OpenWindow (UnityEngine.GameObject) (at Assets/Scripts/UI/UIManager.cs:40)
+WorldButtonScript:OnWorldButtonClicked () (at Assets/Scripts/Systems/WorldButtonScript.cs:48)
+WorldButtonScript:Update () (at Assets/Scripts/Systems/WorldButtonScript.cs:24)
+
+World Window Opened!
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+WorldButtonScript:OnWorldButtonClicked () (at Assets/Scripts/Systems/WorldButtonScript.cs:50)
+WorldButtonScript:Update () (at Assets/Scripts/Systems/WorldButtonScript.cs:24)
+
+Initializing AgentPanel for Agent: Susan White
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+RecruitmentPanel:RefreshPanel () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:46)
+RecruitmentPanel:Start () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:17)
+
+AgentPanel successfully initialized for Agent: Susan White
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+RecruitmentPanel:RefreshPanel () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:46)
+RecruitmentPanel:Start () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:17)
+
+Initializing AgentPanel for Agent: Diana Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+RecruitmentPanel:RefreshPanel () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:46)
+RecruitmentPanel:Start () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:17)
+
+AgentPanel successfully initialized for Agent: Diana Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+RecruitmentPanel:RefreshPanel () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:46)
+RecruitmentPanel:Start () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:17)
+
+Initializing AgentPanel for Agent: John Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:114)
+RecruitmentPanel:RefreshPanel () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:46)
+RecruitmentPanel:Start () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:17)
+
+AgentPanel successfully initialized for Agent: John Johnson
+UnityEngine.Debug:Log (object)
+GameLogger:Log (string) (at Assets/Scripts/Systems/GameLogger.cs:8)
+AgentPanel:Initialize (AgentSO) (at Assets/Scripts/UI/Placeholder/AgentPanel.cs:174)
+RecruitmentPanel:RefreshPanel () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:46)
+RecruitmentPanel:Start () (at Assets/Scripts/UI/Placeholder/RecruitmentPanel.cs:17)
+

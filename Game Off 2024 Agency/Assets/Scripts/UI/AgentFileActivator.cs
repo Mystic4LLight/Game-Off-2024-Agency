@@ -3,60 +3,52 @@ using UnityEngine;
 public class AgentFileActivator : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] public GameObject agentFileUI; // UI to display agent file
-    public AgentPanel agentPanel; // Panel that handles agent UI
-    public AgentSO agentSO; // The agent to display
+    [SerializeField] public AgentUI agentUI; // Reference to the entire AgentUI prefab
 
-    private void Awake()
+    // Initialization method for setting the AgentSO
+    public void Initialize(AgentSO agentSO)
     {
-        // Ensure the agent panel is assigned
-        if (agentFileUI != null)
+        if (agentUI != null)
         {
-            agentPanel = agentFileUI.GetComponent<AgentPanel>();
-            if (agentPanel == null)
+            agentUI.agentSO = agentSO; // Assign the AgentSO to the AgentUI prefab
+        }
+        else
+        {
+            GameLogger.LogError("AgentUI reference is missing in AgentFileActivator.");
+        }
+    }
+
+    /// <summary>
+    /// Opens the Agent File UI by notifying the AgentFileManager.
+    /// </summary>
+    public void ShowAgentFile()
+    {
+        if (agentUI != null && AgentFileManager.Instance != null)
+        {
+            // Only open if no other agent file is currently open
+            if (!AgentFileManager.Instance.HasOpenAgentFile())
             {
-                Debug.LogError("AgentPanel component is missing on the assigned AgentFileUI GameObject.");
+                AgentFileManager.Instance.OpenAgentFile(agentUI);
+            }
+            else
+            {
+                GameLogger.LogWarning("Another Agent File is already open. Please close it first.");
             }
         }
         else
         {
-            Debug.LogError("AgentFileUI GameObject is not assigned.");
+            GameLogger.LogWarning("AgentUI or AgentFileManager is not properly assigned.");
         }
     }
 
     /// <summary>
-    /// Assigns an agent to the activator.
-    /// </summary>
-    public void Initialize(AgentSO newAgent)
-    {
-        agentSO = newAgent;
-    }
-
-    /// <summary>
-    /// Opens the Agent File UI and initializes it with the agent's data.
-    /// </summary>
-    public void ShowAgentFile()
-    {
-        if (agentFileUI != null && agentPanel != null && agentSO != null)
-        {
-            agentFileUI.SetActive(true);
-            agentPanel.Initialize(agentSO); // Pass the Agent to the panel
-            Debug.Log($"Agent File opened for agent: {agentSO.agentName}");
-        }
-        else
-        {
-            Debug.LogError("Missing references in AgentFileActivator. Ensure all fields are properly assigned.");
-        }
-    }
-
-    /// <summary>
-    /// Closes the Agent File UI.
+    /// Closes the Agent File UI by notifying the AgentFileManager.
     /// </summary>
     public void CloseAgentFile()
     {
-        if (agentFileUI != null)
+        if (AgentFileManager.Instance != null)
         {
-            agentFileUI.SetActive(false);
+            AgentFileManager.Instance.CloseAgentFile();
         }
     }
 }

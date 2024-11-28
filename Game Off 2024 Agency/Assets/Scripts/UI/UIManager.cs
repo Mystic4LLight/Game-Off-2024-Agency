@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         // Activate the new window
         currentWindow = newWindow;
         currentWindow.SetActive(true);
-        Debug.Log($"Opened window: {newWindow.name}");
+        GameLogger.Log($"Opened window: {newWindow.name}");
     }
 
     // Open an "Info" window, bypassing the stack so it stays temporary
@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
     {
         this.infoWindow = infoWindow;
         infoWindow.SetActive(true); // Open the info window
-        Debug.Log("Info Window Opened!");
+        GameLogger.Log("Info Window Opened!");
     }
 
     // Close the info window without affecting the main window
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
         {
             infoWindow.SetActive(false);
             infoWindow = null; // Clear the reference once it's closed
-            Debug.Log("Info Window Closed!");
+            GameLogger.Log("Info Window Closed!");
         }
     }
 
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
         {
             currentWindow.SetActive(false);
             currentWindow = null;
-            Debug.Log("Main Window Closed!");
+            GameLogger.Log("Main Window Closed!");
         }
     }
 }

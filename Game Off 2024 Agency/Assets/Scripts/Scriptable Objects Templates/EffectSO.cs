@@ -21,7 +21,7 @@ public abstract class EffectSO : ScriptableObject
     // Optional method to revert any lingering effect impact
     public virtual void RevertEffect(AgentSO agentSO)
     {
-        Debug.Log($"{effectName} effect reverted for {agentSO.agentName}");
+        GameLogger.Log($"{effectName} effect reverted for {agentSO.agentName}");
     }
     public virtual bool IsRemovable(AgentSO agentSO)
     {

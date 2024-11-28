@@ -36,7 +36,7 @@ public class Effect
     {
         if (effectSO == null || agentSO == null)
         {
-            Debug.LogWarning("EffectSO or AgentSO is null! Cannot apply effect.");
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot apply effect.");
             return;
         }
         Sprite effectIcon = effectSO.icon;
@@ -48,13 +48,13 @@ public class Effect
     {
         if (effectSO == null || agentSO == null)
         {
-            Debug.LogWarning("EffectSO or AgentSO is null! Cannot check for removal.");
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot check for removal.");
             return;
         }
 
         if (effectSO.IsRemovable(agentSO))
         {
-            Debug.Log($"Effect '{effectSO.effectName}' is removable.");
+            GameLogger.Log($"Effect '{effectSO.effectName}' is removable.");
             RemoveEffect();
         }
     }
@@ -63,7 +63,7 @@ public class Effect
     {
         if (effectSO == null || agentSO == null)
         {
-            Debug.LogWarning("EffectSO or AgentSO is null! Cannot remove effect.");
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot remove effect.");
             return;
         }
 
@@ -82,11 +82,11 @@ public class Effect
     {
         if (effectSO == null || agentSO == null)
         {
-            Debug.LogWarning("EffectSO or AgentSO is null! Cannot update effect.");
+            GameLogger.LogWarning("EffectSO or AgentSO is null! Cannot update effect.");
             return;
         }
 
         // Add your custom update logic here if required
-        Debug.Log($"Updating effect '{effectSO.effectName}' for agent '{agentSO.agentName}'.");
+        GameLogger.Log($"Updating effect '{effectSO.effectName}' for agent '{agentSO.agentName}'.");
     }
 }

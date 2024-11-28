@@ -28,11 +28,11 @@ public class RecruitButtonHandler : MonoBehaviour
             // Close the AgentFile UI
             agentFileUI.SetActive(false);
 
-            Debug.Log($"Recruited Agent: {agentSO.agentName}");
+            GameLogger.Log($"Recruited Agent: {agentSO.agentName}");
         }
         else
         {
-            Debug.LogWarning("No agent selected for recruitment!");
+            GameLogger.LogWarning("No agent selected for recruitment!");
         }
     }
 }

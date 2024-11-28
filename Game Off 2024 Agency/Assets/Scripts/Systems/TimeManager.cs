@@ -22,7 +22,8 @@ public class TimeManager : MonoBehaviour
     [Header("Agent Recruitment")]
     public AgentGenerator agentGenerator; // Reference to the AgentGenerator
 
-    public event Action OnTimeAdvanced; // Event to notify other scripts when time advances
+    // Event to notify other scripts when time advances (e.g., artifact analysis, training)
+    public event Action OnTimeAdvanced; 
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class TimeManager : MonoBehaviour
     /// </summary>
     public void AdvanceTime(int days, int hours, int minutes, int seconds)
     {
+        // Increment seconds and roll over if necessary
         currentSecond += seconds;
         if (currentSecond >= secondsPerMinute)
         {
@@ -41,6 +43,7 @@ public class TimeManager : MonoBehaviour
             currentMinute++;
         }
 
+        // Increment minutes and roll over if necessary
         currentMinute += minutes;
         if (currentMinute >= minutesPerHour)
         {
@@ -48,19 +51,25 @@ public class TimeManager : MonoBehaviour
             currentHour++;
         }
 
+        // Increment hours and roll over if necessary
         currentHour += hours;
         if (currentHour >= hoursPerDay)
         {
             currentHour -= hoursPerDay;
             currentDay++;
-            RefreshRecruitment(); // Call this when a new day begins
+
+            // Trigger the daily recruitment refresh when a new day begins
+            GameLogger.Log($"Advancing to day {currentDay}.");
+            RefreshRecruitment();
         }
 
+        // Add any additional days directly
         currentDay += days;
 
-        // Notify listeners (e.g., Artifact analysis, books, training) when time advances
+        // Notify listeners about time advancement (e.g., artifact analysis, training, etc.)
         OnTimeAdvanced?.Invoke();
 
+        // Update the displayed time in the UI
         UpdateTimeUI();
     }
 
@@ -87,12 +96,12 @@ public class TimeManager : MonoBehaviour
     {
         if (agentGenerator != null)
         {
-            Debug.Log("Refreshing recruitment slots for the new day.");
+            GameLogger.Log("Refreshing recruitment slots for the new day.");
             agentGenerator.RefreshRecruitment();
         }
         else
         {
-            Debug.LogWarning("AgentGenerator reference is missing in TimeManager.");
+            GameLogger.LogWarning("AgentGenerator reference is missing in TimeManager.");
         }
     }
 

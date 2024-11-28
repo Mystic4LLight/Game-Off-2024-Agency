@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public void AdvanceDay()
     {
         currentDay++;
-        Debug.Log($"Day {currentDay} has begun.");
+        GameLogger.Log($"Day {currentDay} has begun.");
         // Trigger artifact research progress, agent recovery, etc.
     }
 }

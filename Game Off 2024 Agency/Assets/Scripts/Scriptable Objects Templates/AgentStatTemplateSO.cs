@@ -143,7 +143,7 @@ public class AgentStatTemplateSO : ScriptableObject
     {
         if (baseStats == null || baseStats.Count == 0)
         {
-            Debug.LogWarning("Base stats are not defined in the template.");
+            GameLogger.LogWarning("Base stats are not defined in the template.");
             return;
         }
 
@@ -161,7 +161,7 @@ public class AgentStatTemplateSO : ScriptableObject
     {
         if (barStats == null || barStats.Count == 0)
         {
-            Debug.LogWarning("Bar stats are not defined in the template.");
+            GameLogger.LogWarning("Bar stats are not defined in the template.");
             return;
         }
 

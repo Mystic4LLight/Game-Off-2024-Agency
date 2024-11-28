@@ -24,6 +24,6 @@ public class Specialization
         this.type = type;
         this.name = name;
         this.value = value;
-        Debug.Log($"Specialization created: Name = {name}, Type = {type}, Value = {value}");
+        GameLogger.Log($"Specialization created: Name = {name}, Type = {type}, Value = {value}");
     }
 }

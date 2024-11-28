@@ -35,7 +35,7 @@ public class Artifact : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ArtifactSO is not assigned!");
+            GameLogger.LogError("ArtifactSO is not assigned!");
         }
     }
 
@@ -45,7 +45,7 @@ public class Artifact : MonoBehaviour
     {
         if (template == null)
         {
-            Debug.LogWarning("Template is null, cannot initialize artifact.");
+            GameLogger.LogWarning("Template is null, cannot initialize artifact.");
             return;
         }
 
@@ -60,7 +60,7 @@ public class Artifact : MonoBehaviour
     {
         if (remainingResearchTime <= 0)
         {
-            Debug.Log("Artifact research is already completed.");
+            GameLogger.Log("Artifact research is already completed.");
             return;
         }
 
@@ -69,26 +69,26 @@ public class Artifact : MonoBehaviour
         if (researchRoll)
         {
             remainingResearchTime--;
-            Debug.Log($"Research progress made! Remaining research time: {remainingResearchTime} days.");
+            GameLogger.Log($"Research progress made! Remaining research time: {remainingResearchTime} days.");
         }
         else
         {
-            Debug.Log("Research roll failed. No progress made.");
+            GameLogger.Log("Research roll failed. No progress made.");
         }
 
         // Simulate a sanity roll
         bool sanityRoll = RollForSanityLoss(researcher);
         if (sanityRoll)
         {
-            researcher.UpdateStatValue("Sanity", researcher.GetStatValue("Sanity") - 1);
-            Debug.Log($"Researcher {researcher.agentName} lost 1 sanity point!");
+            researcher.UpdateStat("Sanity", researcher.GetStatValue("Sanity") - 1);
+            GameLogger.Log($"Researcher {researcher.agentName} lost 1 sanity point!");
         }
 
         // Check if the researcher has hit the sanity loss threshold
         if (artifactSO.sanityLossThreshold > 0 && researcher.GetStatValue("Sanity") <= sanityLossThreshold)
         {
             ApplyCursedEffects(researcher);
-            Debug.Log($"Artifact cursed the researcher {researcher.agentName}!");
+            GameLogger.Log($"Artifact cursed the researcher {researcher.agentName}!");
         }
 
         // Check if research is complete
@@ -132,7 +132,7 @@ public class Artifact : MonoBehaviour
             {
                 Effect newEffect = new Effect(cursedEffect, agent);
                 cursedEffect.ApplyEffect(agent, newEffect);
-                Debug.Log($"Applying cursed effect: {cursedEffect.effectName} to {agent.agentName}");
+                GameLogger.Log($"Applying cursed effect: {cursedEffect.effectName} to {agent.agentName}");
             }
         }
     }
@@ -149,7 +149,7 @@ public class Artifact : MonoBehaviour
     public void Identify()
     {
         isIdentified = true;
-        Debug.Log("Artifact identified!");
+        GameLogger.Log("Artifact identified!");
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ public class Artifact : MonoBehaviour
     /// </summary>
     private void CompleteResearch()
     {
-        Debug.Log("Artifact research is complete!");
+        GameLogger.Log("Artifact research is complete!");
         // Additional logic, such as unlocking artifact abilities or updating its status, can be added here
     }
 

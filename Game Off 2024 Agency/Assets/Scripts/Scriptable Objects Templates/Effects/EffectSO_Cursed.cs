@@ -9,7 +9,7 @@ public class EffectSO_Cursed : EffectSO
     {
         // Define the specific logic for applying the cursed effect to the agent
         agentSO.UpdateStat("Sanity", -effect.intensity);
-        Debug.Log($"Cursed effect '{effectName}' applied to agent {agentSO.agentName}, reducing sanity by {effect.intensity}");
+        GameLogger.Log($"Cursed effect '{effectName}' applied to agent {agentSO.agentName}, reducing sanity by {effect.intensity}");
     }
 
     public override bool CanRemoveEffect(AgentSO agentSO)
@@ -25,11 +25,11 @@ public class EffectSO_Cursed : EffectSO
         {
             // Logic to revert the effect
             agentSO.UpdateStat("Sanity", 10); // Restore some sanity as an example
-            Debug.Log($"Cursed effect '{effectName}' removed from agent {agentSO.agentName}");
+            GameLogger.Log($"Cursed effect '{effectName}' removed from agent {agentSO.agentName}");
         }
         else
         {
-            Debug.LogWarning($"Cannot remove cursed effect '{effectName}' from agent {agentSO.agentName}");
+            GameLogger.LogWarning($"Cannot remove cursed effect '{effectName}' from agent {agentSO.agentName}");
         }
     }
 
