@@ -764,7 +764,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7731584876820716475}
   m_Direction: 2
   m_Value: 0.5
-  m_Size: 0.34594905
+  m_Size: 0.34594908
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1422,6 +1422,7 @@ GameObject:
   - component: {fileID: 6883297811586494564}
   - component: {fileID: 2966769790394953690}
   - component: {fileID: 3613047542732704936}
+  - component: {fileID: 8078120392247141888}
   m_Layer: 5
   m_Name: AgentSelection
   m_TagString: Untagged
@@ -1490,6 +1491,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8078120392247141888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977755828428588533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b591a770aea23d341b6acac5200cf70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocksInput: 1
 --- !u!1 &9047059865207157969
 GameObject:
   m_ObjectHideFlags: 0

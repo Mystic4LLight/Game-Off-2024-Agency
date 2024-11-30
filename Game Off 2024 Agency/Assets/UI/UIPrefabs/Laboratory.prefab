@@ -937,7 +937,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.42051697, y: -12.901489}
+  m_AnchoredPosition: {x: -0.00047302246, y: -12.901489}
   m_SizeDelta: {x: 392.39, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8389149818529494179
@@ -4868,7 +4868,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4205152000033553975}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99790245
+  m_Size: 0.99998933
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5446,6 +5446,8 @@ MonoBehaviour:
   toggleUsagePageButton: {fileID: 0}
   usageNameText: {fileID: 0}
   profileImage: {fileID: 878841731697152204}
+  cursedStatusText: {fileID: 0}
+  cursedDetailsText: {fileID: 0}
   researchTimeText: {fileID: 0}
 --- !u!1 &3680755092742180149
 GameObject:
@@ -5645,6 +5647,8 @@ MonoBehaviour:
   toggleUsagePageButton: {fileID: 0}
   usageNameText: {fileID: 0}
   profileImage: {fileID: 8253900117483957194}
+  cursedStatusText: {fileID: 0}
+  cursedDetailsText: {fileID: 0}
   researchTimeText: {fileID: 0}
 --- !u!1 &3759125901001485268
 GameObject:
@@ -8598,8 +8602,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8098825371440327629}
   m_HandleRect: {fileID: 9045900455922555623}
   m_Direction: 2
-  m_Value: 14.787158
-  m_Size: 0.99839664
+  m_Value: 14.78809
+  m_Size: 0.99839675
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9265,6 +9269,8 @@ MonoBehaviour:
   toggleUsagePageButton: {fileID: 0}
   usageNameText: {fileID: 0}
   profileImage: {fileID: 505285820147381630}
+  cursedStatusText: {fileID: 0}
+  cursedDetailsText: {fileID: 0}
   researchTimeText: {fileID: 0}
 --- !u!1 &5988777586602997092
 GameObject:
@@ -11348,6 +11354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463784774982086894}
+  - component: {fileID: 8039021663968756966}
   m_Layer: 5
   m_Name: Laboratory
   m_TagString: Untagged
@@ -11377,6 +11384,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8039021663968756966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7545362616438839155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b591a770aea23d341b6acac5200cf70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocksInput: 1
 --- !u!1 &7892272578010087424
 GameObject:
   m_ObjectHideFlags: 0
@@ -11648,8 +11668,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1883186445755671753}
   m_HandleRect: {fileID: 1699382774202256103}
   m_Direction: 2
-  m_Value: 0.50000006
-  m_Size: 0.34594905
+  m_Value: 0.5
+  m_Size: 0.34594908
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11968,6 +11988,8 @@ MonoBehaviour:
   toggleUsagePageButton: {fileID: 0}
   usageNameText: {fileID: 0}
   profileImage: {fileID: 8963891129055054136}
+  cursedStatusText: {fileID: 0}
+  cursedDetailsText: {fileID: 0}
   researchTimeText: {fileID: 0}
 --- !u!1 &8520219825823696432
 GameObject:
@@ -12523,6 +12545,8 @@ MonoBehaviour:
   toggleUsagePageButton: {fileID: 0}
   usageNameText: {fileID: 0}
   profileImage: {fileID: 6925038044362899452}
+  cursedStatusText: {fileID: 0}
+  cursedDetailsText: {fileID: 0}
   researchTimeText: {fileID: 0}
 --- !u!1 &9003439507880859693
 GameObject:

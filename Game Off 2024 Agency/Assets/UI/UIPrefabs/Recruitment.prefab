@@ -565,10 +565,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5570321673964717623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1179.9387, y: -257.18176}
-  m_SizeDelta: {x: 351.9755, y: 514.3635}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5043047531346105539
 GameObject:
@@ -990,6 +990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5168587279286425855}
   - component: {fileID: 6810538958121942494}
+  - component: {fileID: 5418526852873133174}
   m_Layer: 5
   m_Name: Recruitment
   m_TagString: Untagged
@@ -1038,6 +1039,19 @@ MonoBehaviour:
   recruitmentGrid: {fileID: 5570321673964717623}
   agentUIPrefab: {fileID: 144391868677946297, guid: 8dcb39257c327fe419a3ab782ee99611, type: 3}
   agentGenerator: {fileID: 0}
+--- !u!114 &5418526852873133174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6873960782582425571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b591a770aea23d341b6acac5200cf70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocksInput: 1
 --- !u!1 &7367830482628455319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,10 +1082,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5570321673964717623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 677.96326, y: -257.18176}
-  m_SizeDelta: {x: 351.9755, y: 514.3635}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8240730694688022768
 GameObject:
@@ -1178,8 +1192,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5570321673964717623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175.98775, y: -257.18176}
-  m_SizeDelta: {x: 351.9755, y: 514.3635}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
