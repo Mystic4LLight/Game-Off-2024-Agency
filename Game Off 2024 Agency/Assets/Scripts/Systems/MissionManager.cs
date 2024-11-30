@@ -64,45 +64,61 @@ public class MissionManager : MonoBehaviour
     {
         AvaiableSideMissions.RemoveAt(id);
     }
-    public void startMainMission(Mission mission, List<Agent> deployedAgents){
-        AvaiableMainMissions.Remove(mission);  
-        
-        foreach (Agent agent in deployedAgents){
-            AgentManager.Instance.activeAgents.Remove(agent);
-            mission.AddAgent(agent);
-        }      
 
-    }
-    public void startMainMission(Mission mission, List<Agent> deployedAgents, List<Artifact> usedArtifacts)
+    public bool startMainMission(Mission mission, List<Agent> deployedAgents, List<Artifact> usedArtifacts, string statCheck)   
     {
         AvaiableMainMissions.Remove(mission);
-
         foreach (Agent agent in deployedAgents)
         {
-            AgentManager.Instance.activeAgents.Remove(agent);
-            mission.AddAgent(agent);
+            AgentManager.Instance.activeAgents.Remove(agent);            
+        }
+        foreach (Agent agent in deployedAgents)
+        {
+            if (Checks.CheckStat(agent, statCheck, mission.PassCheck) == true)
+            {
+                endMission(mission, deployedAgents);
+                return true;
+            }
+           
         }
 
+        endMission(mission, deployedAgents);
+        return false;
+        
+
+
     }
-    public void startSideMission(Mission mission, List<Agent> deployedAgents)
+    public bool startSideMission(Mission mission, List<Agent> deployedAgents, List<Artifact> usedArtifacts, string statCheck)
     {
         AvaiableSideMissions.Remove(mission);
         foreach (Agent agent in deployedAgents)
         {
             AgentManager.Instance.activeAgents.Remove(agent);
-            mission.AddAgent(agent);
         }
+        foreach (Agent agent in deployedAgents)
+        {
+            if (Checks.CheckStat(agent, statCheck, mission.PassCheck) == true)
+            {
+                endMission(mission, deployedAgents);
+                return true;
+            }
+
+        }
+
+        endMission(mission, deployedAgents);
+        return false;
+
 
     }
 
-    
+
     public void endMission(Mission mission, List<Agent> deployedAgents)
     {
         foreach (Agent agent in deployedAgents)
         {
             AgentManager.Instance.activeAgents.Add(agent);
-            Destroy(mission);
         }
+        Destroy(mission);
     }
     
 

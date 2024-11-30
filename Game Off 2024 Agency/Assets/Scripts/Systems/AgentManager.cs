@@ -48,6 +48,10 @@ public class AgentManager : MonoBehaviour
         GameLogger.Log($"Rejected Agent: {agentSO.agentName}");
         recruitmentPanel.RefreshPanel();
     }
+    public Agent SelectAgent(Agent agent)
+    {
+        return agent;
+    }
 
     
 }
