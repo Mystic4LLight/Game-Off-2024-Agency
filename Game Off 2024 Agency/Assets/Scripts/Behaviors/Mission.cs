@@ -74,47 +74,6 @@ public class Mission : MonoBehaviour
         else
             return false;
     }
-    public bool CheckStat(Agent agent, string stat, float checkValue)
-    {
-        float rollValue = RollD100();         
-        if (rollValue <= agent.GetStatValue(stat))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public bool CheckHardStat(Agent agent, string stat)
-    {
-        float rollValue = RollD100();
-        if (rollValue <= (agent.GetStatValue(stat)/5))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public bool CheckExtremeStat(Agent agent, string stat, float checkValue)
-    {
-        float rollValue = RollD100();
-        if (rollValue <= (agent.GetStatValue(stat)/20))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public float RollD100()
-    {
-        return Random.Range(1, 101);
-    }
-
+    //Rolls and checks are on tools folder
 
 }
