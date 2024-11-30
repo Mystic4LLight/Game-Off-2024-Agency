@@ -318,8 +318,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2365155452175321932}
   m_HandleRect: {fileID: 5448509528245138801}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.98543286
+  m_Value: 1.0000074
+  m_Size: 0.985433
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18503,6 +18503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4573515039022305290}
+  - component: {fileID: 4738872626874772506}
   m_Layer: 5
   m_Name: AgentsPool
   m_TagString: Untagged
@@ -18530,6 +18531,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1545.5, y: 830.76}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4738872626874772506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6195124203381273052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b591a770aea23d341b6acac5200cf70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocksInput: 1
 --- !u!1 &6307033931172422399
 GameObject:
   m_ObjectHideFlags: 0
@@ -20144,7 +20158,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2555930392691232432}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.50403297
+  m_Size: 0.504033
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

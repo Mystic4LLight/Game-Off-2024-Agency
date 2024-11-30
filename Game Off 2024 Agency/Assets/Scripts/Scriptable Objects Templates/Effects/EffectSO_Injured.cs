@@ -3,7 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EffectSO_Injured", menuName = "Scriptable Objects/Effects/Injured")]
 public class EffectSO_Injured : EffectSO
 {
-    public new Sprite icon;
+    // Corris: removed duplicate field 'icon' (it is in base class)
+    // public new Sprite icon;
+
     public int requiredTime = 3; // The number of days required to remove the injury effect
     public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {

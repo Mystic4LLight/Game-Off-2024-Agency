@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class UIManager : MonoBehaviour
     public GameObject[] windows; // All windows in the UI
     private GameObject currentWindow; // The currently active window
     private GameObject infoWindow; // Reference for the info window (this is separate from other windows)
+
+    // Corris: Added a HashSet to store all camera blockers  (Camera blockers are windows that should block camera movement - add 'MainCameraBlocker' as component to window to become blocker)
+    private static HashSet<MainCameraBlocker> cameraBlockers = new();
 
     private void Awake()
     {
@@ -68,5 +72,21 @@ public class UIManager : MonoBehaviour
             currentWindow = null;
             GameLogger.Log("Main Window Closed!");
         }
+    }
+
+    // Corris: Added methods to manage camera blockers - so that camera don't move when Agency overlapped yb big windows
+    public static void AddCameraBlocker(MainCameraBlocker blocker)
+    {
+        cameraBlockers.Add(blocker);
+    }
+
+    public static void RemoveCameraBlocker(MainCameraBlocker blocker)
+    {
+        cameraBlockers.Remove(blocker);
+    }
+
+    public static bool IsCameraBlocked()
+    {
+        return cameraBlockers.Count > 0;
     }
 }

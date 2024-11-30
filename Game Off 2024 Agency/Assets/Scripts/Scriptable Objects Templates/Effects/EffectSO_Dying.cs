@@ -3,7 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EffectSO_Dying", menuName = "Scriptable Objects/Effects/Dying")]
 public class EffectSO_Dying : EffectSO
 {
-    public new Sprite icon;
+    // Corris: removed duplicate field 'icon' (it is in base class)
+    // public new Sprite icon;
+
     public int requiredTime = 5; // The number of days required to remove the dying effect
     public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {

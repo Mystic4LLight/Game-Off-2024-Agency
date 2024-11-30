@@ -3,7 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EffectSO_Insane", menuName = "Scriptable Objects/Effects/Insane")]
 public class EffectSO_Insane : EffectSO
 {
-    public new Sprite icon;
+    // Corris: removed duplicate field 'icon' (it is in base class)
+    // public new Sprite icon;
+
     public override void ApplyEffect(AgentSO agentSO, Effect effect)
     {
         GameLogger.Log($"{effectName} applied to {agentSO.agentName}");
