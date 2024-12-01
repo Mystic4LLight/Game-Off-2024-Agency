@@ -25,6 +25,7 @@ public class TimeManager : MonoBehaviour
     // Event to notify other scripts when time advances (e.g., artifact analysis, training)
     public event Action OnTimeAdvanced; 
 
+
     private void Start()
     {
         UpdateTimeUI();
@@ -92,12 +93,12 @@ public class TimeManager : MonoBehaviour
     /// <summary>
     /// Refreshes the recruitment slots in the Agent Generator when a new day begins.
     /// </summary>
-    private void RefreshRecruitment()
+    public void RefreshRecruitment()
     {
         if (agentGenerator != null)
         {
             GameLogger.Log("Refreshing recruitment slots for the new day.");
-            agentGenerator.RefreshRecruitment();
+            RefreshRecruitment();
         }
         else
         {

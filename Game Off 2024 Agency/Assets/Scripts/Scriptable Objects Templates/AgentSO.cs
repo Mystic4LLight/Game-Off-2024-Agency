@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "AgentSO", menuName = "Scriptable Objects/AgentSO")]
 public class AgentSO : ScriptableObject
@@ -8,11 +9,14 @@ public class AgentSO : ScriptableObject
     [Header("Basic Information")]
     public string agentName;
     public string occupation;
+    public List<string> hobbies = new List<string>();    // List of hobbies the agent has
+    public string archetype;
     public int agentAge;
     public string agentSex;
     public string backstory;
     public string description;
     public Sprite profilePhoto;
+
 
     [Header("Characteristics")]
     public Dictionary<string, int> currentStats = new Dictionary<string, int>();
@@ -51,6 +55,14 @@ public class AgentSO : ScriptableObject
     {
         public float currentValue;
         public float maxValue;
+    }
+
+    private void OnEnable()
+    {
+        if (specializations == null)
+        {
+            specializations = new List<Specialization>();
+        }
     }
 
     public void InitializeFrom(AgentSO other)
@@ -174,9 +186,9 @@ public class AgentSO : ScriptableObject
             "Accounting", "Anthropology", "Appraise", "Archaeology", "History", "Law", "LibraryUse",
             "Charm", "FastTalk", "Intimidate", "Persuade",
             "Climb", "Dodge", "Jump", "SleightOfHand", "Stealth", "Swim", "Throw", "Track",
-            "Fighting(Brawl)", "Firearms (Aiming)", "Firearms(Hipshot)", "FirstAid",
+            "Fighting(Brawl)", "Firearms(Aiming)", "Firearms(Hipshot)", "FirstAid",
             "ElecRepair", "Electronics", "MechRepair", "Locksmith", "OpHvMachine",
-            "Medicine", "NaturalWorld", "Occult", "Psychanalysis", "Psychology", "Navigate",
+            "Medicine", "NaturalWorld", "Occult", "Psychoanalysis", "Psychology", "Navigate",
             "SpotHidden", "Listen",
             "ComputerUse", "CthulhuMythos", "Pilot"
         };
@@ -206,36 +218,43 @@ public class AgentSO : ScriptableObject
     }
 
     public void InitializeSpecializations()
+{
+    if (specializations == null)
     {
-        if (specializations != null && specializations.Count > 0)
-        {
-            GameLogger.Log("Specializations already initialized.");
-            return;
-        }
-
-        if (statTemplate == null || statTemplate.specializations == null || statTemplate.specializations.Count == 0)
-        {
-            GameLogger.LogWarning("StatTemplate or its specializations are null or empty.");
-            return;
-        }
-
-        specializations.Clear();
-
-        foreach (var templateSpec in statTemplate.specializations)
-        {
-            specializations.Add(new Specialization(
-                templateSpec.type,
-                templateSpec.name,
-                Mathf.FloorToInt(templateSpec.defaultValue)
-            ));
-        }
-
-        GameLogger.Log("Specializations initialized:");
-        foreach (var spec in specializations)
-        {
-            GameLogger.Log($"Name: {spec.name}, Type: {spec.type}, Value: {spec.value}");
-        }
+        specializations = new List<Specialization>();
     }
+
+    GameLogger.Log($"Initializing specializations for {agentName}.");
+
+    // Clear existing specializations before reinitializing
+    specializations.Clear();
+
+    // Adding all 18 specializations with default placeholder names to ensure consistency
+    specializations.Add(new Specialization(Specialization.SpecializationType.ArtCraft, "Art/Craft", 5));
+    specializations.Add(new Specialization(Specialization.SpecializationType.ArtCraft, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.ArtCraft, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Fighting, "----", 25));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Fighting, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Firearms, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Language, "Language(Other)\n----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Language, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Language, "Language(Own)\n----", 40));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Science, "Science\n----", 1));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Science, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Science, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Survival, "Survival\n----", 10));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Other, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Other, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Other, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Other, "----", 0));
+    specializations.Add(new Specialization(Specialization.SpecializationType.Other, "----", 0));
+
+    specializations.Sort((a, b) => a.type.CompareTo(b.type));
+    GameLogger.Log("Specializations sorted: " + string.Join(", ", specializations.Select(s => s.type.ToString())));
+
+    GameLogger.Log($"Specializations initialized for {agentName}. Total specializations: {specializations.Count}");
+}
+
 
     public void UpdateStat(string statName, int value)
     {
@@ -339,5 +358,10 @@ public class AgentSO : ScriptableObject
     public float GetBarStatMaxValue(string statName)
     {
         return barStats.ContainsKey(statName) ? barStats[statName].maxValue : 0;
+    }
+
+    public string GetHobbies()
+    {
+        return string.Join(", ", hobbies);
     }
 }
