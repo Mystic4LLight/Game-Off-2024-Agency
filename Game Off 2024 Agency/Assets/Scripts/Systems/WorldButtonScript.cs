@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class WorldButtonScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class WorldButtonScript : MonoBehaviour
 
     [SerializeField] private List<SelectAgentButton> selectAgentButtons; // References to the SelectAgentButton components
     [SerializeField] private List<GameObject> agents; // List of agent GameObjects
+    [SerializeField] private AgentPoolManager agentPoolManager; // Reference to the AgentPoolManager
 
     void Start()
     {
@@ -21,7 +23,7 @@ public class WorldButtonScript : MonoBehaviour
 
     void Update()
     {
-        if (isHovered && Input.GetMouseButtonDown(0)) 
+        if (isHovered && Input.GetMouseButtonDown(0))
         {
             OnWorldButtonClicked();
         }
@@ -54,42 +56,33 @@ public class WorldButtonScript : MonoBehaviour
             return;
         }
 
-        // Initialize agent buttons if available
-        if (selectAgentButtons.Count != agents.Count)
-        {
-            GameLogger.LogWarning("Mismatch between the number of selectAgentButtons and agents.");
-            return;
-        }
+        UpdateAgentButtonsForRoom();
+    }
 
+    private void UpdateAgentButtonsForRoom()
+    {
+        // Move agents to the room pool if conditions are met and deactivate the select button if necessary
         for (int i = 0; i < agents.Count; i++)
         {
-            if (agents[i] != null && selectAgentButtons[i] != null)
-            {
-                if (!selectAgentButtons[i].gameObject.activeInHierarchy)
-                {
-                    selectAgentButtons[i].gameObject.SetActive(true);
-                }
+            var agent = agents[i];
+            if (agent == null) continue;
 
-                // Ensure the agent object is properly assigned to the button before initialization
-                InitializeSelectButton(selectAgentButtons[i], agents[i]);
+            var agentComponent = agent.GetComponent<Agent>();
+            if (agentComponent == null) continue;
+
+            // Check if the agent is under treatment or assigned elsewhere
+            if (agentComponent.agentSO != null && agentComponent.agentSO.isOnTreatment)
+            {
+                // Move the agent to the Med Bay container and deactivate the select button
+                agentPoolManager.MoveAgentToRoom(agent, agentPoolManager.GetRoomContainer("MedBay"));
+                selectAgentButtons[i].gameObject.SetActive(false);
             }
             else
             {
-                GameLogger.LogWarning("SelectAgentButton or agent reference is null for index " + i);
+                // Move agent back to the available pool if not assigned and activate the select button
+                agentPoolManager.MoveAgentToAvailablePool(agent);
+                selectAgentButtons[i].gameObject.SetActive(true);
             }
         }
     }
-
-private void InitializeSelectButton(SelectAgentButton buttonComponent, GameObject agent)
-{
-    if (buttonComponent != null && agent != null)
-    {
-        buttonComponent.SetParentAgentObject(agent);
-        GameLogger.Log($"Activating and initializing SelectAgentButton for agent: {agent.name}");
-    }
-    else
-    {
-        GameLogger.LogWarning("Initialization failed: SelectAgentButton or agent is null.");
-    }
-}
 }

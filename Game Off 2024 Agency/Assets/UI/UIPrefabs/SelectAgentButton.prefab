@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 4526146499464780664}
   - component: {fileID: 9113162159099366205}
   - component: {fileID: 547825352601992657}
+  - component: {fileID: -9015350671632989701}
   m_Layer: 5
   m_Name: SelectAgentButton
   m_TagString: Untagged
@@ -282,3 +283,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e8a86487c54fe47b71b48c6737a718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-9015350671632989701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871655183805209134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736b4f5d16de020409e7b1863671df8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificParent: {fileID: 0}

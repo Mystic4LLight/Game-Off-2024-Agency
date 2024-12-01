@@ -6,6 +6,7 @@ public class SelectAgentButton : MonoBehaviour
     private GameObject parentAgentObject;
     private bool isInitialized = false;
     private Button buttonComponent;
+    private AgentSO agentSO;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class SelectAgentButton : MonoBehaviour
     public void SetParentAgentObject(GameObject agentObject)
     {
         parentAgentObject = agentObject;
+        agentSO = agentObject.GetComponent<AgentUI>()?.agentSO;
 
         if (gameObject.activeInHierarchy && !isInitialized)
         {
@@ -61,29 +63,34 @@ public class SelectAgentButton : MonoBehaviour
 
     public void InitializeButton()
     {
-        // Ensure parentAgentObject is not null
-        if (parentAgentObject == null)
+        if (parentAgentObject == null || agentSO == null)
         {
-            GameLogger.LogError("InitializeButton: parentAgentObject is null. Cannot initialize button.");
+            GameLogger.LogError("InitializeButton: parentAgentObject or agentSO is null. Cannot initialize button.");
             return;
         }
 
         // Place button initialization logic here
         isInitialized = true;
+        UpdateButtonState();
         GameLogger.Log($"SelectAgentButton: Button initialized for agent: {parentAgentObject.name}");
     }
 
     public void OnButtonClick()
     {
-        if (parentAgentObject == null)
+        if (parentAgentObject == null || agentSO == null)
         {
-            GameLogger.LogError("OnButtonClick: parentAgentObject is null. Cannot proceed with click action.");
+            GameLogger.LogError("OnButtonClick: parentAgentObject or agentSO is null. Cannot proceed with click action.");
+            return;
+        }
+
+        if (agentSO.isOnTreatment)
+        {
+            GameLogger.LogWarning($"{agentSO.agentName} is currently under treatment. Selection is disabled.");
             return;
         }
 
         GameLogger.Log($"SelectAgentButton: Button clicked for agent: {parentAgentObject.name}");
 
-        // Pass the agent to the manager
         if (UIInitializationManager.Instance != null)
         {
             UIInitializationManager.Instance.SetCurrentAgent(parentAgentObject);
@@ -95,8 +102,18 @@ public class SelectAgentButton : MonoBehaviour
         }
     }
 
-    public bool IsInitialized()
+    private void UpdateButtonState()
     {
-        return isInitialized;
+        // Update button interactable state based on the agent's status
+        if (agentSO != null && agentSO.isOnTreatment)
+        {
+            buttonComponent.interactable = false;
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            buttonComponent.interactable = true;
+            gameObject.SetActive(true);
+        }
     }
 }

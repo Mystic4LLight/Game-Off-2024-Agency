@@ -5,7 +5,7 @@ using System.Linq;
 public class Agent : MonoBehaviour
 {
     [Header("Agent Details")]
-    [SerializeField] public AgentSO agentSO;
+    public AgentSO agentSO;
 
     private List<Effect> activeEffects = new(); // List of active effects on the agent
     

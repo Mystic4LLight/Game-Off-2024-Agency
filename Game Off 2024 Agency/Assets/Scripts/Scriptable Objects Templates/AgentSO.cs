@@ -50,6 +50,9 @@ public class AgentSO : ScriptableObject
     [Header("Specializations")]
     public List<Specialization> specializations = new List<Specialization>();
 
+    [Header("Bools")]
+    public bool isOnTreatment = false;
+
     [System.Serializable]
     public class BarStatInstance
     {
@@ -282,6 +285,11 @@ public class AgentSO : ScriptableObject
             0,
             barStats[statName].maxValue
         );
+    }
+    public void SetTreatmentStatus(bool treatmentStatus)
+    {
+        isOnTreatment = treatmentStatus;
+        GameLogger.Log($"{agentName} treatment status set to: {isOnTreatment}");
     }
 
     public bool HasAntidote()
