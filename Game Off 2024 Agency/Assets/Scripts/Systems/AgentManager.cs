@@ -10,21 +10,21 @@ public class AgentManager : MonoBehaviour
     public List<Agent> activeAgents = new List<Agent>();    
     public static AgentManager Instance;
     public RecruitmentPanel recruitmentPanel; // Reference to the RecruitmentPanel
+
+    public Transform agentPoolManager; // Reference to manage agents in the pool
+
     void Start()
     {
-        if (Instance != null && Instance != this){
+        if (Instance != null && Instance != this)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             Instance = this;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void RecruitAgent(AgentSO agentSO)
     {        
         Agent newAgent = Instantiate(agentPrefab, agentSpawnPoint.transform.position, agentPrefab.transform.rotation);
@@ -44,14 +44,38 @@ public class AgentManager : MonoBehaviour
 
     public void RejectAgent(AgentSO agentSO)
     {
-        AgentManager.Instance.RemoveFromRecruitmentPool(agentSO);
+        RemoveFromRecruitmentPool(agentSO);
         GameLogger.Log($"Rejected Agent: {agentSO.agentName}");
         recruitmentPanel.RefreshPanel();
     }
+
     public Agent SelectAgent(Agent agent)
     {
         return agent;
     }
 
-    
+    // New function from branch version to move agent to pool
+    public void MoveAgentToPool(GameObject agent)
+    {
+        if (agent == null)
+        {
+            GameLogger.LogError("MoveAgentToPool: Attempted to move a null agent to the pool.");
+            return;
+        }
+        if (agentPoolManager == null)
+        {
+            GameLogger.LogError("AgentPoolManager reference is missing. Cannot move agent to the pool.");
+            return;
+        }
+
+        GameLogger.Log($"Attempting to move agent: {agent.name}, active: {agent.activeSelf}, in scene: {agent.scene.name}");
+
+        if (!agent.activeSelf)
+        {
+            agent.SetActive(true); // Ensure agent is active
+        }
+
+        agent.transform.SetParent(agentPoolManager); // Move to pool container
+        GameLogger.Log($"Agent {agent.name} successfully moved to the pool.");
+    }
 }
