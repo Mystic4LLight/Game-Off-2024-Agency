@@ -23,6 +23,9 @@ public class WorldButtonScript : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.IsCameraBlocked())
+            return; // Block camera movement when UI windows are active
+
         if (isHovered && Input.GetMouseButtonDown(0))
         {
             OnWorldButtonClicked();
@@ -31,6 +34,9 @@ public class WorldButtonScript : MonoBehaviour
 
     void OnMouseEnter()
     {
+        if (UIManager.IsCameraBlocked())
+            return; // Block camera movement when UI windows are active
+
         isHovered = true;
         buttonRenderer.material.color = hoverColor;
     }
@@ -43,6 +49,9 @@ public class WorldButtonScript : MonoBehaviour
 
     public void OnWorldButtonClicked()
     {
+        if (UIManager.IsCameraBlocked())
+            return; // Block camera movement when UI windows are active
+
         GameLogger.Log("World Window Opened!");
 
         // Ensure that the window is opened through the UIManager
