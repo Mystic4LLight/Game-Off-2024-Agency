@@ -1906,8 +1906,6 @@ MonoBehaviour:
       m_LigatureGlyphID: 743
     - m_ComponentGlyphIDs: 2f000000ad000000
       m_LigatureGlyphID: 1200
-<<<<<<< HEAD
-=======
     - m_ComponentGlyphIDs: 3d000000a9000000
       m_LigatureGlyphID: 665
     - m_ComponentGlyphIDs: 3d000000ad000000
@@ -1918,7 +1916,6 @@ MonoBehaviour:
       m_LigatureGlyphID: 1138
     - m_ComponentGlyphIDs: 3d000000aa000000
       m_LigatureGlyphID: 1140
->>>>>>> Mystic4LLight-personal
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 4
@@ -68775,8 +68772,6 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
-<<<<<<< HEAD
-=======
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 61
         m_GlyphValueRecord:
@@ -76067,7 +76062,6 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
->>>>>>> Mystic4LLight-personal
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
   m_ShouldReimportFontFeatures: 0
