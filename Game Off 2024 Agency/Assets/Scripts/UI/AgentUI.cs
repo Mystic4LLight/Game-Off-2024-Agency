@@ -23,6 +23,18 @@ public class AgentUI : MonoBehaviour
         SetViewMode(true);
     }
 
+    // Method to set the AgentSO
+    public void SetAgentSO(AgentSO agent)
+    {
+        agentSO = agent;
+    }
+
+    // Method to provide the AgentSO reference
+    public AgentSO GetAgentSO()
+    {
+        return agentSO;
+    }
+
     public void SetViewMode(bool isCardView)
     {
         if (cardView != null && detailedView != null)
@@ -63,7 +75,13 @@ public class AgentUI : MonoBehaviour
         }
         else
         {
-            GameLogger.LogWarning("CardView or DetailedView is not assigned in AgentUI.");
+            
+    if (cardView == null || detailedView == null)
+    {
+        GameLogger.LogWarning("CardView or DetailedView is not assigned in AgentUI. Cannot switch views.");
+        return;
+    }
+    
         }
     }
 
@@ -75,5 +93,33 @@ public class AgentUI : MonoBehaviour
     public void OnCloseDetailedView()
     {
         SetViewMode(true); // Switch back to card view
+    }
+
+    public void CopyStatsFrom(AgentUI original)
+    {
+        if (original == null)
+        {
+            
+        if (original == null)
+        {
+            GameLogger.LogWarning("Original AgentUI is null. Cannot copy stats.");
+            return;
+        }
+        if (agentSO == null)
+        {
+            GameLogger.LogError("AgentSO reference in the current AgentUI is null. Cannot copy stats.");
+            return;
+        }
+        
+            return;
+        }
+
+        // Copy all stats, abilities, health, sanity, etc.
+        agentSO = original.agentSO;
+
+        // If there are other stats or components to copy, add them here
+        // Example: Copy other runtime-updated data, such as HP, sanity, special effects, etc.
+        // Assuming these stats are part of AgentSO or directly in AgentUI.
+        // Add any code necessary for a complete copy of runtime information.
     }
 }

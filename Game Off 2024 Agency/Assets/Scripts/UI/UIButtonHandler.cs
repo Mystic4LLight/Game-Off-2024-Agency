@@ -22,30 +22,37 @@ public class UIButtonHandler : MonoBehaviour
     }
 
     private void OnButtonClick()
+{
+    GameLogger.Log($"Button clicked: {buttonType}");
+    
+    switch (buttonType)
     {
-        switch (buttonType)
-        {
-            case ButtonType.Close:
-                UIManager.Instance.CloseCurrentWindow(); // Close the current window
-                break;
+        case ButtonType.Close:
+            GameLogger.Log("Attempting to close current window.");
+            UIManager.Instance.CloseCurrentWindow();
+            break;
 
-            case ButtonType.OpenWindow:
-                if (targetWindow != null)
-                {
-                    UIManager.Instance.OpenWindow(targetWindow); // Open a specific window
-                }
-                break;
+        case ButtonType.OpenWindow:
+            if (targetWindow != null)
+            {
+                GameLogger.Log($"Attempting to open window: {targetWindow.name}");
+                UIManager.Instance.OpenWindow(targetWindow);
+            }
+            break;
 
-            case ButtonType.Info:
-                if (infoWindow != null)
-                {
-                    UIManager.Instance.OpenInfoWindow(infoWindow); // Open the info window
-                }
-                break;
+        case ButtonType.Info:
+            if (infoWindow != null)
+            {
+                GameLogger.Log($"Attempting to open info window: {infoWindow.name}");
+                UIManager.Instance.OpenInfoWindow(infoWindow);
+            }
+            break;
 
-            case ButtonType.CloseInfo:
-                UIManager.Instance.CloseInfoWindow(); // Close the info window
-                break;
-        }
+        case ButtonType.CloseInfo:
+            GameLogger.Log("Attempting to close info window.");
+            UIManager.Instance.CloseInfoWindow();
+            break;
     }
+}
+
 }

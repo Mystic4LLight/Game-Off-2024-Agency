@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class WorldButtonScript : MonoBehaviour
 {
@@ -9,45 +10,86 @@ public class WorldButtonScript : MonoBehaviour
     private Color originalColor;  // Store the original color of the button
     private bool isHovered = false; // Track if the player is hovering over the button
 
+    [SerializeField] private List<SelectAgentButton> selectAgentButtons; // References to the SelectAgentButton components
+    [SerializeField] private List<GameObject> agents; // List of agent GameObjects
+
     void Start()
     {
-        // Get the Renderer component to change color
         buttonRenderer = GetComponent<Renderer>();
-        originalColor = buttonRenderer.material.color;  // Save the original color
+        originalColor = buttonRenderer.material.color;
     }
 
     void Update()
     {
-        // Raycast to detect if the mouse clicked while hovering
-        if (isHovered && Input.GetMouseButtonDown(0)) // 0 is the left mouse button
+        if (isHovered && Input.GetMouseButtonDown(0)) 
         {
-            OnWorldButtonClicked(); // Trigger the button click action
+            OnWorldButtonClicked();
         }
     }
 
-    // Handle raycast hover detection
     void OnMouseEnter()
     {
         isHovered = true;
-        // Change the button color to indicate hover
         buttonRenderer.material.color = hoverColor;
     }
 
     void OnMouseExit()
     {
         isHovered = false;
-        // Reset the button color back to the original color
         buttonRenderer.material.color = originalColor;
     }
 
-    // Simulate the "click" behavior of opening a specific window
     public void OnWorldButtonClicked()
     {
+        GameLogger.Log("World Window Opened!");
+
+        // Ensure that the window is opened through the UIManager
         if (targetWindow != null)
         {
-            UIManager.Instance.OpenWindow(targetWindow); // Open the specified window
-            buttonRenderer.material.color = clickColor;  // Change color on click
-            GameLogger.Log("World Window Opened!");
+            UIManager.Instance.OpenWindow(targetWindow); // Use UIManager to open the window
+        }
+        else
+        {
+            GameLogger.LogWarning("Target window reference is null.");
+            return;
+        }
+
+        // Initialize agent buttons if available
+        if (selectAgentButtons.Count != agents.Count)
+        {
+            GameLogger.LogWarning("Mismatch between the number of selectAgentButtons and agents.");
+            return;
+        }
+
+        for (int i = 0; i < agents.Count; i++)
+        {
+            if (agents[i] != null && selectAgentButtons[i] != null)
+            {
+                if (!selectAgentButtons[i].gameObject.activeInHierarchy)
+                {
+                    selectAgentButtons[i].gameObject.SetActive(true);
+                }
+
+                // Ensure the agent object is properly assigned to the button before initialization
+                InitializeSelectButton(selectAgentButtons[i], agents[i]);
+            }
+            else
+            {
+                GameLogger.LogWarning("SelectAgentButton or agent reference is null for index " + i);
+            }
         }
     }
+
+private void InitializeSelectButton(SelectAgentButton buttonComponent, GameObject agent)
+{
+    if (buttonComponent != null && agent != null)
+    {
+        buttonComponent.SetParentAgentObject(agent);
+        GameLogger.Log($"Activating and initializing SelectAgentButton for agent: {agent.name}");
+    }
+    else
+    {
+        GameLogger.LogWarning("Initialization failed: SelectAgentButton or agent is null.");
+    }
+}
 }

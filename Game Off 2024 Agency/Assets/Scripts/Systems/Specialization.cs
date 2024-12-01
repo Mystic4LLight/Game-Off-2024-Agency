@@ -8,10 +8,10 @@ public class Specialization
         ArtCraft,
         Fighting,
         Firearms,
-        Science,
         Language,
-        Other,
-        Survival // New specialization type
+        Science,
+        Survival,
+        Other
     }
 
     public SpecializationType type;
@@ -24,6 +24,5 @@ public class Specialization
         this.type = type;
         this.name = name;
         this.value = value;
-        GameLogger.Log($"Specialization created: Name = {name}, Type = {type}, Value = {value}");
     }
 }
