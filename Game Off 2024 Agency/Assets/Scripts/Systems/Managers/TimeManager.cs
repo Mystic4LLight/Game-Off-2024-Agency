@@ -86,7 +86,9 @@ public class TimeManager : MonoBehaviour
 
         if (timeText != null)
         {
-            timeText.text = $"Time: {currentHour:00}:{currentMinute:00}:{currentSecond:00}";
+           // Corris: removed Time:  looks bad
+            // timeText.text = $"Time: {currentHour:00}:{currentMinute:00}:{currentSecond:00}";
+            timeText.text = $"{currentHour:00}:{currentMinute:00}:{currentSecond:00}";
         }
     }
 
